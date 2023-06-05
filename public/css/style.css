@@ -235,6 +235,7 @@
     margin: 0 auto;
     position: fixed;
     top: 0;
+    transition: .3s all;
 }
 
 .header-wrap.index.cur {
@@ -245,10 +246,6 @@
 
 .header-wrap.index .header-con {
     background: none;
-}
-
-.header-wrap.index.headroom--unpinned {
-    width: 100%;
 }
 
 .header-wrap.headroom--unpinned {
@@ -283,7 +280,7 @@
 }
 
 .header-wrap .header-con .pc_nav_box {
-    left: 46%;
+    left: 43.5%;
     transform: translateX(-50%);
     color: #2e2e2e;
     top: 0;
