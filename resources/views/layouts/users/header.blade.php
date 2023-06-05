@@ -2,14 +2,14 @@
     <div class="header-con por">
         <div class="w1780 f-cb">
             <div class="logo fl">
-                <a href="https://vn.deliworld.com/welcome.html ">
-                    <img src="https://vn.deliworld.com/bocstatic/web/img/logo_w.png?v=v16 " alt="">
+                <a href="/">
+                    <img src="{{ asset('images/logo.png') }}" alt="">
                 </a>
             </div>
 
             <ul class="pc_nav_box poa antart_b" id="pc_nav_box">
                 <li>
-                    <a href="https://vn.deliworld.com/welcome.html " class="a">
+                    <a href="/" class="a">
                         Trang chủ
                     </a>
                 </li>
@@ -129,19 +129,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="https://vn.deliworld.com/news/lists.html " class="a">Phòng tin tức</a>
-                    <div class="sub-box">
-                        <a href="https://vn.deliworld.com/news/lists.html ">Trung tâm Tin tức</a>
-                        <a href="https://vn.deliworld.com/news/media.html ">Truyền thông xã hội</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="https://vn.deliworld.com/tt.html " class="a">Hệ thống kinh doanh</a>
-                    <div class="sub-box">
-                        <a href="https://vn.deliworld.com/tt.html ">Kênh truyền thống</a>
-                        <a href="https://vn.deliworld.com/tmdt.html ">Kênh thương mại điện tử</a>
-                        <a href="https://vn.deliworld.com/lpdeli.html ">Mini game</a>
-                    </div>
+                    <a href="https://vn.deliworld.com/news/lists.html " class="a">Photocopy</a>
                 </li>
                 <li>
                     <a href="https://vn.deliworld.com/contact/contact_us.html " class="a">Liên hệ </a>
@@ -183,51 +171,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="item por">
-                    <div class="item_up appbtn">
-                        <img src="https://vn.deliworld.com/bocstatic/web/img/head_ico1.svg?v=v16 " alt="">
-                        <a href="javascript:;" style="margin-left: 0.2rem">APP</a>
-                    </div>
-                    <!-- <div class="item_option poa">
-      <div class="link">
-       <a href="http://pcm.deliworld.com/Member/Login" target="_blank">PCM</a>
-      </div>
-      <div class="link">
-       <a href="http://mcm.deliworld.com" target="_blank">MCM</a>
-      </div>
-      <div class="link appbtn">
-       <a href="javascript:;">APP</a>
-      </div>
-     </div> -->
-                </div>
-
-                <div class="item lang-box">
-                    <a target="_blank" class="tit">
-                        <img src="https://vn.deliworld.com/bocstatic/web/img/head_ico3.svg?v=v16 " alt="">
-                    </a>
-                    <div class="lang-dialog"
-                        style="display: none; height: 258.6px; padding-top: 30.6px; margin-top: 0px; padding-bottom: 17px; margin-bottom: 0px;">
-                        <div class="view">
-                            <div class="lang-tit">Khu vực/ Ngôn ngữ </div>
-                            <div class="list">
-                                <div class="row f-cb">
-                                    <div class="lang-item">
-                                        <div class="cur-lang">Deli Toàn cầu -- Tiếng Anh</div>
-                                        <a href="http://tw.deliworld.com/"> Taiwan, China - <span> 臺灣</span></a>
-                                        <a href="https://www.deliworld.com"> Global - <span> English</span></a>
-                                        <a href="http://www.delikorea.co.kr/"> Korea - <span> 한국어</span></a>
-                                        <a href="http://www.nbdeli.com/"> China - <span> 简体中文</span></a>
-                                    </div>
-                                    <div class="lang-item">
-                                        <a href="http://deli-cis.com/"> Russia - <span> русский</span></a>
-                                        <a href="http://www.deliworld.com/fr/"> French - <span> français</span></a>
-                                        <a href="https://www.deliworld.com/es/"> Spain - <span> español</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class="search-dialog f-cb poa">
@@ -246,7 +189,7 @@
                 <li>
                     <dl>
                         <dt class="por">
-                            <a class="dib" href="https://vn.deliworld.com/welcome.html ">Trang chủ</a>
+                            <a class="dib" href="/">Trang chủ</a>
                         </dt>
                     </dl>
                 </li>
