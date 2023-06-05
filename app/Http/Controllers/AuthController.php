@@ -98,8 +98,7 @@ class AuthController extends Controller
 
         $userEmail = User::query()
             ->where('email', $request->get('email'))
-            ->first()
-        ;
+            ->first();
 
         if ($userEmail) {
             return response([
@@ -111,8 +110,7 @@ class AuthController extends Controller
 
         $userPhone = User::query()
             ->where('phone', $request->get('phone'))
-            ->first()
-        ;
+            ->first();
 
         if ($userPhone) {
             return response([

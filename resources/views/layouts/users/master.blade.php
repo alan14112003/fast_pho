@@ -172,6 +172,7 @@
         $('#videoo').attr('src', "");
     })
 </script>
+<script type="module" src="{{ asset('js/users/header.js') }}"></script>
 @stack('scripts')
 
 </html>
