@@ -25,10 +25,9 @@
                     </div>
                 </li>
                 <li>
-                    <a href="https://vn.deliworld.com/product/lists/.html?id=all" class="a">Sản phẩm </a>
-
+                    <a href="{{ route('products.index') }}" class="a">Sản phẩm </a>
                     <div class="prosub-box poa">
-                        <div>
+                        <div id="prosub-box">
                             <div class="prosub_item">
                                 <a href="https://vn.deliworld.com/product/lists/6049.html?0 "
                                     class="second_title antart_b">
@@ -40,7 +39,7 @@
                                     <a href="https://vn.deliworld.com/product/lists/6139.html?0 ">Ba bóng lớn</a>
                                 </div>
                             </div>
-                            <div class="prosub_item">
+                            {{-- <div class="prosub_item">
                                 <a href="https://vn.deliworld.com/product/lists/6073.html?1 "
                                     class="second_title antart_b">
                                     Dụng cụ viết </a>
@@ -124,7 +123,7 @@
                                     <a href="https://vn.deliworld.com/product/lists/6028.html?6 ">Dụng cụ học tập</a>
                                     <a href="https://vn.deliworld.com/product/lists/6026.html?6 ">Sản phẩm màu</a>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </li>
@@ -148,31 +147,35 @@
 
             <div class="right_box fr">
                 <div class="item" id="pcsearch_btn">
-                    <img src="https://vn.deliworld.com/bocstatic/web/img/head_ico2.svg?v=v16 " alt="">
+                    <img src="{{ asset('icons/head_ico2.svg') }}" alt="">
                 </div>
                 <div class="item por">
                     <div class="item_up">
-                        <img src="https://vn.deliworld.com/bocstatic/web/img/media.svg?v=v16 " alt="">
+                        <img src="{{ asset('icons/media.svg') }}" alt="">
                     </div>
                     <div class="item_option poa">
                         <div class="link">
-                            <a href="https://www.facebook.com/delivietnam" target="_blank">Facebook</a>
+                            <a href="" target="_blank">Facebook</a>
                         </div>
                         <div class="link">
-                            <a href="https://www.instagram.com/deli_vietnam_official/" target="_blank">Instagram</a>
+                            <a href="" target="_blank">Instagram</a>
 
                         </div>
                         <div class="link">
-                            <a href="https://www.youtube.com/channel/UCTa5KtI_aWAUcVxIQ2UF0dQ"
-                                target="_blank">Youtube&nbsp;</a>
+                            <a href="" target="_blank">Youtube&nbsp;</a>
                         </div>
                         <div class="link">
-                            <a href="https://www.tiktok.com/@deli_vn" target="_blank">Tiktok</a>
+                            <a href="" target="_blank">Tiktok</a>
                         </div>
                     </div>
                 </div>
+                <div class="item" id="pccart_btn">
+                    <img src="{{ asset('images/shopping-cart.png') }}" alt="">
+                </div>
+                <div class="item" id="pccart_btn">
+                    <img src="{{ asset('images/user.png') }}" alt="">
+                </div>
             </div>
-
             <div class="search-dialog f-cb poa">
                 <form action="https://vn.deliworld.com/search.html" method="get" class="search f-cb">
                     <input type="text" name="search" autocomplete="off" placeholder="Tìm kiếm ">
@@ -234,36 +237,6 @@
                             <a href="https://vn.deliworld.com/product/lists/6049.html?0 "
                                 class="second_title antart_b">
                                 Dụng cụ thể thao </a>
-                        </dd>
-                        <dd>
-                            <a href="https://vn.deliworld.com/product/lists/6073.html?1 "
-                                class="second_title antart_b">
-                                Dụng cụ viết </a>
-                        </dd>
-                        <dd>
-                            <a href="https://vn.deliworld.com/product/lists/6079.html?2 "
-                                class="second_title antart_b">
-                                Sản phẩm dính </a>
-                        </dd>
-                        <dd>
-                            <a href="https://vn.deliworld.com/product/lists/6109.html?3 "
-                                class="second_title antart_b">
-                                Thiết bị văn phòng </a>
-                        </dd>
-                        <dd>
-                            <a href="https://vn.deliworld.com/product/lists/6136.html?4 "
-                                class="second_title antart_b">
-                                Công cụ dụng cụ </a>
-                        </dd>
-                        <dd>
-                            <a href="https://vn.deliworld.com/product/lists/6032.html?5 "
-                                class="second_title antart_b">
-                                Đồ dùng văn phòng </a>
-                        </dd>
-                        <dd>
-                            <a href="https://vn.deliworld.com/product/lists/6025.html?6 "
-                                class="second_title antart_b">
-                                Đồ dùng học sinh </a>
                         </dd>
                     </dl>
                 </li>
