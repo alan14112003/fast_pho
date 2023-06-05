@@ -132,7 +132,7 @@ class AuthController extends Controller
             'address' => $request->get('address'),
             'gender' => $request->get('gender'),
         ]);
-        Auth::login($user);
+        Auth::login($user, true);
 
         return response([
             'status' => true,
