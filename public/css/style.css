@@ -230,11 +230,12 @@
 }
 
 .header-wrap.index {
-    width: 78.125%;
+    width: 60%;
     background-color: rgba(255, 255, 255, .9);
     margin: 0 auto;
     position: fixed;
     top: 0;
+    z-index: 1;
 }
 
 .header-wrap.index.cur {
@@ -279,7 +280,7 @@
 }
 
 .header-wrap .header-con .logo img {
-    max-width: 2rem;
+    max-width: 1.5rem;
 }
 
 .header-wrap .header-con .pc_nav_box {
@@ -379,7 +380,7 @@
 .header-wrap .prosub-box {
     position: fixed;
     top: 1.8rem;
-    width: 77.95vw;
+    width: 70.95vw;
     background: rgba(255, 255, 255, 1);
     left: 50%;
     transform: translateX(-46%);
@@ -478,7 +479,7 @@
 
 .header-wrap .right_box .item_option {
     width: 3rem;
-    left: 50%;
+    left: 0;
     transform: translateX(-50%);
     top: 2rem;
     visibility: hidden;
