@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Category\StoreRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -38,5 +39,23 @@ class CategoryController extends Controller
             'body' => $categories,
             'message' => 'Thành công'
         ]);
+    }
+
+    public function store(StoreRequest $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    {
+        try {
+            $category = Category::query()->create($request->validated());
+            return response([
+                'status' => true,
+                'body' => $category,
+                'message' => "Thành công"
+            ]);
+        } catch (\Exception $e) {
+            return response([
+                'status' => false,
+                'body' => null,
+                'message' => "Có lỗi {$e->getMessage()}"
+            ]);
+        }
     }
 }
