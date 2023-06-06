@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserRoleEnum;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,15 +17,9 @@ class AuthController extends Controller
         return view('login');
     }
 
-    public function logining(Request $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    public function logining(LoginRequest $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
     {
-        $request->validate([
-            'email' => [
-                'email',
-                'required',
-            ],
-            'password' => 'required',
-        ]);
+        $request->validated();
 
         $user = User::query()->where('email', $request->get('email'))->first();
         if (is_null($user)) {
@@ -70,31 +66,9 @@ class AuthController extends Controller
         return view('register');
     }
 
-    public function registering(Request $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    public function registering(RegisterRequest $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
     {
-        $request->validate([
-            'email' => [
-                'required',
-                'email',
-            ],
-            'name' => [
-                'required',
-                'string',
-            ],
-            'phone' => [
-                'required',
-                'string',
-            ],
-            'address' => [
-                'required',
-            ],
-            'password' => [
-                'required',
-            ],
-            'gender' => [
-                'nullable',
-            ],
-        ]);
+        $request->validated();
 
         $userEmail = User::query()
             ->where('email', $request->get('email'))
