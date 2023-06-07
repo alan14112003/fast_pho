@@ -109,4 +109,9 @@ class AuthController extends Controller
             'message' => 'Thành công',
         ]);
     }
+
+    public function profile()
+    {
+
+    }
 }
