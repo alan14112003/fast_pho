@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserGenderEnum;
 use App\Enums\UserRoleEnum;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
@@ -51,19 +52,29 @@ class AuthController extends Controller
     }
 
 
-    public function logout(Request $request): \Illuminate\Http\RedirectResponse
+    public function logout(Request $request)
     {
         Auth::logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('index');
+        $redirect = route('index');
+
+        return response([
+            'status' => true,
+            'body' => $redirect,
+            'message' => 'Thành công',
+        ]);
     }
 
     public function register(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return view('register');
+        $userGenderArr = UserGenderEnum::ArrayView();
+
+        return view('clients/auth/register', [
+            'userGenderArr' => $userGenderArr
+        ]);
     }
 
     public function registering(RegisterRequest $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
@@ -82,27 +93,13 @@ class AuthController extends Controller
             ]);
         }
 
-        $userPhone = User::query()
-            ->where('phone', $request->get('phone'))
-            ->first();
-
-        if ($userPhone) {
-            return response([
-                'status' => false,
-                'body' => null,
-                'message' => 'Số điện thoại đã tồn tại',
-            ]);
-        }
-
         $password = Hash::make($request->get('password'));
 
         $user = User::query()->create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
             'password' => $password,
-            'phone' => $request->get('phone'),
-            'address' => $request->get('address'),
-            'gender' => $request->get('gender'),
+            'gender' => $request->get('gender') ?? 0,
         ]);
         Auth::login($user, true);
 

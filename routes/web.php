@@ -20,10 +20,8 @@ Route::get('/', function () {
 })->name('index');
 
 Route::controller(AuthController::class)->group(function () {
-    Route::get('login', 'login')->name('login');
-    Route::post('login', 'logining')->name('logining');
+    Route::get('login_admin', 'login')->name('login_admin');
     Route::get('register', 'register')->name('register');
-    Route::post('register', 'registering')->name('registering');
     Route::get('/profile', 'profile')->name('profile');
 });
 
@@ -34,3 +32,7 @@ Route::controller(ProductController::class)
         Route::get('', 'index')->name('index');
         Route::get('{slug}', 'show')->name('show');
     });
+
+Route::get('/migrate', function () {
+    \Illuminate\Support\Facades\Artisan::call('migrate');
+});

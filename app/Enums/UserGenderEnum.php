@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Enums;
 
@@ -13,4 +15,12 @@ final class UserGenderEnum extends Enum
 {
     const MALE = 0;
     const FEMALE = 1;
+
+    public static function ArrayView()
+    {
+        return [
+            'Nam' => self::MALE,
+            'Nữ' => self::FEMALE,
+        ];
+    }
 }

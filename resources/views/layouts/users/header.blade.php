@@ -12,17 +12,9 @@
                     <a href="/" class="a">
                         Trang chủ
                     </a>
-                </li>
                 <li>
-                    <a href="https://vn.deliworld.com/about/profile.html " class="a">Về chúng tôi</a>
-
-                    <div class="sub-box"
-                        style="width: 250%; display: none; height: 68px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
-                        <a href="https://vn.deliworld.com/about/profile.html ">Hồ sơ công ty</a>
-
-
-                        <a href="https://vn.deliworld.com/about/social.html ">Trách nhiệm xã hội</a>
-                    </div>
+                    <a href="" class="a">Photocopy</a>
+                </li>
                 </li>
                 <li>
                     <a href="{{ route('products.index') }}" class="a">Sản phẩm </a>
@@ -128,7 +120,15 @@
                     </div>
                 </li>
                 <li>
-                    <a href="https://vn.deliworld.com/news/lists.html " class="a">Photocopy</a>
+                    <a href="" class="a">Về chúng tôi</a>
+
+                    <div class="sub-box"
+                        style="width: 250%; display: none; height: 68px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
+                        <a href="">Hồ sơ công ty</a>
+
+
+                        <a href="">Trách nhiệm xã hội</a>
+                    </div>
                 </li>
                 <li>
                     <a href="https://vn.deliworld.com/contact/contact_us.html " class="a">Liên hệ </a>
@@ -172,8 +172,119 @@
                 <div class="item" id="pccart_btn">
                     <img src="{{ asset('images/shopping-cart.png') }}" alt="">
                 </div>
-                <div class="item" id="pccart_btn">
+                <div class="item header-action header-action_account" id="pccart_btn">
                     <img src="{{ asset('images/user.png') }}" alt="">
+                    <div class="header-action_dropdown ">
+                        <span class="box-triangle">
+                            <svg viewBox="0 0 20 9" role="presentation">
+                                <path
+                                    d="M.47108938 9c.2694725-.26871321.57077721-.56867841.90388257-.89986354C3.12384116 6.36134886 5.74788116 3.76338565 9.2467995.30653888c.4145057-.4095171 1.0844277-.40860098 1.4977971.00205122L19.4935156 9H.47108938z"
+                                    fill="#ffffff"></path>
+                            </svg>
+                        </span>
+                        <div class="header-dropdown_content">
+                            @auth
+                                <div class="site_account site_account_info " id="siteNav-account">
+                                    <div class="site_account_panel_list">
+                                        <div class="site_account_info">
+                                            <header class="site_account_header">
+                                                <h2 class="site_account_title heading">Thông tin tài khoản</h2>
+                                            </header>
+                                            <ul>
+                                                <li><span>Sỹ Phan Xuân</span></li>
+                                                <li><a href="/account">Tài khoản của tôi</a></li>
+                                                <li><a href="/account/addresses">Danh sách địa chỉ</a></li>
+                                                <li><a id="logout-btn">Đăng xuất</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endauth
+                            @guest
+                                <div class="site_account " id="siteNav-account">
+                                    <div class="site_account_panel_list">
+                                        <div id="header-login-panel"
+                                            class="site_account_panel site_account_default is-selected">
+                                            <header class="site_account_header">
+                                                <h2 class="site_account_title heading">Đăng nhập tài khoản</h2>
+                                                <p class="site_account_legend">Nhập email và mật khẩu của bạn:</p>
+                                            </header>
+                                            <div class="site_account_inner">
+                                                <form accept-charset="UTF-8" action="/account/login" id="customer_login"
+                                                    method="post">
+                                                    <input name="form_type" type="hidden" value="customer_login">
+                                                    <input name="utf8" type="hidden" value="✓">
+
+                                                    <div class="form__input-wrapper form__input-wrapper--labelled">
+                                                        <input type="email" id="login-email"
+                                                            class="form__field form__field--text" name="email"
+                                                            required="required">
+                                                        <label for="login-email"
+                                                            class="form__floating-label">Email</label>
+                                                    </div>
+                                                    <div class="form__input-wrapper form__input-wrapper--labelled">
+                                                        <input type="password" id="login-password"
+                                                            class="form__field form__field--text" name="password"
+                                                            required="required" autocomplete="current-password">
+                                                        <label for="login-password" class="form__floating-label">Mật
+                                                            khẩu</label>
+                                                    </div>
+                                                    <button type="submit" class="form__submit button dark"
+                                                        id="form_submit-login">Đăng nhập</button>
+                                                </form>
+                                                <div class="site_account_secondary-action">
+                                                    <p>Khách hàng mới?
+                                                        <a class="link" href="{{ route('register') }}">Tạo tài khoản</a>
+                                                    </p>
+                                                    <p>Quên mật khẩu?
+                                                        <button aria-controls="header-recover-panel"
+                                                            class="js-link link">Khôi phục mật khẩu</button>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="header-recover-panel" class="site_account_panel  site_account_sliding">
+                                            <header class="site_account_header">
+                                                <h2 class="site_account_title heading">Khôi phục mật khẩu</h2>
+                                                <p class="site_account_legend">Nhập email của bạn:</p>
+                                            </header>
+                                            <div class="site_account_inner">
+                                                <form accept-charset="UTF-8" action="/account/recover" method="post">
+                                                    <input name="form_type" type="hidden"
+                                                        value="recover_customer_password">
+                                                    <input name="utf8" type="hidden" value="✓">
+
+                                                    <div class="form__input-wrapper form__input-wrapper--labelled">
+                                                        <input type="email" id="recover-recover_email"
+                                                            class="form__field form__field--text" name="email"
+                                                            required="required">
+                                                        <label for="recover-recover_email"
+                                                            class="form__floating-label">Email</label>
+                                                        <div class="sitebox-recaptcha">
+                                                            This site is protected by reCAPTCHA and the Google
+                                                            <a href="https://policies.google.com/privacy" target="_blank"
+                                                                rel="noreferrer">Privacy Policy</a>
+                                                            and <a href="https://policies.google.com/terms"
+                                                                target="_blank" rel="noreferrer">Terms of Service</a>
+                                                            apply.
+                                                        </div>
+                                                    </div>
+                                                    <button type="submit" class="form__submit button dark"
+                                                        id="form_submit-recover">Khôi phục</button>
+                                                </form>
+                                                <div class="site_account_secondary-action">
+                                                    <p>Bạn đã nhớ mật khẩu?
+                                                        <button aria-controls="header-login-panel"
+                                                            class="js-link link">Trở về đăng nhập</button>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endguest
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="search-dialog f-cb poa">
