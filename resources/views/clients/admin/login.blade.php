@@ -47,7 +47,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group mb-0 text-center">
-                                    <button class="btn btn-primary" type="submit"> Log In </button>
+                                    <button class="btn btn-primary"> Log In </button>
                                 </div>
                             </form>
                         </div>
@@ -62,5 +62,6 @@
         </p>
     </footer>
 </body>
+<script src="{{ asset('js/admin/login.js') }}" type="module"></script>
 
 </html>

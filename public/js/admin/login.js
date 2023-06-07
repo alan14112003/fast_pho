@@ -1,7 +1,7 @@
 import { DOMAIN } from '../url.js';
 import { renderAlert } from '../helper.js'
 
-const LOGINING = DOMAIN + 'admin_logining'
+const LOGINING = DOMAIN + 'api/admin_logining'
 
 $('#form-login').on('submit', function (e) {
     e.preventDefault()
@@ -22,12 +22,17 @@ $('#form-login').on('submit', function (e) {
                 setTimeout(() => {
                     location.replace(response.body)
                 }, 2000)
+            } else {
+                renderAlert('.card-body', {
+                    title: 'Lỗi',
+                    text: response.message
+                })
             }
         },
         error: function (response) {
             renderAlert('.card-body', {
                 title: 'Lỗi',
-                text: response.responseJSON.message
+                text: response?.responseJSON?.message
             })
         }
     });
