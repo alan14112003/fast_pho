@@ -7,13 +7,16 @@ use App\Enums\UserRoleEnum;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
+use App\Http\Controllers\ResponseTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function login(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    use ResponseTrait;
+
+    public function login()
     {
         return view('clients/admin/login');
     }
@@ -47,13 +50,17 @@ class AuthController extends Controller
         ];
     }
 
-    public function userLogin(LoginRequest $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    public function userLogin(LoginRequest $request)
     {
         $request->validated();
         $logining = $this->logining($request->get('email'), $request->get('password'));
 
+        if ($logining['body']->role !== UserRoleEnum::USER) {
+            return $this->responseTrait('Tài khoản không tồn tại');
+        }
+
         if ($logining['status']) {
-            $logining['body'] = redirect()->route('index');
+            $logining['body'] = route('index');
         }
 
         return response($logining);
@@ -64,8 +71,12 @@ class AuthController extends Controller
         $request->validated();
         $logining = $this->logining($request->get('email'), $request->get('password'));
 
+        if ($logining['body']->role !== UserRoleEnum::ADMIN) {
+            return $this->responseTrait('Không có quyền truy cập');
+        }
+
         if ($logining['status']) {
-            $logining['body'] = redirect()->route('admin.index');
+            $logining['body'] = route('admin.index');
         }
 
         return response($logining);
@@ -80,14 +91,10 @@ class AuthController extends Controller
 
         $redirect = route('index');
 
-        return response([
-            'status' => true,
-            'body' => $redirect,
-            'message' => 'Thành công',
-        ]);
+        return $this->responseTrait('Thành công', true, $redirect);
     }
 
-    public function register(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function register()
     {
         $userGenderArr = UserGenderEnum::ArrayView();
 
@@ -96,7 +103,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function registering(RegisterRequest $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    public function registering(RegisterRequest $request)
     {
         $request->validated();
 
@@ -105,11 +112,7 @@ class AuthController extends Controller
             ->first();
 
         if ($userEmail) {
-            return response([
-                'status' => false,
-                'body' => null,
-                'message' => 'Email đã tồn tại',
-            ]);
+            return $this->responseTrait('Email đã tồn tại');
         }
 
         $password = Hash::make($request->get('password'));
@@ -122,11 +125,7 @@ class AuthController extends Controller
         ]);
         Auth::login($user, true);
 
-        return response([
-            'status' => true,
-            'body' => route('index'),
-            'message' => 'Thành công',
-        ]);
+        return $this->responseTrait('Thành công', true, route('index'));
     }
 
     public function profile()
