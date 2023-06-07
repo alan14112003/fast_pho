@@ -173,6 +173,8 @@
     })
 </script>
 <script type="module" src="{{ asset('js/users/header.js') }}"></script>
+<script type="module" src="{{ asset('js/users/login.js') }}"></script>
+<script type="module" src="{{ asset('js/users/logout.js') }}"></script>
 @stack('scripts')
 
 </html>
