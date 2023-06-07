@@ -32,18 +32,11 @@ class RegisterRequest extends FormRequest
                 'required',
                 'string',
             ],
-            'phone' => [
-                'required',
-                'string',
-            ],
-            'address' => [
-                'required',
-            ],
             'password' => [
                 'required',
             ],
             'gender' => [
-                'nullable',
+                'required',
             ],
         ];
     }
