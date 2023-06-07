@@ -1,3 +1,15 @@
 :root {
     --main-color: #46d1d8
 }
+
+button {
+    outline: none;
+}
+
+.alert {
+    padding: .5rem 1rem;
+}
+
+.alert-dismissible .btn-close {
+    padding: .625rem .5rem;
+}
