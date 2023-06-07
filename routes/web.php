@@ -24,6 +24,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'logining')->name('logining');
     Route::get('register', 'register')->name('register');
     Route::post('register', 'registering')->name('registering');
+    Route::get('/profile', 'profile')->name('profile');
 });
 
 Route::controller(ProductController::class)
