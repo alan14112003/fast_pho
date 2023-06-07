@@ -15,7 +15,7 @@ class AuthController extends Controller
 {
     public function login(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return view('login');
+        return view('clients/admin/login');
     }
 
     public function logining(LoginRequest $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
@@ -112,6 +112,5 @@ class AuthController extends Controller
 
     public function profile()
     {
-
     }
 }
