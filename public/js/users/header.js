@@ -38,3 +38,17 @@ $.ajax({
         showError($('#errors-category'), [erorrs]);
     }
 });
+
+//Header Account Action
+const headerAction = $(".header-action.header-action_account")
+
+headerAction.off('click').on('click', function () {
+    $(document).off('click').on('click', function (e) {
+        if (!$(e.target).closest(".header-action_dropdown").length && !$(e.target).closest(headerAction).length) {
+            headerAction.removeClass("show-action")
+            $(document).off('click');
+        } else {
+            headerAction.addClass("show-action")
+        }
+    })
+})
