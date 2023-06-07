@@ -1,4 +1,4 @@
-const DOMAIN = 'http://fast_pho.com/'
+export const DOMAIN = 'http://fast_pho.com/'
 export const CATEGORIES = DOMAIN + 'api/categories'
 export const REGISTERING = DOMAIN + 'api/registering'
 export const LOGINING = DOMAIN + 'api/logining'

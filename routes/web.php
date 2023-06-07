@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\ProductController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Admin
+Route::middleware(AdminMiddleware::class)
+    ->prefix('admin/')
+    ->name('admin.')
+    ->group(function () {
+        Route::get('', [AdminController::class, 'index'])->name('index');
+    });
+
+
+//User
 Route::get('/', function () {
     return view('clients/users/index');
 })->name('index');

@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::controller(AuthController::class)->group(function () {
-    Route::post('logining', 'logining')->name('logining');
+    Route::post('logining', 'userLogin')->name('logining');
+    Route::post('admin_logining', 'adminLogin')->name('admin_logining');
     Route::post('registering', 'registering')->name('registering');
     Route::post('logout', 'logout')->name('logout');
 });
