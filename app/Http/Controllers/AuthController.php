@@ -18,39 +18,58 @@ class AuthController extends Controller
         return view('clients/admin/login');
     }
 
-    public function logining(LoginRequest $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    public function logining($email, $password): array
     {
-        $request->validated();
+        $user = User::query()->where('email', $email)->first();
 
-        $user = User::query()->where('email', $request->get('email'))->first();
         if (is_null($user)) {
-            return response([
+            return [
                 'status' => false,
                 'body' => null,
                 'message' => 'Tài khoản không tồn tại',
-            ]);
+            ];
         }
-        if (!Hash::check($request->get('password'), $user->password)) {
-            return response([
+
+        if (!Hash::check($password, $user->password)) {
+            return [
                 'status' => false,
                 'body' => null,
                 'message' => 'Sai mật khẩu',
-            ]);
+            ];
         }
+
         Auth::login($user, true);
 
-        $redirect = route('index');
-        if ($user->role == UserRoleEnum::ADMIN) {
-            $redirect = route('admin.index');
-        }
-
-        return response([
+        return [
             'status' => true,
-            'body' => $redirect,
+            'body' => $user,
             'message' => 'Thành công',
-        ]);
+        ];
     }
 
+    public function userLogin(LoginRequest $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    {
+        $request->validated();
+        $logining = $this->logining($request->get('email'), $request->get('password'));
+
+        if ($logining['status']) {
+            $logining['body'] = redirect()->route('index');
+        }
+
+        return response($logining);
+    }
+
+    public function adminLogin(LoginRequest $request)
+    {
+        $request->validated();
+        $logining = $this->logining($request->get('email'), $request->get('password'));
+
+        if ($logining['status']) {
+            $logining['body'] = redirect()->route('admin.index');
+        }
+
+        return response($logining);
+    }
 
     public function logout(Request $request)
     {
