@@ -13,3 +13,11 @@ button {
 .alert-dismissible .btn-close {
     padding: .625rem .5rem;
 }
+
+.text-ellipsis {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
