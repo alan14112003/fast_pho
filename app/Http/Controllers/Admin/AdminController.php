@@ -9,6 +9,10 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('clients.admin.index');
+        $currentPage = 'home';
+
+        return view('clients.admin.index', [
+            'currentPage' => $currentPage
+        ]);
     }
 }

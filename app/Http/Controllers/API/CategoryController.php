@@ -69,11 +69,11 @@ class CategoryController extends Controller
                 return response([
                     'status' => false,
                     'body' => null,
-                    'message' =>'Id không tồn tại',
+                    'message' => 'Id không tồn tại',
                 ]);
             }
 
-            if($request->get('name') === $category->name) {
+            if ($request->get('name') === $category->name) {
                 return response([
                     'status' => true,
                     'body' => $category,
@@ -98,7 +98,7 @@ class CategoryController extends Controller
         }
     }
 
-    public function delete($id): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    public function destroy($id): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
     {
         try {
             $category = Category::query()->find($id);
@@ -107,7 +107,7 @@ class CategoryController extends Controller
                 return response([
                     'status' => false,
                     'body' => null,
-                    'message' =>'Id không tồn tại',
+                    'message' => 'Id không tồn tại',
                 ]);
             }
 
@@ -116,7 +116,7 @@ class CategoryController extends Controller
             return response([
                 'status' => true,
                 'body' => null,
-                'message' =>'Thành công',
+                'message' => 'Thành công',
             ]);
         } catch (\Throwable $e) {
             return response([
@@ -136,5 +136,4 @@ class CategoryController extends Controller
             $this->deleteChildren($categoryId);
         }
     }
-
 }
