@@ -73,7 +73,7 @@ class CategoryController extends Controller
         }
     }
 
-    public function delete($id): \Illuminate\Http\JsonResponse
+    public function destroy($id): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
     {
         try {
             $category = Category::query()->find($id);
@@ -85,6 +85,7 @@ class CategoryController extends Controller
             $this->deleteChildren($id);
             $category->delete();
             return $this->responseTrait('Thành công', true);
+
         } catch (\Throwable $e) {
             return $this->responseTrait("Có lỗi! {$e->getMessage()}");
         }
@@ -99,5 +100,4 @@ class CategoryController extends Controller
             $this->deleteChildren($categoryId);
         }
     }
-
 }

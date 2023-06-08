@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Middleware\AdminMiddleware;
@@ -23,6 +24,14 @@ Route::middleware(AdminMiddleware::class)
     ->name('admin.')
     ->group(function () {
         Route::get('', [AdminController::class, 'index'])->name('index');
+
+        Route::controller(AdminProductController::class)
+            ->prefix('products/')
+            ->name('products.')->group(function () {
+                Route::get('', 'index')->name('index');
+                Route::get('/create', 'create')->name('create');
+                Route::get('/edit/{id}', 'edit')->name('edit');
+            });
     });
 
 

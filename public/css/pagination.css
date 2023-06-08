@@ -1,0 +1,34 @@
+.pagination {
+    padding-top: 30px;
+    float: right;
+}
+
+.pagination ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.p1 a {
+    width: 33px;
+    height: 33px;
+    padding: 0;
+    text-align: center;
+}
+
+.pagination a {
+    display: inline-block;
+    color: #fff;
+}
+
+.p1 a.is-active {
+    background-color: var(--main-color);
+    border-radius: 100%;
+}
+
+.p1 a li {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+}

@@ -31,13 +31,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('categories')->name('categories.')->controller(CategoryController::class)
+Route::prefix('categories')
+    ->name('categories.')
+    ->controller(CategoryController::class)
     ->group(function () {
         Route::get('/', 'all')->name('all');
         Route::middleware('admin.api')->group(function () {
             Route::post('/', 'store')->name('store');
             Route::put('/{id}', 'update')->name('update');
-            Route::delete('/{id}', 'delete')->name('delete');
+            Route::delete('/{id}', 'destroy')->name('destroy');
         });
     });
 
@@ -48,6 +50,7 @@ Route::prefix('products')->name('products.')
             Route::get('/', 'all')->name('all');
             Route::post('/', 'store')->name('store');
             Route::put('/{id}', 'update')->name('update');
+            Route::delete('/{id}', 'destroy')->name('destroy');
         });
 
         Route::prefix('/{productId}/subs')->name('subs.')
