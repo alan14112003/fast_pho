@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ResponseTrait;
 use App\Http\Requests\Category\StoreRequest;
 use App\Http\Requests\Category\UpdateRequest;
 use App\Models\Category;
@@ -10,6 +11,8 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    use ResponseTrait;
+
     public function getSubCategories($id, $index = 2): array
     {
         $categories = [];
@@ -26,7 +29,7 @@ class CategoryController extends Controller
         return $categories;
     }
 
-    public function all(): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    public function all(): \Illuminate\Http\JsonResponse
     {
         $categories = Category::query()->whereNull('parent_id')->get();
 
@@ -35,95 +38,55 @@ class CategoryController extends Controller
             $category->index = 1;
         }
 
-        return response([
-            'status' => true,
-            'body' => $categories,
-            'message' => 'Thành công'
-        ]);
+        return $this->responseTrait('Thành công', true, $categories);
     }
 
-    public function store(StoreRequest $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    public function store(StoreRequest $request): \Illuminate\Http\JsonResponse
     {
         try {
             $category = Category::query()->create($request->validated());
-            return response([
-                'status' => true,
-                'body' => $category,
-                'message' => "Thành công"
-            ]);
+            return $this->responseTrait('Thành công', true, $category);
         } catch (\Exception $e) {
-            return response([
-                'status' => false,
-                'body' => null,
-                'message' => "Có lỗi! {$e->getMessage()}"
-            ]);
+            return $this->responseTrait("Có lỗi! {$e->getMessage()}");
         }
     }
 
-    public function update($id, UpdateRequest $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    public function update($id, UpdateRequest $request): \Illuminate\Http\JsonResponse
     {
         try {
             $category = Category::query()->find($id);
 
             if (is_null($category)) {
-                return response([
-                    'status' => false,
-                    'body' => null,
-                    'message' =>'Id không tồn tại',
-                ]);
+                return $this->responseTrait('Id không tồn tại');
             }
 
             if($request->get('name') === $category->name) {
-                return response([
-                    'status' => true,
-                    'body' => $category,
-                    'message' => "Thành công"
-                ]);
+                return $this->responseTrait('Thành công', true, $category);
             }
 
             $category->slug = null;
             $category->update($request->validated());
 
-            return response([
-                'status' => true,
-                'body' => $category,
-                'message' => "Thành công"
-            ]);
+            return $this->responseTrait('Thành công', true, $category);
         } catch (\Exception $e) {
-            return response([
-                'status' => false,
-                'body' => null,
-                'message' => "Có lỗi! {$e->getMessage()}"
-            ]);
+            return $this->responseTrait("Có lỗi! {$e->getMessage()}");
         }
     }
 
-    public function delete($id): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    public function delete($id): \Illuminate\Http\JsonResponse
     {
         try {
             $category = Category::query()->find($id);
 
             if (is_null($category)) {
-                return response([
-                    'status' => false,
-                    'body' => null,
-                    'message' =>'Id không tồn tại',
-                ]);
+                return $this->responseTrait('Id không tồn tại');
             }
 
             $this->deleteChildren($id);
             $category->delete();
-            return response([
-                'status' => true,
-                'body' => null,
-                'message' =>'Thành công',
-            ]);
+            return $this->responseTrait('Thành công', true);
         } catch (\Throwable $e) {
-            return response([
-                'status' => false,
-                'body' => null,
-                'message' => "Có lỗi! {$e->getMessage()}"
-            ]);
+            return $this->responseTrait("Có lỗi! {$e->getMessage()}");
         }
     }
 
