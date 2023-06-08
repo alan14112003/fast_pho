@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\SubProduct;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginingRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class LoginingRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,18 @@ class LoginingRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'type' => [
+                'required',
+                'string'
+            ],
+            'image' => [
+                'nullable',
+                'image',
+            ],
+            'total' => [
+                'required',
+                'integer',
+            ]
         ];
     }
 }

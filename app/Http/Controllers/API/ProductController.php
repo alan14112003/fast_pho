@@ -4,33 +4,35 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ResponseTrait;
-use App\Models\Category;
+use App\Http\Requests\Product\StoreRequest;
+use App\Http\Requests\Product\UpdateRequest;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
     use ResponseTrait;
 
-    public function all(Request $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    public function all(Request $request): \Illuminate\Http\JsonResponse
     {
-        try {
-            $q = $request->get('q');
-            $sale = $request->get('sale');
-            $new = $request->get('new');
-            $categorySlug = $request->get('category-slug');
-            $categoryIndex = $request->get('category-index');
+        $q = $request->get('q');
+        $sale = $request->get('sale');
+        $new = $request->get('new');
+        $categorySlug = $request->get('category-slug');
+        $categoryIndex = $request->get('category-index');
 
-            $productsQr = Product::query()->select('products.*')
-                ->leftJoin('categories', 'products.category_id', '=', 'categories.id');
+        $productsQr = Product::query()->select('products.*')
+            ->leftJoin('categories', 'products.category_id', '=', 'categories.id');
 
-            if ($categorySlug) {
-                //  Kiểm tra xem nó ở cấp mấy trong category để biết đường lấy con của nó
-                switch ($categoryIndex) {
-                    case 1: {
-                            $productsQr = $productsQr->whereRaw(
-                                "categories.parent_id IN (
+        if ($categorySlug) {
+            //  Kiểm tra xem nó ở cấp mấy trong category để biết đường lấy con của nó
+            switch ($categoryIndex) {
+                case 1:
+                {
+                    $productsQr = $productsQr->whereRaw(
+                        "categories.parent_id IN (
                             Select id from categories
                             Where parent_id = (
                                 Select id from categories
@@ -73,12 +75,56 @@ class ProductController extends Controller
 
             // Lấy ra các sản phẩm theo kiểu phân trang
             $products = $productsQr->paginate(15);
+        return $this->responseTrait('Thành công', true, $products);
+    }
 
-            return response([
-                'status' => true,
-                'body' => $products,
-                'message' => 'Hiển thị thành công',
+    public function store(StoreRequest $request): \Illuminate\Http\JsonResponse
+    {
+        try {
+            $product = Product::query()->create([
+                'name' => $request->get('name'),
+                'descriptions' => $request->get('descriptions'),
+                'price' => $request->get('price'),
+                'sale' => $request->get('sale') ?? 0,
+                'category_id' => $request->get('category_id'),
             ]);
+
+            $imagePath = Storage::putFileAs(
+                "images/products/{$product->slug}",
+                $request->file('image'),
+                "image.{$request->file('image')->extension()}"
+            );
+            $product->update([
+                'image' => $imagePath,
+            ]);
+
+            return $this->responseTrait('Thêm thành công', true, $product);
+        } catch (\Exception $e) {
+            return $this->responseTrait("Có lỗi! {$e->getMessage()}");
+        }
+    }
+
+    public function update($id, UpdateRequest $request): \Illuminate\Http\JsonResponse
+    {
+        try {
+            $product = Product::query()->find($id);
+            if (is_null($product)) {
+                return $this->responseTrait('Sản phẩm không tồn tại');
+            }
+            $data = $request->validated();
+
+            if ($request->hasFile('image')) {
+                $imagePath = Storage::putFileAs(
+                    "images/products/{$product->id}",
+                    $request->file('image'),
+                    "image.{$request->file('image')->extension()}"
+                );
+                $data['image'] = $imagePath;
+            }
+
+            $product->update($data);
+
+            return $this->responseTrait("Sửa thành công", true, $product);
         } catch (\Exception $e) {
             return $this->responseTrait("Có lỗi! {$e->getMessage()}");
         }
