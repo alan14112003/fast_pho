@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\SubProductController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,8 +41,20 @@ Route::prefix('categories')->name('categories.')->controller(CategoryController:
         });
     });
 
-Route::prefix('products')->name('products.')->controller(ProductController::class)
+Route::prefix('products')->name('products.')
     ->group(function () {
-        Route::get('/', 'all')->name('all');
-        //        Route::get('/{id}', 'show')->name('show');
+        Route::controller(ProductController::class)
+            ->group(function () {
+            Route::get('/', 'all')->name('all');
+            Route::post('/', 'store')->name('store');
+            Route::put('/{id}', 'update')->name('update');
+        });
+
+        Route::prefix('/{productId}/subs')->name('subs.')
+            ->controller(SubProductController::class)
+            ->group(function () {
+            Route::get('/', 'all')->name('all');
+            Route::post('/', 'store')->name('store');
+            Route::put('/{id}', 'update')->name('update');
+        });
     });
