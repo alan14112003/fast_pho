@@ -191,7 +191,7 @@
                                                 <h2 class="site_account_title heading">Thông tin tài khoản</h2>
                                             </header>
                                             <ul>
-                                                <li><span>Sỹ Phan Xuân</span></li>
+                                                <li><span>{{ auth()->user()->name }}</span></li>
                                                 <li><a href="/account">Tài khoản của tôi</a></li>
                                                 <li><a href="/account/addresses">Danh sách địa chỉ</a></li>
                                                 <li><a id="logout-btn">Đăng xuất</a></li>

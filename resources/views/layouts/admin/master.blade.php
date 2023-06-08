@@ -10,27 +10,28 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{ asset('favicon.ico') }}" rel="shortcut icon">
-    @include('libraries')
-    @stack('styles')
-    <!-- Choices.js-->
-    <link rel="stylesheet" href="vendor/choices.js/public/assets/styles/choices.min.css">
+
     <!-- Google fonts - Muli-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,700">
     <!-- theme stylesheet-->
-    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="css/custom.css">
-    <!-- Tweaks for older IEs-->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/style.default.css') }}" id="theme-stylesheet">
+    @stack('styles')
 </head>
 
 <body>
-    @include('layouts.users.header')
-    @yield('content')
-    @include('layouts.users.footer')
+    @include('layouts.admin.header')
+    <div class="d-flex align-items-stretch">
+        @include('layouts.admin.sidebar')
+        @yield('content')
+    </div>
+    <div class="toast-container position-fixed p-3 top-0 end-0">
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        </div>
+    </div>
+    {{-- @include('layouts.admin.footer') --}}
 </body>
+@include('libraries')
 @stack('scripts')
 
 </html>
