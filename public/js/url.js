@@ -1,6 +1,9 @@
 export const DOMAIN = 'http://fast_pho.com/'
 
+export const ICONS = 'http://fast_pho.com/icons/'
+
 export const PRODUCT_EDIT = DOMAIN + 'admin/products/edit/'
+export const SUB_PRODUCT_EDIT = DOMAIN + 'admin/products/:productId/subs/:id'
 
 //Api:
 
@@ -11,8 +14,15 @@ export const LOGOUT = DOMAIN + 'api/logout'
 
 //Product
 export const PRODUCTS = DOMAIN + 'api/products'
-export const PRODUCT_DELETE = DOMAIN + 'api/products/'
-export const SUB_PRODUCT = DOMAIN + 'api/products/subs'
+export const PRODUCT = DOMAIN + 'api/products/:id'
+export const PRODUCT_DELETE = DOMAIN + 'api/products/:id'
+export const PRODUCT_UPDATE = DOMAIN + 'api/products/:id'
+
+//Subs Product
+export const SUBS_PRODUCT = DOMAIN + 'api/products/:productId/subs'
+export const SUB_PRODUCT_DELETE = DOMAIN + 'api/products/:productId/subs/:id'
+export const SUB_PRODUCT_UPDATE = DOMAIN + 'api/products/:productId/subs/:id'
 
 //Category
 export const CATEGORIES = DOMAIN + 'api/categories'
+export const CATEGORY_CREATE = DOMAIN + 'api/categories'

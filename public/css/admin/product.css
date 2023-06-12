@@ -1,0 +1,38 @@
+#modal-categories .text-second {
+    padding: 3px 7px;
+    border: 1px solid transparent;
+}
+
+#modal-categories .info:hover>.text-second {
+    color: #db6574;
+    cursor: pointer;
+    border-color: #8a8d93;
+    border-radius: 3px;
+}
+
+#modal-categories .info:hover>.create {
+    display: block;
+}
+
+#modal-categories .caret,
+#modal-categories .create {
+    cursor: pointer;
+    filter: invert(58%) sepia(5%) saturate(380%) hue-rotate(182deg) brightness(95%) contrast(91%);
+}
+
+#modal-categories .create {
+    display: none;
+}
+
+#modal-categories .form-control {
+    width: 200px;
+    height: 1.75rem;
+}
+
+.node {
+    margin-left: 20px;
+}
+
+.leaf {
+    margin-left: 30px;
+}

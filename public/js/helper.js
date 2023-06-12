@@ -73,3 +73,19 @@ export const renderPagination = (pagination, callback) => {
         }
     })
 }
+
+export const renderLoading = (ele) => {
+    $(ele).html(`
+        <div class="d-flex justify-content-center position-absolute w-100">
+            <div class="spinner-border text-info" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    `)
+}
+
+export const findChildObject = (array, id) => {
+    var result;
+    array.some(o => result = o.id === id ? o : findChildObject(o.children || [], id));
+    return result;
+};

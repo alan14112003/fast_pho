@@ -17,6 +17,11 @@ class ProductController extends Controller
 
     public function index()
     {
-        return view('clients.admin.product');
+        return view('clients.admin.products.index');
+    }
+
+    public function edit()
+    {
+        return view('clients.admin.products.edit');
     }
 }
