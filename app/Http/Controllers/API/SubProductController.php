@@ -49,6 +49,13 @@ class SubProductController extends Controller
         }
     }
 
+    public function get($productId, $id)
+    {
+        $subProduct = SubProduct::query()->find($id);
+
+        return $this->responseTrait("Thành công", true, $subProduct);
+    }
+
     public function update($productId, $id, UpdateRequest $request): \Illuminate\Http\JsonResponse
     {
         try {

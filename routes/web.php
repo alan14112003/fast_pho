@@ -46,12 +46,19 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/profile', 'profile')->name('profile');
 });
 
-Route::controller(ProductController::class)
-    ->prefix('products/')
+Route::prefix('products/')
     ->name('products.')
     ->group(function () {
-        Route::get('', 'index')->name('index');
-        Route::get('{slug}', 'show')->name('show');
+        Route::controller(ProductController::class)
+            ->group(function () {
+                Route::get('', 'index')->name('index');
+                Route::get('{slug}', 'show')->name('show');
+            });
+        Route::controller(ProductController::class)
+            ->group(function () {
+                Route::get('', 'index')->name('index');
+                Route::get('{slug}', 'show')->name('show');
+            });
     });
 
 Route::get('/migrate', function () {

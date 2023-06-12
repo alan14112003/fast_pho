@@ -47,17 +47,20 @@ Route::prefix('products')->name('products.')
     ->group(function () {
         Route::controller(ProductController::class)
             ->group(function () {
-            Route::get('/', 'all')->name('all');
-            Route::post('/', 'store')->name('store');
-            Route::put('/{id}', 'update')->name('update');
-            Route::delete('/{id}', 'destroy')->name('destroy');
-        });
+                Route::get('/{id}', 'get')->name('get');
+                Route::get('/', 'all')->name('all');
+                Route::post('/', 'store')->name('store');
+                Route::put('/{id}', 'update')->name('update');
+                Route::delete('/{id}', 'destroy')->name('destroy');
+            });
 
         Route::prefix('/{productId}/subs')->name('subs.')
             ->controller(SubProductController::class)
             ->group(function () {
-            Route::get('/', 'all')->name('all');
-            Route::post('/', 'store')->name('store');
-            Route::put('/{id}', 'update')->name('update');
-        });
+                Route::get('/', 'all')->name('all');
+                Route::post('/', 'store')->name('store');
+                Route::get('/{id}', 'get')->name('get');
+                Route::put('/{id}', 'update')->name('update');
+                Route::delete('/{id}', 'destroy')->name('destroy');
+            });
     });
