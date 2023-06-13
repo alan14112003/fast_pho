@@ -10,17 +10,21 @@
     border-radius: 3px;
 }
 
-#modal-categories .info:hover>.create {
+#modal-categories .info:hover>.create,
+#modal-categories .info:hover>.delete {
     display: block;
 }
 
 #modal-categories .caret,
-#modal-categories .create {
+#modal-categories .create,
+#modal-categories .delete {
     cursor: pointer;
     filter: invert(58%) sepia(5%) saturate(380%) hue-rotate(182deg) brightness(95%) contrast(91%);
+    width: 24px;
 }
 
-#modal-categories .create {
+#modal-categories .create,
+#modal-categories .delete {
     display: none;
 }
 
