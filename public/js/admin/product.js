@@ -1,4 +1,4 @@
-import { PRODUCTS as productsUri, SUBS_PRODUCT as subsProductUri, PRODUCT_EDIT, PRODUCT_DELETE, SUB_PRODUCT_EDIT } from "../url.js";
+import { STORAGE, PRODUCTS as productsUri, SUBS_PRODUCT as subsProductUri, PRODUCT_EDIT, PRODUCT_DELETE, SUB_PRODUCT_EDIT } from "../url.js";
 import { renderLoading, renderPagination, renderToast } from '../helper.js'
 
 const bodyContent = $('#body-content')
@@ -26,7 +26,7 @@ const renderProducts = () => {
                         const id = `<th class="col-1" scope="row">${p.id}</th>`
                         const image = `<img width='80' height='80' 
                             style="object-fit: cover" 
-                            src="${p.image}?${Date.now()}" alt="${p.slug}"/>`
+                            src="${STORAGE + p.image}?${Date.now()}" alt="${p.slug}"/>`
                         const info = `
                             <strong>${p.name}</strong>
                             <p class="text-ellipsis" style="-webkit-line-clamp: 2;">${p.descriptions}</p>
@@ -122,7 +122,7 @@ const renderSubsProduct = (parent, productId) => {
                     subsProduct.forEach(subP => {
                         const image = `<img width='80' height='80' 
                             style="object-fit: cover; border-radius: 10px" 
-                            src="${subP.image}?${Date.now()}""/>`
+                            src="${STORAGE + subP.image}?${Date.now()}""/>`
 
                         const info = `
                             <div class="d-flex">
