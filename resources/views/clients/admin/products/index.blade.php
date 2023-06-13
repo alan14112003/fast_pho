@@ -24,8 +24,9 @@
                 <div class="row gy-4">
                     <div class="col-lg-12">
                         <div class="card mb-0">
-                            <div class="card-header">
+                            <div class="card-header d-flex justify-content-between align-items-center">
                                 <h3 class="h4 mb-0">Striped table with hover effect</h3>
+                                <a href="{{ route('admin.products.create') }}" class="btn bg-info text-white">Thêm</a>
                             </div>
                             <div class="card-body pt-0">
                                 <div class="table-responsive">

@@ -68,8 +68,8 @@
                                                             class="form-control mt-1">
                                                     </div>
                                                     <div class="col-4 pe-4">
-                                                        <label for="avatar">Hình ảnh:</label>
-                                                        <input type="file" name="avatar" id="avatar"
+                                                        <label for="image">Hình ảnh:</label>
+                                                        <input type="file" name="image" id="image"
                                                             oninput="pic.src=window.URL.createObjectURL(this.files[0])"
                                                             class="form-control mt-1">
                                                     </div>
@@ -109,8 +109,8 @@
                                             <tr class="form-group">
                                                 <div class="d-flex mt-2">
                                                     <div class="col-4 pe-4">
-                                                        <label for="description">Mô tả:</label>
-                                                        <textarea name="description" id="description" rows="4" class="form-control mt-1 pb-3"></textarea>
+                                                        <label for="descriptions">Mô tả:</label>
+                                                        <textarea name="descriptions" id="descriptions" rows="4" class="form-control mt-1 pb-3"></textarea>
                                                     </div>
                                                     <div class="col-8">
                                                         <div class="d-flex">

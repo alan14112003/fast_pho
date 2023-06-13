@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Middleware\AdminMiddleware;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,5 +63,9 @@ Route::prefix('products/')
     });
 
 Route::get('/migrate', function () {
-    \Illuminate\Support\Facades\Artisan::call('migrate');
+    Artisan::call('migrate');
+});
+
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
 });
