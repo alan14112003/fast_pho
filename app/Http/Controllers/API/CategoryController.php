@@ -29,7 +29,7 @@ class CategoryController extends Controller
         return $categories;
     }
 
-    public function all(): \Illuminate\Http\JsonResponse
+    public function all()
     {
         $categories = Category::query()->whereNull('parent_id')->get();
 
@@ -41,7 +41,7 @@ class CategoryController extends Controller
         return $this->responseTrait('Thành công', true, $categories);
     }
 
-    public function store(StoreRequest $request): \Illuminate\Http\JsonResponse
+    public function store(StoreRequest $request)
     {
         try {
             $category = Category::query()->create($request->validated());
@@ -51,7 +51,7 @@ class CategoryController extends Controller
         }
     }
 
-    public function update($id, UpdateRequest $request): \Illuminate\Http\JsonResponse
+    public function update($id, UpdateRequest $request)
     {
         try {
             $category = Category::query()->find($id);
@@ -60,7 +60,7 @@ class CategoryController extends Controller
                 return $this->responseTrait('Id không tồn tại');
             }
 
-            if($request->get('name') === $category->name) {
+            if ($request->get('name') === $category->name) {
                 return $this->responseTrait('Thành công', true, $category);
             }
 
@@ -73,7 +73,7 @@ class CategoryController extends Controller
         }
     }
 
-    public function destroy($id): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    public function destroy($id)
     {
         try {
             $category = Category::query()->find($id);
@@ -85,7 +85,6 @@ class CategoryController extends Controller
             $this->deleteChildren($id);
             $category->delete();
             return $this->responseTrait('Thành công', true);
-
         } catch (\Throwable $e) {
             return $this->responseTrait("Có lỗi! {$e->getMessage()}");
         }

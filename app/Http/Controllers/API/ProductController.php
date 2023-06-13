@@ -90,7 +90,7 @@ class ProductController extends Controller
         return $this->responseTrait('Thành công', true, $product);
     }
 
-    public function store(StoreRequest $request): \Illuminate\Http\JsonResponse
+    public function store(StoreRequest $request)
     {
         try {
             $product = Product::query()->create([
@@ -101,7 +101,7 @@ class ProductController extends Controller
                 'category_id' => $request->get('category_id'),
             ]);
 
-            $imagePath = Storage::putFileAs(
+            $imagePath = Storage::disk('public')->putFileAs(
                 "images/products/{$product->slug}",
                 $request->file('image'),
                 "image.{$request->file('image')->extension()}"
@@ -126,7 +126,7 @@ class ProductController extends Controller
             $data = $request->validated();
 
             if ($request->hasFile('image')) {
-                $imagePath = Storage::putFileAs(
+                $imagePath = Storage::disk('public')->putFileAs(
                     "images/products/{$product->id}",
                     $request->file('image'),
                     "image.{$request->file('image')->extension()}"
