@@ -4,7 +4,7 @@ import { main as categoriesReload } from '../categories.js'
 
 $('#form-store-comic').on('submit', function (e) {
     e.preventDefault()
-    var formData = new FormData($(this)[0]);
+    const formData = new FormData($(this)[0]);
     formData.set('category_id', formData.get('category'));
 
     $.ajax({
@@ -32,7 +32,7 @@ $('#form-store-comic').on('submit', function (e) {
 })
 
 const main = async () => {
-    categoriesReload()
+    await categoriesReload()
 }
 
-main();
+await main();

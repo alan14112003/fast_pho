@@ -33,7 +33,7 @@
                             </div>
                             <form class="d-flex align-items-center" id="form-c-category">
                                 <input type="hidden" name="parent_id" id="parent-id">
-                                <input class="form-control" type="text" name="name">
+                                <input class="form-control" type="text" id="category_name_inp" name="name">
                                 <button class="btn">Thêm</button>
                                 <button type="reset" class="btn d-none" id="cancel-c-category">Hủy</button>
                             </form>
@@ -108,10 +108,6 @@
                                             </tr>
                                             <tr class="form-group">
                                                 <div class="d-flex mt-2">
-                                                    <div class="col-4 pe-4">
-                                                        <label for="descriptions">Mô tả:</label>
-                                                        <textarea name="descriptions" id="descriptions" rows="4" class="form-control mt-1 pb-3"></textarea>
-                                                    </div>
                                                     <div class="col-8">
                                                         <div class="d-flex">
                                                             <div class="col-6 pe-4">
@@ -126,12 +122,17 @@
                                                                     placeholder="VD: 25" class="form-control mt-1">
                                                             </div>
                                                         </div>
-                                                        <div class="col-12 mt-3 pe-4">
-                                                            <label for="slug">Slug:</label>
-                                                            <input type="text" name="slug" id="slug"
-                                                                class="form-control mt-1">
-                                                        </div>
                                                     </div>
+                                                </div>
+                                            </tr>
+                                            <tr>
+                                                <div class="col-12 mt-3">
+                                                    <label for="descriptions">Mô tả:</label>
+                                                    <textarea
+                                                        name="descriptions"
+                                                        id="descriptions" rows="4"
+                                                        class="form-control mt-1 pb-3">
+                                                    </textarea>
                                                 </div>
                                             </tr>
                                         </tbody>
@@ -157,5 +158,6 @@
     </div>
 @endsection
 @push('scripts')
+    <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
     <script src="{{ asset('js/admin/products/update.js') }}" type="module"></script>
 @endpush

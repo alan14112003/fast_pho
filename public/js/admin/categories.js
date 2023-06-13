@@ -42,6 +42,9 @@ export const showCategories = (rootId, nodeId, leafId) => {
     $('#category').html('')
     $('#category_').html('')
     $('#category__').html('')
+
+    if (!rootId) rootId = categories[0]?.id
+    
     categories.forEach(root => {
         $('#category_').append(`
             <option value="${root.id}" ${root.id === rootId ? 'selected' : ''}>
@@ -51,7 +54,7 @@ export const showCategories = (rootId, nodeId, leafId) => {
 
         if (root.id === rootId) {
             if (nodeId === undefined) {
-                nodeId = root.children[0].id
+                nodeId = root.children[0]?.id
             }
 
             root.children.forEach(node => {
@@ -63,7 +66,7 @@ export const showCategories = (rootId, nodeId, leafId) => {
 
                 if (node.id === nodeId) {
                     if (leafId === undefined) {
-                        leafId = node.children[0].id
+                        leafId = node.children[0]?.id
                     }
 
                     node.children.forEach(leaf => {
@@ -152,6 +155,7 @@ const setOnClickCreateCategory = () => {
         $('#parent-id').val(id)
         $('#parent-label').html($(this).parent().find('.text-second').text())
         $('#cancel-c-category').removeClass('d-none')
+        $('#category_name_inp').focus()
     })
 }
 
@@ -167,16 +171,14 @@ const setOnClickDeleteCategory = () => {
 
 const setOnClickCancelCreateCategory = () => {
     $('#cancel-c-category').off('click').on('click', function () {
-        $('#parent-label').html('Danh mục')
-        $('#parent-id').removeAttr('value')
-        $(this).addClass('d-none')
+        resetForm()
     })
 }
 
 const setOnSubmitFormCreateCategory = () => {
     $('#form-c-category').off('submit').on('submit', function (e) {
         e.preventDefault()
-        var formData = new FormData($(this)[0]);
+        const formData = new FormData($(this)[0]);
 
         $.ajax({
             url: CATEGORY_CREATE,
@@ -186,8 +188,9 @@ const setOnSubmitFormCreateCategory = () => {
             contentType: false,
             success: async function (response) {
                 if (response.status) {
+                    resetForm()
                     await assignCategories();
-                    main()
+                    await main()
 
                     renderToast({
                         title: 'Danh mục sản phẩm',
@@ -207,7 +210,7 @@ const setOnSubmitFormCreateCategory = () => {
 }
 
 const handleDeleteCategory = (id) => {
-    var formData = new FormData();
+    const formData = new FormData();
 
     formData.append('_method', 'DELETE')
 
@@ -220,7 +223,7 @@ const handleDeleteCategory = (id) => {
         success: async function (response) {
             if (response.status) {
                 await assignCategories();
-                main()
+                await main()
 
                 renderToast({
                     title: 'Danh mục sản phẩm',
@@ -236,6 +239,14 @@ const handleDeleteCategory = (id) => {
             })
         }
     })
+}
+
+const resetForm = () => {
+    $('#parent-label').html('Danh mục')
+    $('#parent-id').removeAttr('value')
+    $('#cancel-c-category').addClass('d-none')
+    $('#category_name_inp').focus()
+    $('#category_name_inp').val('')
 }
 
 export const main = async () => {
