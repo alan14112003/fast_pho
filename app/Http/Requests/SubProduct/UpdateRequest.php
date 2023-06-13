@@ -35,6 +35,7 @@ class UpdateRequest extends FormRequest
             'total' => [
                 'required',
                 'integer',
+                'min:0'
             ]
         ];
     }
