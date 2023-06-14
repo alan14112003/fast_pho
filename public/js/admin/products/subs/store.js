@@ -1,14 +1,14 @@
-import { PRODUCT_STORE } from "../../url.js"
-import { renderToast } from '../../helper.js'
-import { main as categoriesReload } from '../categories.js'
+import { SUB_PRODUCT_STORE } from "../../../url.js"
+import { renderToast } from '../../../helper.js'
 
-$('#form-store-comic').on('submit', function (e) {
+const productId = location.href.split('/').find(element => Number(element))
+
+$('#form-store').on('submit', function (e) {
     e.preventDefault()
     const formData = new FormData($(this)[0]);
-    formData.set('category_id', formData.get('category'));
 
     $.ajax({
-        url: PRODUCT_STORE,
+        url: SUB_PRODUCT_STORE.replace(':productId', productId),
         type: 'POST',
         data: formData,
         processData: false,
@@ -30,9 +30,3 @@ $('#form-store-comic').on('submit', function (e) {
         }
     })
 })
-
-const main = async () => {
-    await categoriesReload()
-}
-
-await main();

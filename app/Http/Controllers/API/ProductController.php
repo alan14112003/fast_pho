@@ -127,7 +127,7 @@ class ProductController extends Controller
 
             if ($request->hasFile('image')) {
                 $imagePath = Storage::disk('public')->putFileAs(
-                    "images/products/{$product->id}",
+                    "images/products/{$product->slug}",
                     $request->file('image'),
                     "image.{$request->file('image')->extension()}"
                 );
@@ -147,13 +147,14 @@ class ProductController extends Controller
         try {
             $product = Product::query()->find($id);
 
-            if ($product) {
-                $product->delete();
-
-                return $this->responseTrait('Xóa thành công', true);
+            if (!$product) {
+                return $this->responseTrait('Sản phẩm không tồn tại');
             }
 
-            return $this->responseTrait('Sản phẩm không tồn tại');
+            $product->delete();
+            Storage::deleteDirectory("public/images/products/{$product->slug}");
+
+            return $this->responseTrait('Xóa thành công', true);
         } catch (\Exception $e) {
             return $this->responseTrait("Có lỗi! {$e->getMessage()}");
         }

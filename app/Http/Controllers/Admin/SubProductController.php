@@ -20,8 +20,16 @@ class SubProductController extends Controller
         return view('clients.admin.products.subs.index');
     }
 
-    public function edit()
+    public function create()
     {
-        return view('clients.admin.products.subs.edit');
+        return view('clients.admin.products.subs.create');
+    }
+
+    public function edit($productId, $id)
+    {
+        return view('clients.admin.products.subs.edit', [
+            'productId' => $productId,
+            'id' => $id
+        ]);
     }
 }

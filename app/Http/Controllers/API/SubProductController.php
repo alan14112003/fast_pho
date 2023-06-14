@@ -33,7 +33,7 @@ class SubProductController extends Controller
                 'product_id' => $productId
             ]);
 
-            $imagePath = Storage::putFileAs(
+            $imagePath = Storage::disk('public')->putFileAs(
                 "images/products/{$product->slug}/subs/{$subProduct->id}",
                 $request->file('image'),
                 "image.{$request->file('image')->extension()}"
@@ -67,7 +67,7 @@ class SubProductController extends Controller
             $data = $request->validated();
 
             if ($request->hasFile('image')) {
-                $imagePath = Storage::putFileAs(
+                $imagePath = Storage::disk('public')->putFileAs(
                     "images/products/{$product->slug}/subs/{$subProduct->id}",
                     $request->file('image'),
                     "image.{$request->file('image')->extension()}"
@@ -78,6 +78,25 @@ class SubProductController extends Controller
             $subProduct->update($data);
 
             return $this->responseTrait("Sửa thành công", true, $subProduct);
+        } catch (\Exception $e) {
+            return $this->responseTrait("Có lỗi! {$e->getMessage()}");
+        }
+    }
+
+    public function destroy($productId, $id): \Illuminate\Http\JsonResponse
+    {
+        try {
+            $product = Product::query()->find($productId);
+            $subProduct = SubProduct::query()->find($id);
+
+            if (!$subProduct || !$product) {
+                return $this->responseTrait('Sản phẩm không tồn tại');
+            }
+
+            $subProduct->delete();
+            Storage::deleteDirectory("public/images/products/{$product->slug}/subs/{$subProduct->id}");
+
+            return $this->responseTrait('Xóa thành công', true);
         } catch (\Exception $e) {
             return $this->responseTrait("Có lỗi! {$e->getMessage()}");
         }

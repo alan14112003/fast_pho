@@ -36,6 +36,7 @@ class StoreRequest extends FormRequest
             'total' => [
                 'required',
                 'integer',
+                'min:1'
             ]
         ];
     }
