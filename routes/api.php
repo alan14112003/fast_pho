@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\SubProductController;
 use App\Http\Controllers\AuthController;
@@ -64,3 +65,15 @@ Route::prefix('products')->name('products.')
                 Route::delete('/{id}', 'destroy')->name('destroy');
             });
     });
+
+Route::prefix('orders')
+    ->name('orders.')
+    ->controller(OrderController::class)
+    ->group(function () {
+        Route::get('/products', 'products')->name('products');
+        Route::prefix('/{id}')->group(function () {
+            Route::get('/product', 'product')->name('product');
+            Route::put('/change-status', 'changeStatus')->name('change_status');
+        });
+    })
+;

@@ -17,4 +17,9 @@ class Order extends Model
         "user_address",
         "status",
     ];
+
+    public function orderProducts(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(OrderProduct::class);
+    }
 }

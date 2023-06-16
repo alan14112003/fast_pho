@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\SubProductController as AdminSubProductController;
 use App\Http\Controllers\AuthController;
@@ -43,6 +44,13 @@ Route::middleware(AdminMiddleware::class)
                     Route::get('/create', 'create')->name('create');
                     Route::get('/edit/{id}', 'edit')->name('edit');
                 });
+            });
+
+        Route::prefix('orders/')
+            ->name('orders.')->controller(AdminOrderController::class)
+            ->group(function () {
+                Route::get('products', 'products')->name('products');
+                Route::get('/product/{id}', 'product')->name('product');
             });
     });
 

@@ -89,3 +89,27 @@ export const findChildObject = (array, id) => {
     array.some(o => result = o.id === id ? o : findChildObject(o.children || [], id));
     return result;
 };
+
+export const formatCurrency = (number) => {
+    const formatter = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+    });
+    return formatter.format(number);
+}
+
+export const formatDateTime = (date) => {
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // Lưu ý: Tháng bắt đầu từ 0 (tháng 0 là tháng 1)
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+  
+    // Chuyển đổi sang định dạng dd/mm/yyyy - hh:mm:ss
+    const formattedDate = ('0' + day).slice(-2) + '/' + ('0' + month).slice(-2) + '/' + year;
+    const formattedTime = ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2) + ':' + ('0' + seconds).slice(-2);
+  
+    return formattedDate + ' - ' + formattedTime;
+}
+  

@@ -5,6 +5,7 @@ export const STORAGE = DOMAIN + 'storage/'
 export const PRODUCT_EDIT = DOMAIN + 'admin/products/edit/'
 export const SUB_PRODUCT_CREATE = DOMAIN + 'admin/products/:productId/subs/create'
 export const SUB_PRODUCT_EDIT = DOMAIN + 'admin/products/:productId/subs/edit/:id'
+export const PRODUCT_ORDER_VIEW = DOMAIN + 'admin/orders/product/:id'
 
 //Api:
 
@@ -31,3 +32,9 @@ export const SUB_PRODUCT_DELETE = DOMAIN + 'api/products/:productId/subs/:id'
 export const CATEGORIES = DOMAIN + 'api/categories'
 export const CATEGORY_CREATE = DOMAIN + 'api/categories'
 export const CATEGORY_DELETE = DOMAIN + 'api/categories/:id'
+
+//order
+export const PRODUCT_ORDERS = DOMAIN + 'api/orders/products'
+export const FILE_ORDERS = DOMAIN + 'api/orders/files'
+export const CHANGE_STATUS_ORDER = DOMAIN + 'api/orders/:id/change-status'
+export const PRODUCT_ORDER = DOMAIN + 'api/orders/:id/product'

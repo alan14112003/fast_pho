@@ -31,8 +31,8 @@
                     <use xlink:href="#browser-window-1"> </use>
                 </svg><span>Đơn hàng </span></a>
             <ul class="collapse list-unstyled " id="exampledropdownDropdown">
-                <li><a class="sidebar-link" href="#">Photocopy</a></li>
-                <li><a class="sidebar-link" href="#">Sản phẩm</a></li>
+                <li><a class="sidebar-link" href="">Photocopy</a></li>
+                <li><a class="sidebar-link" href="{{ route('admin.orders.products') }}">Sản phẩm</a></li>
             </ul>
         </li>
         {{-- </ul><span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Extras</span> --}}

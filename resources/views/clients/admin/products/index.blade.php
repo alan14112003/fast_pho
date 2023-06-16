@@ -84,5 +84,5 @@
     </div>
 @endsection
 @push('scripts')
-    <script src="{{ asset('js/admin/product.js') }}" type="module"></script>
+    <script src="{{ asset('js/admin/products.js') }}" type="module"></script>
 @endpush

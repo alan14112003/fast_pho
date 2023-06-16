@@ -1,13 +1,16 @@
 @extends('layouts.admin.master')
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/pagination.css') }}">
+    <script>
+        let orderId = '{{ $id }}'
+    </script>
 @endpush
 @section('content')
     <div class="page-content form-page">
         <!-- Page Header-->
         <div class="bg-dash-dark-2 py-4">
             <div class="container-fluid">
-                <h2 class="h5 mb-0">Đơn hàng sản phẩm</h2>
+                <h2 class="h5 mb-0">Hóa đơn sản phẩm</h2>
             </div>
         </div>
         <!-- Breadcrumb-->
@@ -15,56 +18,60 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 py-3 px-0">
                     <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Đơn hàng sản phẩm</li>
+                    <li class="breadcrumb-item active" aria-current="page">Hóa đơn sản phẩm</li>
                 </ol>
             </nav>
+            <button class="btn btn-primary print-order">In hóa đơn</button>
         </div>
         <section class="tables py-0">
             <div class="container-fluid">
                 <div class="row gy-4">
                     <div class="col-lg-12">
                         <div class="card mb-0">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <h3 class="h4 mb-0">Striped table with hover effect</h3>
+                            <div class="avatar-box mb-4">
+                                <img src="{{ asset('images/logo.png') }}" alt="" style="max-width: 100px">
+                            </div>
+                            <div class="card-header">
+                                <h3 class="text-center">HÓA ĐƠN MUA HÀNG</h3>
                             </div>
                             <div class="card-body pt-0">
-                                <div class="table-responsive">
-                                    <table class="table mb-0 table-striped table-hover">
-                                        <thead>
+                                <h4>THÔNG TIN NGƯỜI NHẬN</h4>
+                                <table>
+                                    <tr>
+                                        <td>Tên: </td>
+                                        <td class="user_name"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sdt: </td>
+                                        <td class="user_phone"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Đc: </td>
+                                        <td class="user_address"></td>
+                                    </tr>
+                                </table>
+                                <h6 class="my-3">HÌNH THỨC THANH TOÁN: <span class="type"></span> </h6>
+                                <h4 class="mt-4">SẢN PHẨM</h4>
+                                <table class="table">
+                                    <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Thông tin người mua</th>
-                                            <th>Thời gian</th>
-                                            <th>Số sp</th>
-                                            <th>Thanh toán</th>
-                                            <th>Ngày tạo</th>
-                                            <th>Tình trạng</th>
+                                            <th>STT</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Loại</th>
+                                            <th>Đơn giá</th>
+                                            <th>Số lượng</th>
+                                            <th>Thành tiền</th>
                                         </tr>
-                                        </thead>
-                                        <tbody id="body-content">
-                                        </tbody>
-                                    </table>
+                                    </thead>
+                                    <tbody id="body-content"></tbody>
+                                </table>
+                                <div >
+                                    Tổng cộng: <span class="total"></span>
                                 </div>
-                                <div class="card-footer">
-                                    <div class="pagination p1">
-                                        <ul>
-                                            <a href="#" id="first-paginate">
-                                                <li>&lt;&lt;</li>
-                                            </a>
-                                            <a href="#" id="pre-paginate">
-                                                <li></li>
-                                            </a>
-                                            <a href="#" class="is-active" id="current-paginate">
-                                                <li></li>
-                                            </a>
-                                            <a href="#" id="next-paginate">
-                                                <li></li>
-                                            </a>
-                                            <a href="#" id="last-paginate">
-                                                <li>&gt;&gt;</li>
-                                            </a>
-                                        </ul>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 text-center fw-bold">
+                                    THANK YOU
                                 </div>
                             </div>
                         </div>
@@ -84,8 +91,5 @@
     </div>
 @endsection
 @push('scripts')
-    <script>
-        const arrayViewStatusOrder = JSON.parse('{!! json_encode($arrayViewStatus) !!}');
-    </script>
     <script src="{{ asset('js/admin/orders/product.js') }}" type="module"></script>
 @endpush
