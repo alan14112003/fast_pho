@@ -7,7 +7,7 @@
         <!-- Page Header-->
         <div class="bg-dash-dark-2 py-4">
             <div class="container-fluid">
-                <h2 class="h5 mb-0">Sản phẩm</h2>
+                <h2 class="h5 mb-0">Đơn photo</h2>
             </div>
         </div>
         <!-- Breadcrumb-->
@@ -15,7 +15,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 py-3 px-0">
                     <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Sản phẩm</li>
+                    <li class="breadcrumb-item active" aria-current="page">Đơn photo</li>
                 </ol>
             </nav>
         </div>
@@ -26,20 +26,30 @@
                         <div class="card mb-0">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h3 class="h4 mb-0">Striped table with hover effect</h3>
-                                <a href="{{ route('admin.products.create') }}" class="btn bg-info text-white">Thêm</a>
                             </div>
                             <div class="card-body pt-0">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <select id="status-filter" class="form-select">
+                                            <option value="All">All</option>
+                                            @foreach ($arrayViewStatus as $status)
+                                                <option value="{{ $status['value'] }}">{{ $status['name'] }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="table-responsive">
                                     <table class="table mb-0 table-striped table-hover">
                                         <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Ảnh</th>
-                                                <th>Thông tin</th>
-                                                <th>Giá thành</th>
-                                                <th>Ngày tạo</th>
-                                                <th></th>
-                                            </tr>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Thông tin người mua</th>
+                                            <th>Thời gian</th>
+                                            <th>Số photo</th>
+                                            <th>Thanh toán</th>
+                                            <th>Ngày tạo</th>
+                                            <th>Tình trạng</th>
+                                        </tr>
                                         </thead>
                                         <tbody id="body-content">
                                         </tbody>
@@ -84,5 +94,11 @@
     </div>
 @endsection
 @push('scripts')
-    <script src="{{ asset('js/admin/products.js') }}" type="module"></script>
+    <script>
+        const arrayViewStatusOrder = JSON.parse('{!! json_encode($arrayViewStatus) !!}');
+    </script>
+    <script type="module">
+        import main from '{{ asset('js/admin/orders/orders.js') }}'
+        await main('PHOTOS')
+    </script>
 @endpush

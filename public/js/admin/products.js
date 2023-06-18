@@ -1,5 +1,5 @@
 import { STORAGE, PRODUCTS as productsUri, SUBS_PRODUCTS as subsProductUri, PRODUCT_EDIT, PRODUCT_DELETE, SUB_PRODUCT_EDIT, SUB_PRODUCT_CREATE, SUB_PRODUCT_DELETE } from "../url.js";
-import { renderLoading, renderPagination, renderToast } from '../helper.js'
+import { formatDateTime, renderLoading, renderPagination, renderToast } from '../helper.js'
 
 const bodyContent = $('#body-content')
 
@@ -41,7 +41,7 @@ const renderProducts = () => {
                         const functions = `
                             <a class="btn btn-secondary" href ="${PRODUCT_EDIT + p.id}" role = "button" >Sửa</a>
                             <button type="button" class="btn btn-danger btn-delete" data-id=${p.id}>Xóa</button>
-                            <a class="btn btn-info btn-create_sub" href="${SUB_PRODUCT_CREATE.replace(':productId', p.id)}">Con</a>
+                            <a class="btn btn-info btn-create_sub mt-1" href="${SUB_PRODUCT_CREATE.replace(':productId', p.id)}">Thêm ct</a>
                         `
 
                         bodyContent.append(`
@@ -50,7 +50,7 @@ const renderProducts = () => {
                                 <td class="col-1">${image}</td>
                                 <td class="col-4">${info}</td>
                                 <td class="col-2">${price}</td>
-                                <td class="col-2">${createdAt}</td>
+                                <td class="col-2">${formatDateTime(createdAt)}</td>
                                 <td class="col-3 functions-box">${functions}</td>
                             </tr>
                         `)
@@ -158,7 +158,7 @@ const renderSubsProduct = (parent, productId) => {
                             <td class="col-1"></td>
                             <td class="col-4" colspan="2">${info}</td>
                             <td class="col-2">${quantity}</td>
-                            <td class="col-2">${createdAt}</td>
+                            <td class="col-2">${formatDateTime(createdAt)}</td>
                             <td class="col-3 functions-box">${functions}</td>
                         `);
                         subsP.insertAfter(parent)
