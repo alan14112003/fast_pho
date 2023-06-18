@@ -7,7 +7,7 @@
         <!-- Page Header-->
         <div class="bg-dash-dark-2 py-4">
             <div class="container-fluid">
-                <h2 class="h5 mb-0">Tables</h2>
+                <h2 class="h5 mb-0">Sản phẩm</h2>
             </div>
         </div>
         <!-- Breadcrumb-->
@@ -84,5 +84,5 @@
     </div>
 @endsection
 @push('scripts')
-    <script src="{{ asset('js/admin/product.js') }}" type="module"></script>
+    <script src="{{ asset('js/admin/products.js') }}" type="module"></script>
 @endpush

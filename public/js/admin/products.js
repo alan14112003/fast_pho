@@ -1,5 +1,5 @@
-import { STORAGE, PRODUCTS as productsUri, SUBS_PRODUCT as subsProductUri, PRODUCT_EDIT, PRODUCT_DELETE, SUB_PRODUCT_EDIT } from "../url.js";
-import { renderLoading, renderPagination, renderToast } from '../helper.js'
+import { STORAGE, PRODUCTS as productsUri, SUBS_PRODUCTS as subsProductUri, PRODUCT_EDIT, PRODUCT_DELETE, SUB_PRODUCT_EDIT, SUB_PRODUCT_CREATE, SUB_PRODUCT_DELETE } from "../url.js";
+import { formatDateTime, renderLoading, renderPagination, renderToast } from '../helper.js'
 
 const bodyContent = $('#body-content')
 
@@ -39,8 +39,9 @@ const renderProducts = () => {
                         const createdAt = new Date(p.created_at);
 
                         const functions = `
-                            <a class="btn btn-secondary" href ="${PRODUCT_EDIT + p.id}" role = "button" >Edit</a>
-                            <button type="button" class="btn btn-danger btn-delete" data-id=${p.id}>Delete</button>
+                            <a class="btn btn-secondary" href ="${PRODUCT_EDIT + p.id}" role = "button" >Sửa</a>
+                            <button type="button" class="btn btn-danger btn-delete" data-id=${p.id}>Xóa</button>
+                            <a class="btn btn-info btn-create_sub mt-1" href="${SUB_PRODUCT_CREATE.replace(':productId', p.id)}">Thêm ct</a>
                         `
 
                         bodyContent.append(`
@@ -49,7 +50,7 @@ const renderProducts = () => {
                                 <td class="col-1">${image}</td>
                                 <td class="col-4">${info}</td>
                                 <td class="col-2">${price}</td>
-                                <td class="col-2">${createdAt}</td>
+                                <td class="col-2">${formatDateTime(createdAt)}</td>
                                 <td class="col-3 functions-box">${functions}</td>
                             </tr>
                         `)
@@ -75,7 +76,7 @@ await renderProducts();
 //Delete
 const deleteProduct = (deletedUri, e) => {
     $.ajax({
-        url: deletedUri + $(e.currentTarget).data('id'),
+        url: deletedUri.replace(':id', $(e.currentTarget).data('id')),
         type: 'DELETE',
         processData: false,
         contentType: false,
@@ -144,21 +145,26 @@ const renderSubsProduct = (parent, productId) => {
                             .replace(':id', subP.id)
                         const functions = `
                             <a class="btn btn-secondary" href ="${editUrl}" role = "button" >Edit</a>
-                            <button type="button" class="btn btn-danger btn-delete" data-id=${subP.id}>Delete</button>
+                            <button type="button" class="btn btn-danger btn-delete" data-product-id=${productId} data-id=${subP.id}>Delete</button>
                         `
 
                         const subsP = $(`<tr data-product-id=${productId}>`, {
                             class: 'sub-product'
                         });
+
+                        $(subsP).addClass('sub-product')
+
                         subsP.html(`
                             <td class="col-1"></td>
                             <td class="col-4" colspan="2">${info}</td>
                             <td class="col-2">${quantity}</td>
-                            <td class="col-2">${createdAt}</td>
+                            <td class="col-2">${formatDateTime(createdAt)}</td>
                             <td class="col-3 functions-box">${functions}</td>
                         `);
                         subsP.insertAfter(parent)
                     });
+
+                    setOnclickDeleteSubProductBtn()
                 }
             },
             error: function (response) {
@@ -195,3 +201,38 @@ bodyContent.find('tr').off('click').on('click', function (e) {
 
 })
 
+
+//Delete subproduct
+const deleteSubProduct = (deletedUri, e) => {
+    $.ajax({
+        url: deletedUri.replace(':productId', $(e.currentTarget).data('product-id')).replace(':id', $(e.currentTarget).data('id')),
+        type: 'DELETE',
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            if (response.status) {
+                $(e.currentTarget).parent().parent().remove()
+
+                renderToast({
+                    title: 'Sản phẩm',
+                    text: response.message,
+                })
+            }
+        },
+        error: function (response) {
+            renderToast({
+                status: 'danger',
+                title: 'Lỗi',
+                text: response.responseJSON.message
+            })
+        }
+    })
+}
+
+const setOnclickDeleteSubProductBtn = () => {
+    $('.sub-product .btn-delete').on('click', function (e) {
+        if (confirm('Bạn chắc chắn muốn xóa loại sản phẩm này?')) {
+            deleteSubProduct(SUB_PRODUCT_DELETE, e)
+        }
+    })
+}
