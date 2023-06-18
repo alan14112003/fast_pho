@@ -122,6 +122,7 @@ class AuthController extends Controller
             'email' => $request->get('email'),
             'password' => $password,
             'gender' => $request->get('gender') ?? 0,
+            'avatar' => 'images/users/default_avatar.png',
         ]);
         Auth::login($user, true);
 

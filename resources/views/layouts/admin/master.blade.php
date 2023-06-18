@@ -14,6 +14,7 @@
     <!-- Google fonts - Muli-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,700">
     <!-- theme stylesheet-->
+    <link rel="stylesheet" href="{{ asset('vendor/choices/choices.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/global.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin/style.default.css') }}" id="theme-stylesheet">
     @stack('styles')
@@ -31,6 +32,7 @@
     </div>
     {{-- @include('layouts.admin.footer') --}}
 </body>
+<script src="{{ asset('js/admin/front.js') }}"></script>
 @include('libraries')
 @stack('scripts')
 

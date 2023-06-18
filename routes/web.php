@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\SubProductController as AdminSubProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\ProductController;
@@ -28,6 +29,15 @@ Route::middleware(AdminMiddleware::class)
     ->group(function () {
         Route::get('', [AdminController::class, 'index'])->name('index');
 
+        Route::prefix('/slides')
+            ->name('slides.')
+            ->controller(SlideController::class)
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/create', 'create')->name('create');
+                Route::get('/edit/{id}', 'edit')->name('edit');
+            });
+
         Route::prefix('products/')
             ->name('products.')->group(function () {
                 Route::controller(AdminProductController::class)
@@ -51,6 +61,10 @@ Route::middleware(AdminMiddleware::class)
             ->group(function () {
                 Route::get('products', 'products')->name('products');
                 Route::get('/product/{id}', 'product')->name('product');
+
+                Route::get('/photos', 'photos')->name('photos');
+                Route::get('/photo/{id}', 'photo')->name('photo');
+                Route::get('/photo/bill/{id}', 'bill')->name('bill');
             });
     });
 

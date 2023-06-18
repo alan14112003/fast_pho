@@ -7,7 +7,7 @@
         <!-- Page Header-->
         <div class="bg-dash-dark-2 py-4">
             <div class="container-fluid">
-                <h2 class="h5 mb-0">Đơn hàng</h2>
+                <h2 class="h5 mb-0">Đơn photo</h2>
             </div>
         </div>
         <!-- Breadcrumb-->
@@ -15,7 +15,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 py-3 px-0">
                     <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Đơn hàng</li>
+                    <li class="breadcrumb-item active" aria-current="page">Đơn photo</li>
                 </ol>
             </nav>
         </div>
@@ -45,7 +45,7 @@
                                             <th>#</th>
                                             <th>Thông tin người mua</th>
                                             <th>Thời gian</th>
-                                            <th>Số sp</th>
+                                            <th>Số photo</th>
                                             <th>Thanh toán</th>
                                             <th>Ngày tạo</th>
                                             <th>Tình trạng</th>
@@ -99,6 +99,6 @@
     </script>
     <script type="module">
         import main from '{{ asset('js/admin/orders/orders.js') }}'
-        await main()
+        await main('PHOTOS')
     </script>
 @endpush

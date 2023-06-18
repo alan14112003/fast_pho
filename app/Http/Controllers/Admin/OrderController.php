@@ -18,8 +18,8 @@ class OrderController extends Controller
         View::share('currentPage', $currentPage);
     }
 
-    //  hàm products trả về view order product
-    public function products(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    //  Tạo ra hàm dùng chung array view Status
+    private function arrayViewStatus(): array
     {
         $arrayViewStatus = [];
         foreach (OrderStatusEnum::arrayView() as $name => $value) {
@@ -28,6 +28,14 @@ class OrderController extends Controller
                 'value' => $value
             ];
         }
+        return $arrayViewStatus;
+    }
+
+    //  hàm products trả về view order product
+    public function products(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    {
+        $arrayViewStatus = $this->arrayViewStatus();
+
         return view('clients.admin.orders.products', [
             'arrayViewStatus' => $arrayViewStatus
         ]);
@@ -36,6 +44,30 @@ class OrderController extends Controller
     public function product($id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         return view('clients.admin.orders.product', [
+            'id' => $id,
+        ]);
+    }
+
+    //  Trả về view order photo
+    public function photos(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    {
+        $arrayViewStatus = $this->arrayViewStatus();
+
+        return view('clients.admin.orders.photos', [
+            'arrayViewStatus' => $arrayViewStatus
+        ]);
+    }
+
+    public function photo($id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('clients.admin.orders.photo', [
+            'id' => $id,
+        ]);
+    }
+
+    public function bill($id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('clients.admin.orders.photo_bill', [
             'id' => $id,
         ]);
     }

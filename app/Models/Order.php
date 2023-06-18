@@ -22,4 +22,9 @@ class Order extends Model
     {
         return $this->hasMany(OrderProduct::class);
     }
+
+    public function orderPhotos(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(OrderPhoto::class);
+    }
 }

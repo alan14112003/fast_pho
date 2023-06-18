@@ -7,7 +7,7 @@
         <!-- Page Header-->
         <div class="bg-dash-dark-2 py-4">
             <div class="container-fluid">
-                <h2 class="h5 mb-0">Sản phẩm thêm</h2>
+                <h2 class="h5 mb-0">Sản phẩm chi tiết</h2>
             </div>
         </div>
         <!-- Breadcrumb-->
@@ -25,7 +25,7 @@
                     <div class="col-lg-12">
                         <div class="card mb-0">
                             <div class="card-header">
-                                <h3 class="h4 mb-0">Con sản phẩm</h3>
+                                <h3 class="h4 mb-0">Thêm sản phẩm chi tiết</h3>
                             </div>
                             <div class="card-body pt-0">
                                 <form id="form-store" enctype="multipart/form-data">

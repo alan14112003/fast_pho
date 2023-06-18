@@ -7,7 +7,7 @@
         <!-- Page Header-->
         <div class="bg-dash-dark-2 py-4">
             <div class="container-fluid">
-                <h2 class="h5 mb-0">Đơn hàng</h2>
+                <h2 class="h5 mb-0">Slide</h2>
             </div>
         </div>
         <!-- Breadcrumb-->
@@ -15,7 +15,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 py-3 px-0">
                     <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Đơn hàng</li>
+                    <li class="breadcrumb-item active" aria-current="page">Slide</li>
                 </ol>
             </nav>
         </div>
@@ -26,15 +26,15 @@
                         <div class="card mb-0">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h3 class="h4 mb-0">Striped table with hover effect</h3>
+                                <a href="{{ route('admin.slides.create') }}" class="btn bg-info text-white">Thêm</a>
                             </div>
                             <div class="card-body pt-0">
                                 <div class="row">
                                     <div class="col-2">
-                                        <select id="status-filter" class="form-select">
+                                        <select class="form-control" id="status-filter">
                                             <option value="All">All</option>
-                                            @foreach ($arrayViewStatus as $status)
-                                                <option value="{{ $status['value'] }}">{{ $status['name'] }}</option>
-                                            @endforeach
+                                            <option value="1">Bật</option>
+                                            <option value="0">Tắt</option>
                                         </select>
                                     </div>
                                 </div>
@@ -43,12 +43,11 @@
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Thông tin người mua</th>
-                                            <th>Thời gian</th>
-                                            <th>Số sp</th>
-                                            <th>Thanh toán</th>
-                                            <th>Ngày tạo</th>
-                                            <th>Tình trạng</th>
+                                            <th>Ảnh</th>
+                                            <th>Chuyển hướng</th>
+                                            <th>Thứ tự</th>
+                                            <th>Trạng thái</th>
+                                            <th></th>
                                         </tr>
                                         </thead>
                                         <tbody id="body-content">
@@ -94,11 +93,5 @@
     </div>
 @endsection
 @push('scripts')
-    <script>
-        const arrayViewStatusOrder = JSON.parse('{!! json_encode($arrayViewStatus) !!}');
-    </script>
-    <script type="module">
-        import main from '{{ asset('js/admin/orders/orders.js') }}'
-        await main()
-    </script>
+    <script src="{{ asset('js/admin/slides/index.js') }}" type="module"></script>
 @endpush

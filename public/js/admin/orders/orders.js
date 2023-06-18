@@ -1,14 +1,25 @@
 import { formatDateTime, renderLoading, renderPagination, renderToast } from "../../helper.js";
-import { CHANGE_STATUS_ORDER, ICONS, PRODUCT_ORDERS, PRODUCT_ORDER_VIEW } from "../../url.js";
+import {
+    CHANGE_STATUS_ORDER,
+    ICONS,
+    PRODUCT_ORDERS,
+    PRODUCT_ORDER_VIEW,
+    PHOTOS_ORDERS,
+    PHOTO_ORDER_VIEW
+} from "../../url.js";
 
 const bodyContent = $('#body-content')
 
 let statusQr = new URLSearchParams(window.location.search).get('status')
 const page = new URLSearchParams(window.location.search).get('page') ?? 1;
+let typePage = ""
 
 //Show all orders
 const renderOrders = () => {
-  let url = PRODUCT_ORDERS + `?page=${page}`
+  let url = (typePage === 'PRODUCT') ? PRODUCT_ORDERS : PHOTOS_ORDERS
+
+  url += `?page=${page}`
+
   if (statusQr) {
     url += `&status=${statusQr}`
     $(`#status-filter option[value='${statusQr}']`).attr('selected', true)
@@ -36,7 +47,7 @@ const renderOrders = () => {
         bodyContent.html('');
         orders.forEach(o => {
             const id = `<th class="col-1" scope="row">${o.id}</th>`
-            
+
             const info = `
                 <strong>${o.user_name}</strong>
                 <p>
@@ -57,18 +68,18 @@ const renderOrders = () => {
                 }
               </select>
             `
-
+            const viewOrderUrl = (typePage === 'PRODUCT') ? PRODUCT_ORDER_VIEW : PHOTO_ORDER_VIEW
             bodyContent.append(`
               <tr>
                   ${id}
                   <td class="col-3">${info}</td>
                   <td class="col-2">${o.delivery_time}</td>
-                  <td class="col-1">${o.product_count}</td>
+                  <td class="col-1">${o.item_count}</td>
                   <td class="col-1">${o.type}</td>
                   <td class="col-2">${createdAt}</td>
                   <td class="col-2">${status}</td>
                   <td class="col-1">
-                    <a href="${PRODUCT_ORDER_VIEW.replace(':id', o.id)}" data-bs-toggle="tooltip" title="Xem chi tiết">
+                    <a href="${viewOrderUrl.replace(':id', o.id)}" data-bs-toggle="tooltip" title="Xem chi tiết">
                       <img src="${ICONS}eye.svg" />
                     </a>
                   </td>
@@ -77,9 +88,6 @@ const renderOrders = () => {
         })
 
         renderPagination(response.body.orders, renderOrders)
-        console.log(response.body);
-
-
 
         resolve()
       },
@@ -94,7 +102,7 @@ const renderOrders = () => {
   })
 }
 
-const setchangeSelectStatus = () => {
+const setChangeSelectStatus = () => {
   $('.select-status').off('change').on('change', function () {
     onChangeStatusOrder(this)
   })
@@ -134,7 +142,7 @@ const onChangeStatusOrder = (_this) => {
       })
     }
   })
-} 
+}
 
 const setChangeStatusFilter = () => {
   $('#status-filter').off('change').on('change', async function() {
@@ -148,10 +156,12 @@ const setChangeStatusFilter = () => {
   })
 }
 
-const main = async() => {
+const main = async(type = 'PRODUCT') => {
+  typePage = type
   await renderOrders();
-  setchangeSelectStatus()
+  setChangeSelectStatus()
   setChangeStatusFilter()
 }
 
-await main()
+export default main
+
