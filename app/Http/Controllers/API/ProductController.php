@@ -16,15 +16,16 @@ class ProductController extends Controller
 {
     use ResponseTrait;
 
-    public function all(Request $request): \Illuminate\Http\JsonResponse
+    public function all(Request $request)
     {
         $q = $request->get('q');
-        $sale = $request->get('sale');
-        $new = $request->get('new');
-        $categorySlug = $request->get('category-slug');
-        $categoryIndex = $request->get('category-index');
+        $perPage = $request->get('perPage') ?? 15;
+        $type = $request->get('type');
+        $categorySlug = $request->get('categorySlug');
+        $categoryIndex = $request->get('categoryIndex');
 
-        $productsQr = Product::query()->select('products.*')
+
+        $productsQr = Product::query()->select('products.*', 'categories.name as category_name')
             ->leftJoin('categories', 'products.category_id', '=', 'categories.id');
 
         if ($categorySlug) {
@@ -59,12 +60,12 @@ class ProductController extends Controller
         }
 
         //  Nếu có sale thì lấy ra các sản phẩm có sale khác 0
-        if ($sale) {
+        if ($type === 'sale') {
             $productsQr = $productsQr->where('sale', '<>', 0);
         }
 
         //  Nếu có new thì lấy ra các sản phẩm từ 14 ngày trước đổ lại
-        if ($new) {
+        if ($type === 'new') {
             // Lấy ngày 14 ngày trước
             $startDate = Carbon::now()->subDays(14)->toDateString();
 
@@ -74,7 +75,7 @@ class ProductController extends Controller
         $productsQr = $productsQr->where('products.name', 'like', "%$q%");
 
         // Lấy ra các sản phẩm theo kiểu phân trang
-        $products = $productsQr->paginate(15);
+        $products = $productsQr->paginate($perPage);
         return $this->responseTrait('Thành công', true, $products);
     }
 
@@ -86,6 +87,32 @@ class ProductController extends Controller
 
         $product->node_category_id = $nodeCategoryId;
         $product->root_rategory_id = $rootCategoryId;
+
+        return $this->responseTrait('Thành công', true, $product);
+    }
+
+    public function getWithSubs($slug): \Illuminate\Http\JsonResponse
+    {
+        $product = Product::query()
+            ->with('children')
+            ->addSelect([
+                'products.id',
+                'products.name',
+                'products.image',
+                "products.descriptions",
+                "products.price",
+                "products.sale",
+                "products.category_id",
+                "products.slug",
+                "products.created_at",
+                "products.updated_at",
+                "parent_id",
+            ])
+            ->addSelect('categories.name as category_name')
+            ->join('categories', 'categories.id', '=', 'products.category_id')
+            ->where('products.slug', $slug)->first();
+        //        $subProducts = SubProduct::query()->whereIn('product_id', $product->id)->get();
+        //        $product->subs = $subProducts;
 
         return $this->responseTrait('Thành công', true, $product);
     }
@@ -116,7 +143,7 @@ class ProductController extends Controller
         }
     }
 
-    public function update($id, UpdateRequest $request): \Illuminate\Http\JsonResponse
+    public function update($id, UpdateRequest $request)
     {
         try {
             $product = Product::query()->find($id);

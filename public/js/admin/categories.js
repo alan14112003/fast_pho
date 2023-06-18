@@ -3,7 +3,7 @@ import { renderToast } from '../helper.js'
 
 //Get categories and show through select
 let categories = [];
-const getCategories = () => {
+export const getCategories = () => {
     return new Promise((resolve, reject) => {
         $.ajax({
             url: CATEGORIES,
@@ -76,9 +76,9 @@ export const showCategories = (rootId, nodeId, leafId) => {
                 }
             })
         }
-
-        setOnChangeCategories();
     })
+
+    setOnChangeCategories();
 }
 
 const setOnChangeCategories = () => {

@@ -48,6 +48,7 @@ Route::prefix('products')->name('products.')
         Route::controller(ProductController::class)
             ->group(function () {
                 Route::get('/{id}', 'get')->name('get');
+                Route::get('get_with_subs/{slug}', 'getWithSubs')->name('get_with_subs');
                 Route::get('/', 'all')->name('all');
                 Route::post('/', 'store')->name('store');
                 Route::put('/{id}', 'update')->name('update');

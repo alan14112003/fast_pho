@@ -1,0 +1,35 @@
+.header-wrap.index {
+    width: 100%;
+}
+
+.pagination ul a.is-active {
+    background-color: var(--main-color);
+    color: white;
+    border: 1px solid var(--main-color);
+}
+
+.pcpro_list .sec_tab {
+    font-size: .45rem;
+}
+
+.price {
+    font-size: .55rem;
+}
+
+.discount {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+}
+
+.discount img {
+    width: 45px;
+    height: 45px;
+}
+
+.discount span {
+    position: absolute;
+    left: 8px;
+    top: 12px;
+    color: white;
+}

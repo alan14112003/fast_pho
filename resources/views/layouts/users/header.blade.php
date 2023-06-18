@@ -20,102 +20,6 @@
                     <a href="{{ route('products.index') }}" class="a">Sản phẩm </a>
                     <div class="prosub-box poa">
                         <div id="prosub-box">
-                            <div class="prosub_item">
-                                <a href="https://vn.deliworld.com/product/lists/6049.html?0 "
-                                    class="second_title antart_b">
-                                    Dụng cụ thể thao </a>
-                                <div class="third_box">
-                                    <a href="https://vn.deliworld.com/product/lists/6050.html?0 ">Ba bóng nhỏ</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6052.html?0 ">Thiết bị tập thể
-                                        dục</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6139.html?0 ">Ba bóng lớn</a>
-                                </div>
-                            </div>
-                            {{-- <div class="prosub_item">
-                                <a href="https://vn.deliworld.com/product/lists/6073.html?1 "
-                                    class="second_title antart_b">
-                                    Dụng cụ viết </a>
-                                <div class="third_box">
-                                    <a href="https://vn.deliworld.com/product/lists/6074.html?1 ">Bút bi</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6128.html?1 ">Chì kim &amp; Ngòi
-                                        chì</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6133.html?1 ">Lõi bút gel</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6168.html?1 ">Bút dạ bảng</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6170.html?1 ">Bút dạ dầu</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6172.html?1 ">Bút nhớ dòng</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6174.html?1 ">Bút gel</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6187.html?1 ">Bút máy ngòi mài</a>
-                                </div>
-                            </div>
-                            <div class="prosub_item">
-                                <a href="https://vn.deliworld.com/product/lists/6079.html?2 "
-                                    class="second_title antart_b">
-                                    Sản phẩm dính </a>
-                                <div class="third_box">
-                                    <a href="https://vn.deliworld.com/product/lists/6080.html?2 ">Giấy nhắn</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6084.html?2 ">Hồ khô</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6088.html?2 ">Hồ nước</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6090.html?2 ">Keo sữa</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6095.html?2 ">Keo siêu dính</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6180.html?2 ">Băng dính dạng băng
-                                        kéo</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6182.html?2 ">Băng dính</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6196.html?2 ">Máy dán thùng
-                                        carton</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6198.html?2 ">Dụng cụ cắt băng
-                                        dính</a>
-                                </div>
-                            </div>
-                            <div class="prosub_item">
-                                <a href="https://vn.deliworld.com/product/lists/6109.html?3 "
-                                    class="second_title antart_b">
-                                    Thiết bị văn phòng </a>
-                                <div class="third_box">
-                                    <a href="https://vn.deliworld.com/product/lists/6110.html?3 ">Máy móc văn phòng</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6119.html?3 ">Thiết bị văn phòng</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6131.html?3 ">Thiết bị ngoại vi</a>
-                                </div>
-                            </div>
-                            <div class="prosub_item">
-                                <a href="https://vn.deliworld.com/product/lists/6136.html?4 "
-                                    class="second_title antart_b">
-                                    Công cụ dụng cụ </a>
-                                <div class="third_box">
-                                    <a href="https://vn.deliworld.com/product/lists/6137.html?4 ">Dụng cụ điện</a>
-                                </div>
-                            </div>
-                            <div class="prosub_item">
-                                <a href="https://vn.deliworld.com/product/lists/6032.html?5 "
-                                    class="second_title antart_b">
-                                    Đồ dùng văn phòng </a>
-                                <div class="third_box">
-                                    <a href="https://vn.deliworld.com/product/lists/6060.html?5 ">Vật dụng để bàn</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6077.html?5 ">Giấy văn phòng</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6103.html?5 ">Thiết bị giảng dạy</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6121.html?5 ">Máy tính kỹ thuật</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6046.html?5 ">Vật dụng văn phòng</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6044.html?5 ">File &amp; Cặp tài
-                                        liệu</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6042.html?5 ">Đồ dùng văn phòng</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6033.html?5 ">Dập ghim &amp; Đục
-                                        lỗ</a>
-                                </div>
-                            </div>
-                            <div class="prosub_item">
-                                <a href="https://vn.deliworld.com/product/lists/6025.html?6 "
-                                    class="second_title antart_b">
-                                    Đồ dùng học sinh </a>
-                                <div class="third_box">
-                                    <a href="https://vn.deliworld.com/product/lists/6063.html?6 ">File &amp; Cặp tài
-                                        liệu</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6071.html?6 ">Sản phẩm giáo dục
-                                        trẻ</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6154.html?6 ">Sản phẩm giấy</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6161.html?6 ">Túi</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6028.html?6 ">Dụng cụ học tập</a>
-                                    <a href="https://vn.deliworld.com/product/lists/6026.html?6 ">Sản phẩm màu</a>
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
                 </li>
@@ -169,8 +73,78 @@
                         </div>
                     </div>
                 </div>
-                <div class="item" id="pccart_btn">
+                <div class="item header-action header-action_cart" id="pccart_btn">
                     <img src="{{ asset('images/shopping-cart.png') }}" alt="">
+                    <div class="header-action_dropdown">
+                        <span class="box-triangle">
+                            <svg viewBox="0 0 20 9" role="presentation">
+                                <path
+                                    d="M.47108938 9c.2694725-.26871321.57077721-.56867841.90388257-.89986354C3.12384116 6.36134886 5.74788116 3.76338565 9.2467995.30653888c.4145057-.4095171 1.0844277-.40860098 1.4977971.00205122L19.4935156 9H.47108938z"
+                                    fill="#ffffff"></path>
+                            </svg>
+                        </span>
+                        <div class="header-dropdown_content">
+                            <div class="site-cart">
+                                <div class="cart-ttbold">
+                                    <p class="ttbold">Giỏ hàng</p>
+                                    <a class="hide-cart">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                            viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000"
+                                            xml:space="preserve">
+                                            <g>
+                                                <path
+                                                    d="M500,442.7L79.3,22.6C63.4,6.7,37.7,6.7,21.9,22.5C6.1,38.3,6.1,64,22,79.9L442.6,500L22,920.1C6,936,6.1,961.6,21.9,977.5c15.8,15.8,41.6,15.8,57.4-0.1L500,557.3l420.7,420.1c16,15.9,41.6,15.9,57.4,0.1c15.8-15.8,15.8-41.5-0.1-57.4L557.4,500L978,79.9c16-15.9,15.9-41.5,0.1-57.4c-15.8-15.8-41.6-15.8-57.4,0.1L500,442.7L500,442.7z">
+                                                </path>
+                                            </g>
+                                        </svg>
+                                    </a>
+                                </div>
+                                <div class="cart-view clearfix">
+                                    <div class="cart-view-scroll">
+                                        <table id="cart-view">
+                                            <tbody id="cart-body">
+                                                {{-- <tr class="item-cart_empty">
+                                                    <td>
+                                                        <div class="svgico-mini-cart"> <svg width="81"
+                                                                height="70" viewBox="0 0 81 70">
+                                                                <g transform="translate(0 2)" stroke-width="4"
+                                                                    stroke="#1e2d7d" fill="none" fill-rule="evenodd">
+                                                                    <circle stroke-linecap="square" cx="34"
+                                                                        cy="60" r="6"></circle>
+                                                                    <circle stroke-linecap="square" cx="67"
+                                                                        cy="60" r="6"></circle>
+                                                                    <path
+                                                                        d="M22.9360352 15h54.8070373l-4.3391876 30H30.3387146L19.6676025 0H.99560547">
+                                                                    </path>
+                                                                </g>
+                                                            </svg></div> Hiện chưa có sản phẩm
+                                                    </td>
+                                                </tr> --}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="line"></div>
+                                    <div class="cart-view-total">
+                                        <table class="table-total">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left">TỔNG TIỀN:</td>
+                                                    <td class="text-right" id="total-view-cart">0₫</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="/cart" class="linktocart button dark">Xem giỏ
+                                                            hàng</a></td>
+                                                    <td><a href="/checkout" class="linktocheckout button dark">Thanh
+                                                            toán</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="item header-action header-action_account" id="pccart_btn">
                     <img src="{{ asset('images/user.png') }}" alt="">
@@ -288,8 +262,8 @@
                 </div>
             </div>
             <div class="search-dialog f-cb poa">
-                <form action="https://vn.deliworld.com/search.html" method="get" class="search f-cb">
-                    <input type="text" name="search" autocomplete="off" placeholder="Tìm kiếm ">
+                <form action="" method="get" id="form-search" class="search f-cb">
+                    <input type="text" name="q" autocomplete="off" placeholder="Tìm kiếm ">
                     <input type="submit" value="">
                 </form>
                 <a href="javascript:;" class="search-close" id="search-close"></a>

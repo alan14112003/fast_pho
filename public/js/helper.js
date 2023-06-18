@@ -23,10 +23,32 @@ export const renderToast = ({ status = 'primary', title = '', text = '' }) => {
     new bootstrap.Toast($('.toast')).show();
 }
 
-const pushState = (name, value) => {
+export const pushState = (name, value) => {
     let url = `?${name}=${value}`;
 
     window.history.pushState("", "", url);
+}
+
+export const pushStates = (obj) => {
+    if (jQuery.isEmptyObject(obj)) {
+        window.history.pushState("", "", "?");
+        return;
+    }
+
+    let params = "?";
+    for (const [key, value] of Object.entries(obj)) {
+        if (value)
+            params += `${key}=${value}&`
+    }
+
+    window.history.pushState("", "", params.substring(0, params.length - 1));
+}
+
+export const getParam = (name) => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    return urlParams.get(name)
 }
 
 export const renderPagination = (pagination, callback) => {
@@ -38,14 +60,14 @@ export const renderPagination = (pagination, callback) => {
     $('#first-paginate').off('click').on('click', () => {
         if (currentPage !== 1) {
             pushState('page', 1)
-            callback();
+            callback(1);
         }
     })
 
     if (prePageUrl) {
         $('#pre-paginate').off('click').on('click', () => {
             pushState('page', currentPage - 1)
-            callback();
+            callback(currentPage - 1);
         })
         $('#pre-paginate').find('li').html(currentPage - 1)
         $('#pre-paginate').show();
@@ -58,7 +80,7 @@ export const renderPagination = (pagination, callback) => {
     if (nextPageUrl) {
         $('#next-paginate').off('click').on('click', () => {
             pushState('page', currentPage + 1)
-            callback();
+            callback(currentPage + 1);
         })
         $('#next-paginate').find('li').html(currentPage + 1)
         $('#next-paginate').show();
@@ -69,7 +91,7 @@ export const renderPagination = (pagination, callback) => {
     $('#last-paginate').off('click').on('click', () => {
         if (currentPage !== lastPage) {
             pushState('page', lastPage)
-            callback();
+            callback(lastPage);
         }
     })
 }
@@ -89,3 +111,23 @@ export const findChildObject = (array, id) => {
     array.some(o => result = o.id === id ? o : findChildObject(o.children || [], id));
     return result;
 };
+
+function reverseString(str) {
+    return str.split('').reverse().join('');
+}
+
+// Create our number formatter.
+export const formatMoney = (num) => {
+    let money = num.toString();
+    money = reverseString(money).match(/.{1,3}/g);
+    return reverseString(money.join('.'))
+};
+
+export const moneyToNumber = (money) => {
+    money = money.toString()
+    return parseFloat(money.substring(0, money.length - 1).replaceAll('.', ''))
+};
+
+export const calculateMoneyAfterSale = (m, s) => {
+    return m * (100 - s) / 100;
+}

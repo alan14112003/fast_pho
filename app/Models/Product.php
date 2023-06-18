@@ -29,4 +29,9 @@ class Product extends Model
             ]
         ];
     }
+
+    public function children()
+    {
+        return $this->hasMany(SubProduct::class);
+    }
 }
