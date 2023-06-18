@@ -26,9 +26,9 @@ class AddRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'product_id' => [
+            'slug' => [
                 'required',
-                Rule::exists(Product::class, 'id')
+                Rule::exists(Product::class, 'slug')
             ],
             'quantity' => [
                 'required',

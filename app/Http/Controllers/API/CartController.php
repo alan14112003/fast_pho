@@ -27,11 +27,11 @@ class CartController extends Controller
             return $this->responseTrait('Thành công', true, $cart);
         }
 
-        $cartIds = array_keys($cart);
+        $cartSlugs = array_keys($cart);
 
-        $products = Product::query()->whereIn('id', $cartIds)->get();
+        $products = Product::query()->whereIn('slug', $cartSlugs)->get();
         foreach ($products as $product) {
-            $product->quantity = $cart[$product->id];
+            $product->quantity = $cart[$product->slug];
         }
 
         return $this->responseTrait('Thành công', true, $products);
@@ -40,7 +40,7 @@ class CartController extends Controller
     public function add(AddRequest $request)
     {
         $cart = [];
-        $productId = $request->get('product_id');
+        $productSlug = $request->get('slug');
         $quantity = $request->get('quantity');
 
         if ($request->cookie($this->cartName)) {
@@ -48,7 +48,7 @@ class CartController extends Controller
         }
 
         $expiration = Carbon::now()->addYear();
-        $cart[$productId] = isset($cart[$productId]) ? $cart[$productId] + $quantity : $quantity;
+        $cart[$productSlug] = isset($cart[$productSlug]) ? $cart[$productSlug] + $quantity : $quantity;
 
         return response([
             'status' => true,
