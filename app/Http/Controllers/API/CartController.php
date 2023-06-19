@@ -40,20 +40,20 @@ class CartController extends Controller
     public function add(AddRequest $request)
     {
         $cart = [];
-        $productSlug = $request->get('slug');
+        $subProductId = $request->get('id');
         $quantity = $request->get('quantity');
 
         if ($request->cookie($this->cartName)) {
             $cart = json_decode($request->cookie('cart'), true);
         }
 
-        $expiration = Carbon::now()->addYear();
-        $cart[$productSlug] = isset($cart[$productSlug]) ? $cart[$productSlug] + $quantity : $quantity;
+        $expiration = Carbon::now()->addYear()->toDateTimeString();
+        $cart[$subProductId] = isset($cart[$subProductId]) ? $cart[$subProductId] + $quantity : $quantity;
 
         return response([
             'status' => true,
             'body' => $cart,
             'message' => 'Thành công'
-        ])->withCookie($this->cartName, json_encode($cart), $expiration);
+        ])->withCookie(cookie($this->cartName, json_encode($cart), $expiration));
     }
 }

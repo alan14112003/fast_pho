@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Cart;
 
-use App\Models\Product;
+use App\Models\SubProduct;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -26,9 +26,9 @@ class AddRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'slug' => [
+            'id' => [
                 'required',
-                Rule::exists(Product::class, 'slug')
+                Rule::exists(SubProduct::class, 'id')
             ],
             'quantity' => [
                 'required',

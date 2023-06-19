@@ -53,9 +53,13 @@ export const CATEGORIES = DOMAIN + 'api/categories'
 export const CATEGORY_CREATE = DOMAIN + 'api/categories'
 export const CATEGORY_DELETE = DOMAIN + 'api/categories/:id'
 
-//order
+//Order
 export const PRODUCT_ORDERS = DOMAIN + 'api/orders/products'
 export const PHOTOS_ORDERS = DOMAIN + 'api/orders/photos'
 export const CHANGE_STATUS_ORDER = DOMAIN + 'api/orders/:id/change-status'
 export const PRODUCT_ORDER = DOMAIN + 'api/orders/:id/product'
 export const PHOTO_ORDER = DOMAIN + 'api/orders/:id/photo'
+
+//Cart
+export const CART = DOMAIN + 'api/cart'
+export const CART_UPDATE = DOMAIN + 'api/cart/add'

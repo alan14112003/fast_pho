@@ -1,5 +1,5 @@
 import { formatMoney, moneyToNumber } from "../helper.js";
-import { CATEGORIES, DOMAIN, ICONS, IMAGES, PRODUCT_VIEW, STORAGE, _PRODUCTS } from "../url.js";
+import { CART, CART_UPDATE, CATEGORIES, DOMAIN, ICONS, IMAGES, PRODUCT_VIEW, STORAGE, _PRODUCTS } from "../url.js";
 
 const proSubBox = $('#prosub-box');
 
@@ -81,9 +81,9 @@ let cartBody = $('#cart-body')
 let cartTotal = $('#total-view-cart')
 let removeCartBtns;
 
-const renderEleCart = (linkToProduct, slug, image, name, quantity, type, price) => {
+const renderEleCart = (linkToProduct, id, image, name, quantity, type, price) => {
     cartBody.append(`
-    <tr class="item_2" data-slug="${slug}">
+    <tr class="item_2" data-id="${id}">
         <td class="img"><a
                 href="${linkToProduct}"
                 title="${linkToProduct}"><img
@@ -115,11 +115,26 @@ const renderEleCart = (linkToProduct, slug, image, name, quantity, type, price) 
 }
 
 const showCart = () => {
-
+    $.ajax({
+        url: CART,
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) {
+            if (response.status) {
+                response.body.forEach(element => {
+                    console.log(response);
+                });
+            }
+        },
+        error: function (response) {
+            const erorrs = Object.values(response.responseJSON.errors);
+            showError($('#errors-category'), [erorrs]);
+        }
+    });
 }
 
-const deleteCart = (slug, price, quantity) => {
-    cartBody.find(`.item_2[data-slug=${slug}]`).remove()
+const deleteCart = (id, price, quantity) => {
+    cartBody.find(`.item_2[data-id=${id}]`).remove()
 
     const preTotal = moneyToNumber(cartTotal.html())
     cartTotal.html(formatMoney(preTotal - price * quantity) + '₫')
@@ -127,30 +142,49 @@ const deleteCart = (slug, price, quantity) => {
 
 const setOnClickRemoveCartBtn = () => {
     removeCartBtns.off('click').on('click', function () {
-        const slug = $(this).parent().parent().attr('data-slug');
+        const id = $(this).parent().parent().attr('data-id');
         const price = moneyToNumber($(this).parent().find('.pro-price-view').html())
         const quantity = parseInt($('.qty-value').html())
 
-        deleteCart(slug, price, quantity);
+        deleteCart(id, price, quantity);
     })
 }
 
-export const addToCart = ({ slug, image, name, quantity, type, price }) => {
-    const preTotal = moneyToNumber(cartTotal.html())
-    if (cartBody.find('.item_2').attr('data-slug') === slug) {
-        const ele = cartBody.find(`.item_2[data-slug=${slug}] .qty-value`)
-        ele.html(parseInt(ele.html()) + parseInt(quantity))
-    } else {
-        const linkToProduct = PRODUCT_VIEW.replace(':slug', slug)
-
-        renderEleCart(linkToProduct, slug, image, name, quantity, type, price)
+export const addToCart = ({ id, slug, image, name, quantity, type, price }) => {
+    const data = {
+        id: id,
+        quantity: quantity
     }
 
-    cartTotal.html(formatMoney(preTotal + price * quantity) + '₫')
+    $.ajax({
+        url: CART_UPDATE,
+        type: 'POST',
+        data: data,
+        dataType: 'json',
+        success: function (response) {
+            if (response.status) {
+                const preTotal = moneyToNumber(cartTotal.html())
+                if (cartBody.find('.item_2').attr('data-id') === id) {
+                    const ele = cartBody.find(`.item_2[data-id=${id}] .qty-value`)
+                    ele.html(parseInt(ele.html()) + parseInt(quantity))
+                } else {
+                    const linkToProduct = PRODUCT_VIEW.replace(':slug', slug)
 
-    removeCartBtns = $('#remove-cart')
-    setOnClickRemoveCartBtn()
+                    renderEleCart(linkToProduct, id, image, name, quantity, type, price)
+                }
 
-    headerActionCart.addClass('show-action')
+                cartTotal.html(formatMoney(preTotal + price * quantity) + '₫')
+
+                removeCartBtns = $('#remove-cart')
+                setOnClickRemoveCartBtn()
+
+                headerActionCart.addClass('show-action')
+            }
+        },
+        error: function (response) {
+            const erorrs = Object.values(response.responseJSON.errors);
+            showError($('#errors-category'), [erorrs]);
+        }
+    });
 }
 

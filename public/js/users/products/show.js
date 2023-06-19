@@ -48,7 +48,7 @@ const appendToSwiperCont = (item, isCur) => {
 
 const appendToColors = (item) => {
     colorsContainer.append(`
-    <button class="btn">${item.type}</button>
+    <button class="btn" data-id="${item.id}" data-image="${item.image}">${item.type}</button>
     `)
 }
 
@@ -94,12 +94,14 @@ const showProduct = async () => {
     $('#add_cart').off('click').on('click', function () {
         let quantity = $('.number-input input.quantity').val()
 
+        const subChoosen = $('.con_item .btn.cur');
         addToCart({
-            slug: result.slug,
-            image: result.image,
+            id: subChoosen.attr('data-id'),
+            image: subChoosen.attr('data-image'),
             name: result.name,
             quantity,
-            type: $('.con_item .btn.cur').html(),
+            type: subChoosen.html(),
+            slug: result.slug,
             price: result.price
         })
     })
