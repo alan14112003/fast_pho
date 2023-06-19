@@ -120,5 +120,7 @@ Route::prefix('cart')
     ->controller(CartController::class)
     ->group(function () {
         Route::get('/', 'all')->name('all');
-        Route::post('/add', 'add')->name('add');
+        Route::post('/update', 'update')->name('update');
+        Route::delete('/{id}', 'remove')->name('remove');
+        Route::delete('/', 'emptyCart')->name('empty_cart');
     });

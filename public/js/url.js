@@ -62,4 +62,4 @@ export const PHOTO_ORDER = DOMAIN + 'api/orders/:id/photo'
 
 //Cart
 export const CART = DOMAIN + 'api/cart'
-export const CART_UPDATE = DOMAIN + 'api/cart/add'
+export const CART_UPDATE = DOMAIN + 'api/cart/update'
