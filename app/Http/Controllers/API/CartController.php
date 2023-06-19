@@ -33,7 +33,7 @@ class CartController extends Controller
         ->join('sub_products', 'products.id', '=', 'sub_products.product_id')
         ->whereIn('sub_products.id', $cartIds)
         ->get();
-        
+
         foreach ($products as $product) {
             $product->quantity = $cart[$product->slug];
         }
@@ -41,23 +41,47 @@ class CartController extends Controller
         return $this->responseTrait('Thành công', true, $products);
     }
 
-    public function add(AddRequest $request)
+    public function update(AddRequest $request)
     {
         $cart = [];
         $subProductId = $request->get('id');
         $quantity = $request->get('quantity');
 
         if ($request->cookie($this->cartName)) {
-            $cart = json_decode($request->cookie('cart'), true);
+            $cart = json_decode($request->cookie($this->cartName), true);
         }
 
         $expiration = Carbon::now()->addYear()->timestamp;
         $cart[$subProductId] = isset($cart[$subProductId]) ? $cart[$subProductId] + $quantity : $quantity;
 
-        return response([
-            'status' => true,
-            'body' => $cart,
-            'message' => 'Thành công'
-        ])->withCookie(cookie($this->cartName, json_encode($cart), $expiration));
+        return $this->responseTrait('Thành công', true, $cart)
+            ->withCookie(cookie($this->cartName, json_encode($cart), $expiration));
+    }
+
+    public function remove($id, Request $request)
+    {
+        $cart = [];
+
+        if ($request->cookie($this->cartName)) {
+            $cart = json_decode($request->cookie($this->cartName), true);
+        }
+
+        if (!$cart[$id]) {
+            return $this->responseTrait('Không có sản phẩm này trong giỏ hàng');
+        }
+
+        unset($cart[$id]);
+        $expiration = Carbon::now()->addYear()->timestamp;
+        return $this->responseTrait('Thành công')
+            ->withCookie(cookie($this->cartName, json_encode($cart), $expiration));
+    }
+
+    public function emptyCart(): \Illuminate\Http\JsonResponse
+    {
+        $cart = [];
+
+        $expiration = Carbon::now()->addYear()->timestamp;
+        return $this->responseTrait('Thành công')
+            ->withCookie(cookie($this->cartName, json_encode($cart), $expiration));
     }
 }
