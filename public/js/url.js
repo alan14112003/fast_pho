@@ -17,6 +17,8 @@ export const PHOTO_ORDER_BILL = DOMAIN + 'admin/orders/photo/bill/:id'
 
 export const PRODUCT_VIEW = DOMAIN + 'products/:slug'
 
+export const CART_VIEW = DOMAIN + 'cart'
+
 //Api:
 
 //Auth
@@ -63,3 +65,4 @@ export const PHOTO_ORDER = DOMAIN + 'api/orders/:id/photo'
 //Cart
 export const CART = DOMAIN + 'api/cart'
 export const CART_UPDATE = DOMAIN + 'api/cart/update'
+export const CART_REMOVE = DOMAIN + 'api/cart/:id'

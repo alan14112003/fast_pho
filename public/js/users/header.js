@@ -1,8 +1,7 @@
 import { formatMoney, moneyToNumber } from "../helper.js";
-import { CART, CART_UPDATE, CATEGORIES, DOMAIN, ICONS, IMAGES, PRODUCT_VIEW, STORAGE, _PRODUCTS } from "../url.js";
+import { CART, CART_REMOVE, CART_UPDATE, CATEGORIES, DOMAIN, ICONS, IMAGES, PRODUCT_VIEW, STORAGE, _PRODUCTS } from "../url.js";
 
 const proSubBox = $('#prosub-box');
-
 
 $.ajax({
     url: CATEGORIES,
@@ -35,8 +34,8 @@ $.ajax({
         }
     },
     error: function (response) {
-        const erorrs = Object.values(response.responseJSON.errors);
-        showError($('#errors-category'), [erorrs]);
+        // const erorrs = Object.values(response.responseJSON.errors);
+        // showError($('#errors-category'), [erorrs]);
     }
 });
 
@@ -114,16 +113,60 @@ const renderEleCart = (linkToProduct, id, image, name, quantity, type, price) =>
     `)
 }
 
-const showCart = () => {
+const renderCart = async (result) => {
+    let preTotal = 0;
+    result.forEach(p => {
+        const linkToProduct = PRODUCT_VIEW.replace(':slug', p.slug)
+
+        renderEleCart(
+            linkToProduct,
+            p.id,
+            p.image,
+            p.name,
+            p.quantity,
+            p.type,
+            p.price
+        )
+        cartTotal.html(formatMoney(preTotal + p.price * p.quantity) + '₫');
+        preTotal += p.price * p.quantity;
+    });
+
+    removeCartBtns = $('#remove-cart')
+    setOnClickRemoveCartBtn()
+}
+
+export const getCart = async () => {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: CART,
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                if (response.status) {
+                    resolve(response.body)
+                }
+            },
+            error: function (response) {
+                const erorrs = Object.values(response.responseJSON.errors);
+                showError($('#errors-category'), [erorrs]);
+            }
+        })
+    });
+}
+
+const deleteCart = (id, price, quantity) => {
     $.ajax({
-        url: CART,
-        type: 'GET',
+        url: CART_REMOVE.replace(':id', id),
+        type: 'DELETE',
         dataType: 'json',
         success: function (response) {
             if (response.status) {
-                response.body.forEach(element => {
-                    console.log(response);
-                });
+                cartBody.find(`.item_2[data-id=${id}]`).remove()
+
+                const preTotal = moneyToNumber(cartTotal.html())
+                cartTotal.html(formatMoney(preTotal - price * quantity) + '₫')
+
+                headerActionCart.addClass('show-action')
             }
         },
         error: function (response) {
@@ -131,13 +174,6 @@ const showCart = () => {
             showError($('#errors-category'), [erorrs]);
         }
     });
-}
-
-const deleteCart = (id, price, quantity) => {
-    cartBody.find(`.item_2[data-id=${id}]`).remove()
-
-    const preTotal = moneyToNumber(cartTotal.html())
-    cartTotal.html(formatMoney(preTotal - price * quantity) + '₫')
 }
 
 const setOnClickRemoveCartBtn = () => {
@@ -187,4 +223,12 @@ export const addToCart = ({ id, slug, image, name, quantity, type, price }) => {
         }
     });
 }
+
+const main = async () => {
+    const result = await getCart()
+
+    await renderCart(result)
+}
+
+main()
 

@@ -1,3 +1,4 @@
+import { renderToast } from "../../helper.js";
 import { STORAGE, PRODUCT_WITH_SUBS } from "../../url.js";
 import { addToCart } from "../header.js";
 
@@ -95,15 +96,23 @@ const showProduct = async () => {
         let quantity = $('.number-input input.quantity').val()
 
         const subChoosen = $('.con_item .btn.cur');
-        addToCart({
-            id: subChoosen.attr('data-id'),
-            image: subChoosen.attr('data-image'),
-            name: result.name,
-            quantity,
-            type: subChoosen.html(),
-            slug: result.slug,
-            price: result.price
-        })
+        if (subChoosen.length) {
+            addToCart({
+                id: subChoosen.attr('data-id'),
+                image: subChoosen.attr('data-image'),
+                name: result.name,
+                quantity,
+                type: subChoosen.html(),
+                slug: result.slug,
+                price: result.price
+            })
+        } else {
+            renderToast({
+                status: 'danger',
+                title: 'Lỗi',
+                text: 'Vui lòng chọn màu sắc trước khi thêm vào giỏ hàng.'
+            })
+        }
     })
 }
 

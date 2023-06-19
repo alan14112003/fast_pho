@@ -41,19 +41,19 @@ Route::middleware(AdminMiddleware::class)
         Route::prefix('products/')
             ->name('products.')->group(function () {
                 Route::controller(AdminProductController::class)
-                ->group(function () {
-                    Route::get('', 'index')->name('index');
-                    Route::get('/create', 'create')->name('create');
-                    Route::get('/edit/{id}', 'edit')->name('edit');
-                });
+                    ->group(function () {
+                        Route::get('', 'index')->name('index');
+                        Route::get('/create', 'create')->name('create');
+                        Route::get('/edit/{id}', 'edit')->name('edit');
+                    });
 
                 Route::controller(AdminSubProductController::class)
-                ->prefix('/{productId}/subs')
-                ->name('subs')
-                ->group(function () {
-                    Route::get('/create', 'create')->name('create');
-                    Route::get('/edit/{id}', 'edit')->name('edit');
-                });
+                    ->prefix('/{productId}/subs')
+                    ->name('subs')
+                    ->group(function () {
+                        Route::get('/create', 'create')->name('create');
+                        Route::get('/edit/{id}', 'edit')->name('edit');
+                    });
             });
 
         Route::prefix('orders/')
@@ -73,6 +73,15 @@ Route::middleware(AdminMiddleware::class)
 Route::get('/', function () {
     return view('clients/users/index');
 })->name('index');
+
+Route::prefix('/cart')->name('cart.')->group(function () {
+    Route::get('/', function () {
+        return view('clients/users/cart/index');
+    })->name('index');
+    Route::get('/details', function () {
+        return view('clients/users/cart/detail');
+    })->name('detail');
+});
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('login_admin', 'login')->name('login_admin');
