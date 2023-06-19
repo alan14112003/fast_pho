@@ -33,7 +33,7 @@ class AddRequest extends FormRequest
             'quantity' => [
                 'required',
                 'numeric',
-                'min:1'
+                'min:-1'
             ]
         ];
     }

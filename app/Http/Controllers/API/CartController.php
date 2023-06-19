@@ -30,12 +30,12 @@ class CartController extends Controller
         $cartIds = array_keys($cart);
 
         $products = Product::query()
-        ->join('sub_products', 'products.id', '=', 'sub_products.product_id')
-        ->whereIn('sub_products.id', $cartIds)
-        ->get();
+            ->join('sub_products', 'products.id', '=', 'sub_products.product_id')
+            ->whereIn('sub_products.id', $cartIds)
+            ->get();
 
         foreach ($products as $product) {
-            $product->quantity = $cart[$product->slug];
+            $product->quantity = $cart[$product->id];
         }
 
         return $this->responseTrait('Thành công', true, $products);
@@ -54,7 +54,7 @@ class CartController extends Controller
         $expiration = Carbon::now()->addYear()->timestamp;
         $cart[$subProductId] = isset($cart[$subProductId]) ? $cart[$subProductId] + $quantity : $quantity;
 
-        return $this->responseTrait('Thành công', true, $cart)
+        return $this->responseTrait('Thành công', true)
             ->withCookie(cookie($this->cartName, json_encode($cart), $expiration));
     }
 
@@ -72,7 +72,7 @@ class CartController extends Controller
 
         unset($cart[$id]);
         $expiration = Carbon::now()->addYear()->timestamp;
-        return $this->responseTrait('Thành công')
+        return $this->responseTrait('Thành công', true)
             ->withCookie(cookie($this->cartName, json_encode($cart), $expiration));
     }
 
