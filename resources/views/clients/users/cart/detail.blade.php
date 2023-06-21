@@ -59,31 +59,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div></div>
-                            {{-- <div class="order-summary-section order-summary-section-discount"
-                                data-order-summary-section="discount">
-                                <form id="form_discount_add" accept-charset="UTF-8" method="post">
-                                    <input name="utf8" type="hidden" value="✓">
-                                    <div class="fieldset">
-                                        <div class="field  ">
-                                            <div class="field-input-btn-wrapper">
-                                                <div class="field-input-wrapper">
-                                                    <label class="field-label" for="discount.code">Mã giảm giá</label>
-                                                    <input placeholder="Mã giảm giá" class="field-input"
-                                                        data-discount-field="true" autocomplete="false" autocapitalize="off"
-                                                        spellcheck="false" size="30" type="text" id="discount.code"
-                                                        name="discount.code" value="">
-                                                </div>
-                                                <button type="submit" class="field-input-btn btn btn-default btn-disabled">
-                                                    <span class="btn-content">Sử dụng</span>
-                                                    <i class="btn-spinner icon icon-button-spinner"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div> --}}
-
                             <div class="order-summary-section order-summary-section-total-lines payment-lines"
                                 data-order-summary-section="payment-lines">
                                 <table class="total-line-table">
@@ -209,85 +184,27 @@
                                     <h2 class="section-title">Thông tin giao hàng</h2>
                                 </div>
                                 <div class="section-content section-customer-information no-mb">
-                                    <input name="utf8" type="hidden" value="✓">
                                     <div class="inventory_location_data">
                                         <input name="customer_shipping_country" type="hidden" value="241">
                                         <input name="customer_shipping_province" type="hidden" value="33">
                                         <input name="customer_shipping_district" type="hidden" value="369">
                                         <input name="customer_shipping_ward" type="hidden" value="20407">
                                     </div>
-                                    <input type="hidden" name="checkout_user[email]" value="phanxuansy219812@gmail.com">
                                     <div class="logged-in-customer-information">&nbsp;
                                         <div class="logged-in-customer-information-avatar-wrapper">
                                             <div class="logged-in-customer-information-avatar gravatar"
-                                                style="background-image: url(//www.gravatar.com/avatar/f9c70ec134cefbbe4124e7178fb0e1b3.jpg?s=100&amp;d=blank);filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='//www.gravatar.com/avatar/f9c70ec134cefbbe4124e7178fb0e1b3.jpg?s=100&amp;d=blank', sizingMethod='scale')">
+                                                style="background-image: url(//www.gravatar.com/avatar/f9c70ec134cefbbe4124e7178fb0e1b3.jpg?s=100&amp;d=blank);
+                                                filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='//www.gravatar.com/avatar/f9c70ec134cefbbe4124e7178fb0e1b3.jpg?s=100&amp;d=blank', 
+                                                sizingMethod='scale')">
                                             </div>
                                         </div>
                                         <p class="logged-in-customer-information-paragraph">
-                                            Phan Xuân Sỹ (phanxuansy219812@gmail.com)
-                                            <br>
-                                            <a
-                                                href="/account/logout?return_url=%2Fcheckouts%2F7319231ceb8b491187cdc7a39097aa67%3Fstep%3D1">Đăng
-                                                xuất</a>
+                                            @auth
+                                              {{ auth()->user()->name }} ({{ auth()->user()->email }})  
+                                            @endauth
                                         </p>
                                     </div>
                                     <div class="fieldset">
-                                        <div class="field field-show-floating-label">
-                                            <div class="field-input-wrapper field-input-wrapper-select">
-                                                <label class="field-label" for="stored_addresses">Thêm địa chỉ
-                                                    mới...</label>
-                                                <select class="field-input" id="stored_addresses">
-                                                    <option value="0" data-properties="{}">Địa chỉ đã lưu trữ
-                                                    </option>
-                                                    <option value="1128620155"
-                                                        data-properties="{&quot;id&quot;:1128620155,
-                                                                &quot;last_name&quot;:&quot;Phan Xuân&quot;,
-                                                                &quot;first_name&quot;:&quot;Sỹ&quot;,
-                                                                &quot;phone&quot;:&quot;0788641673&quot;,
-                                                                &quot;address1&quot;:&quot;112 Hùng Vương&quot;,
-                                                                &quot;zip&quot;:null,
-                                                                &quot;city&quot;:null,
-                                                                &quot;country&quot;:&quot;Vietnam&quot;,
-                                                                &quot;country_id&quot;:&quot;241&quot;,
-                                                                &quot;province&quot;:&quot;Quảng Nam&quot;,
-                                                                &quot;province_id&quot;:&quot;33&quot;,
-                                                                &quot;district&quot;:&quot;Thành phố Hội An&quot;,
-                                                                &quot;district_id&quot;:&quot;369&quot;,
-                                                                &quot;ward&quot;:&quot;Phường Thanh Hà&quot;,
-                                                                &quot;wardid&quot;:&quot;20407&quot;,
-                                                                &quot;default&quot;:true}"
-                                                        selected="">
-                                                        0788641673,
-                                                        112 Hùng Vương,
-
-
-                                                        Phường Thanh Hà,
-                                                        Thành phố Hội An,
-                                                        Quảng Nam,
-                                                        Vietnam
-                                                    </option>
-                                                    <option value="1130670892"
-                                                        data-properties="{&quot;id&quot;:1130670892,
-                                                                &quot;last_name&quot;:&quot;Phan Xuân&quot;,
-                                                                &quot;first_name&quot;:&quot;Sỹ&quot;,
-                                                                &quot;phone&quot;:null,
-                                                                &quot;address1&quot;:null,
-                                                                &quot;zip&quot;:null,
-                                                                &quot;city&quot;:null,
-                                                                &quot;country&quot;:&quot;Vietnam&quot;,
-                                                                &quot;country_id&quot;:&quot;241&quot;,
-                                                                &quot;province&quot;:null,
-                                                                &quot;province_id&quot;:null,
-                                                                &quot;district&quot;:null,
-                                                                &quot;district_id&quot;:null,
-                                                                &quot;ward&quot;:null,
-                                                                &quot;wardid&quot;:null,
-                                                                &quot;default&quot;:false}">
-                                                        Vietnam
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
                                         <div class="field field-show-floating-label">
                                             <div class="field-input-wrapper">
                                                 <label class="field-label" for="billing_address_full_name">Họ và
