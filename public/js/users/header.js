@@ -218,8 +218,11 @@ export const addToCart = ({ id, slug, image, name, quantity, type, price }) => {
             }
         },
         error: function (response) {
-            const erorrs = Object.values(response.responseJSON.errors);
-            showError($('#errors-category'), [erorrs]);
+            renderToast({
+                status: 'danger',
+                title: 'Lỗi',
+                text: response.message
+            })
         }
     });
 }

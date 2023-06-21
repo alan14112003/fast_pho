@@ -2,6 +2,18 @@
     display: none;
 }
 
+.toast {
+    font-size: 0.475rem;
+}
+
+.toast-header {
+    padding: .3rem .75rem;
+}
+
+.toast-body {
+    padding: .45rem;
+}
+
 .btn {
     display: inline-block;
     border-radius: 4px;

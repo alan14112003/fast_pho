@@ -129,7 +129,7 @@ const showProducts = (tempPage) => {
 
                             <div class="cont">${p.name}</div>
                             <div class="new-tip tov price"><span>${formatMoney(calculateMoneyAfterSale(p.price, p.sale))}</span><sup>đ</sup></div>
-                            <div class="discount"><img src=${IMAGES + 'discount.png'} /><span>${p.sale}%</span></div>
+                            ${p.sale > 0 ? `<div class="discount"><img src=${IMAGES + 'discount.png'} /><span>${p.sale}%</span>` : ''}</div>
                             <div class="new-tip">${p.category_name}</div>
                         </a>
                     </li>
