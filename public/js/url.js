@@ -57,6 +57,7 @@ export const CATEGORY_DELETE = DOMAIN + 'api/categories/:id'
 
 //Order
 export const PRODUCT_ORDERS = DOMAIN + 'api/orders/products'
+export const PRODUCT_ORDER_CREATE = DOMAIN + 'api/orders/products'
 export const PHOTOS_ORDERS = DOMAIN + 'api/orders/photos'
 export const CHANGE_STATUS_ORDER = DOMAIN + 'api/orders/:id/change-status'
 export const PRODUCT_ORDER = DOMAIN + 'api/orders/:id/product'
@@ -66,3 +67,6 @@ export const PHOTO_ORDER = DOMAIN + 'api/orders/:id/photo'
 export const CART = DOMAIN + 'api/cart'
 export const CART_UPDATE = DOMAIN + 'api/cart/update'
 export const CART_REMOVE = DOMAIN + 'api/cart/:id'
+
+//Json
+export const HN_TREE = DOMAIN + 'js/ha_noi_tree.json'

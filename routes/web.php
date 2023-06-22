@@ -89,7 +89,7 @@ Route::prefix('/cart')->name('cart.')->group(function () {
     })->name('index');
     Route::get('/details', function () {
         return view('clients/users/cart/detail');
-    })->name('detail');
+    })->name('details');
 });
 
 Route::controller(AuthController::class)->group(function () {

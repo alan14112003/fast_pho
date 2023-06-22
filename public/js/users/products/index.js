@@ -181,7 +181,7 @@ const addValueToParams = async () => {
     if (category) {
         const arrCate = category.split('_');
         categorySlug = arrCate[0];
-        categoryIndex = arrCate[1]; s
+        categoryIndex = arrCate[1];
     }
 }
 

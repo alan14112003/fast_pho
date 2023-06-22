@@ -39,7 +39,7 @@ Route::prefix('users')
     ->name('users.')
     ->controller(UserController::class)
     ->group(function () {
-       Route::get('/count', 'countUser')->name('count');
+        Route::get('/count', 'countUser')->name('count');
     });
 
 Route::prefix('categories')
@@ -105,15 +105,17 @@ Route::prefix('orders')
     ->name('orders.')
     ->controller(OrderController::class)
     ->group(function () {
-        Route::get('/products', 'products')->name('products');
+        Route::prefix('/products')->group(function () {
+            Route::get('/', 'products')->name('products');
+            Route::post('/', 'productsCreate')->name('products_create');
+        });
         Route::prefix('/{id}')->group(function () {
             Route::get('/product', 'product')->name('product');
             Route::get('/photo', 'photo')->name('photo');
             Route::put('/change-status', 'changeStatus')->name('change_status');
         });
         Route::get('/photos', 'photos')->name('photos');
-    })
-;
+    });
 
 Route::prefix('cart')
     ->name('cart.')

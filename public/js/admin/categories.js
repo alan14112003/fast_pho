@@ -44,7 +44,7 @@ export const showCategories = (rootId, nodeId, leafId) => {
     $('#category__').html('')
 
     if (!rootId) rootId = categories[0]?.id
-    
+
     categories.forEach(root => {
         $('#category_').append(`
             <option value="${root.id}" ${root.id === rootId ? 'selected' : ''}>

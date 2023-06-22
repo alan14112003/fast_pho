@@ -74,7 +74,7 @@
                                             <td class="total-line-price">
                                                 <span class="order-summary-emphasis"
                                                     data-checkout-subtotal-price-target="173000000">
-                                                    1,730,000₫
+                                                    0₫
                                                 </span>
                                             </td>
                                         </tr>
@@ -85,9 +85,7 @@
                                             <td class="total-line-price">
                                                 <span class="order-summary-emphasis"
                                                     data-checkout-total-shipping-target="0">
-
                                                     —
-
                                                 </span>
                                             </td>
                                         </tr>
@@ -101,7 +99,7 @@
                                                 <span class="payment-due-currency">VND</span>
                                                 <span class="payment-due-price"
                                                     data-checkout-payment-due-target="173000000">
-                                                    1,730,000₫
+                                                    0₫
                                                 </span>
                                                 <span class="checkout_version" display:none="" data_checkout_version="35">
                                                 </span>
@@ -123,26 +121,16 @@
                         <li class="breadcrumb-item">
                             <a href="{{ route('cart.index') }}">Giỏ hàng</a>
                         </li>
-
                         <li class="breadcrumb-item breadcrumb-item-current">
-
-                            Thông tin giao hàng
-
+                            <a href="#" id="btn-details" class="breadcrumb-link">Thông tin giao hàng</a>
                         </li>
-                        <li class="breadcrumb-item ">
-
-                            <a href="/checkouts/7319231ceb8b491187cdc7a39097aa67?step=2" class="breadcrumb-link">
-
-                                Phương thức thanh toán
-
-                            </a>
-
+                        <li class="breadcrumb-item">
+                            <a href="#" id="btn-payment" class="breadcrumb-link">Phương thức thanh toán</a>
                         </li>
-
                     </ul>
 
                 </div>
-                <div class="main-content">
+                <div class="main-content" id="details">
                     <div id="checkout_order_information_changed_error_message" class="hidden" style="margin-bottom:15px">
                         <p class="field-message field-message-error alert alert-danger"><svg x="0px" y="0px"
                                 viewBox="0 0 286.054 286.054" style="enable-background:new 0 0 286.054 286.054;"
@@ -172,11 +160,6 @@
                             </span>
                         </p>
                     </div>
-                    <script>
-                        $("html, body").animate({
-                            scrollTop: 0
-                        }, "slow");
-                    </script>
                     <div class="step">
                         <div class="step-sections " step="1">
                             <div class="section">
@@ -200,30 +183,29 @@
                                         </div>
                                         <p class="logged-in-customer-information-paragraph">
                                             @auth
-                                              {{ auth()->user()->name }} ({{ auth()->user()->email }})  
+                                                {{ auth()->user()->name }} ({{ auth()->user()->email }})
                                             @endauth
                                         </p>
                                     </div>
                                     <div class="fieldset">
                                         <div class="field field-show-floating-label">
                                             <div class="field-input-wrapper">
-                                                <label class="field-label" for="billing_address_full_name">Họ và
+                                                <label class="field-label" for="full_name">Họ và
                                                     tên</label>
                                                 <input placeholder="Họ và tên" autocapitalize="off" spellcheck="false"
-                                                    class="field-input" size="30" type="text"
-                                                    id="billing_address_full_name" name="billing_address[full_name]"
-                                                    value="Phan Xuân Sỹ" autocomplete="false">
+                                                    class="field-input" size="30" type="text" id="full_name"
+                                                    name="billing_address[full_name]" value="Phan Xuân Sỹ"
+                                                    autocomplete="false" required>
                                             </div>
                                         </div>
                                         <div class="field field-required   field-show-floating-label">
                                             <div class="field-input-wrapper">
-                                                <label class="field-label" for="billing_address_phone">Số điện
+                                                <label class="field-label" for="phone">Số điện
                                                     thoại</label>
                                                 <input autocomplete="false" placeholder="Số điện thoại"
                                                     autocapitalize="off" spellcheck="false" class="field-input"
-                                                    size="30" maxlength="15" type="tel"
-                                                    id="billing_address_phone" name="billing_address[phone]"
-                                                    value="0788641673">
+                                                    size="30" maxlength="15" type="tel" id="phone"
+                                                    name="billing_address[phone]" value="0788641673" required>
                                             </div>
                                         </div>
                                     </div>
@@ -243,292 +225,22 @@
                                                     </div>
                                                     <div class="field field-required  field-show-floating-label">
                                                         <div class="field-input-wrapper">
-                                                            <label class="field-label" for="billing_address_address1">Địa
+                                                            <label class="field-label" for="address">Địa
                                                                 chỉ</label>
                                                             <input placeholder="Địa chỉ" autocapitalize="off"
                                                                 spellcheck="false" class="field-input" size="30"
-                                                                type="text" id="billing_address_address1"
-                                                                name="billing_address[address1]" value="112 Hùng Vương">
+                                                                type="text" id="address"
+                                                                name="billing_address[address1]" value="112 Hùng Vương"
+                                                                required>
                                                         </div>
                                                     </div>
-
-                                                    <input name="selected_customer_shipping_country" type="hidden"
-                                                        value="241">
-                                                    <input name="selected_customer_shipping_province" type="hidden"
-                                                        value="33">
-                                                    <input name="selected_customer_shipping_district" type="hidden"
-                                                        value="369">
-                                                    <input name="selected_customer_shipping_ward" type="hidden"
-                                                        value="20407">
-
                                                     <div
                                                         class="field field-show-floating-label field-required field-third ">
                                                         <div class="field-input-wrapper field-input-wrapper-select">
                                                             <label class="field-label" for="customer_shipping_province">
                                                                 Tỉnh / thành </label>
                                                             <select class="field-input" id="customer_shipping_province"
-                                                                name="customer_shipping_province">
-                                                                <option data-code="null" value="null">
-
-                                                                    Chọn tỉnh / thành </option>
-
-
-
-                                                                <option data-code="HC" value="50">Hồ Chí Minh</option>
-
-
-
-                                                                <option data-code="HI" value="1">Hà Nội</option>
-
-
-
-                                                                <option data-code="DA" value="32">Đà Nẵng</option>
-
-
-
-                                                                <option data-code="AG" value="57">An Giang</option>
-
-
-
-                                                                <option data-code="BV" value="49">Bà Rịa - Vũng Tàu
-                                                                </option>
-
-
-
-                                                                <option data-code="BI" value="47">Bình Dương</option>
-
-
-
-                                                                <option data-code="BP" value="45">Bình Phước</option>
-
-
-
-                                                                <option data-code="BU" value="39">Bình Thuận</option>
-
-
-
-                                                                <option data-code="BD" value="35">Bình Định</option>
-
-
-
-                                                                <option data-code="BL" value="62">Bạc Liêu</option>
-
-
-
-                                                                <option data-code="BG" value="15">Bắc Giang</option>
-
-
-
-                                                                <option data-code="BK" value="4">Bắc Kạn</option>
-
-
-
-                                                                <option data-code="BN" value="18">Bắc Ninh</option>
-
-
-
-                                                                <option data-code="BT" value="53">Bến Tre</option>
-
-
-
-                                                                <option data-code="CB" value="3">Cao Bằng</option>
-
-
-
-                                                                <option data-code="CM" value="63">Cà Mau</option>
-
-
-
-                                                                <option data-code="CN" value="59">Cần Thơ</option>
-
-
-
-                                                                <option data-code="GL" value="41">Gia Lai</option>
-
-
-
-                                                                <option data-code="HG" value="2">Hà Giang</option>
-
-
-
-                                                                <option data-code="HM" value="23">Hà Nam</option>
-
-
-
-                                                                <option data-code="HT" value="28">Hà Tĩnh</option>
-
-
-
-                                                                <option data-code="HO" value="11">Hòa Bình</option>
-
-
-
-                                                                <option data-code="HY" value="21">Hưng Yên</option>
-
-
-
-                                                                <option data-code="HD" value="19">Hải Dương</option>
-
-
-
-                                                                <option data-code="HP" value="20">Hải Phòng</option>
-
-
-
-                                                                <option data-code="HU" value="60">Hậu Giang</option>
-
-
-
-                                                                <option data-code="KH" value="37">Khánh Hòa</option>
-
-
-
-                                                                <option data-code="KG" value="58">Kiên Giang</option>
-
-
-
-                                                                <option data-code="KT" value="40">Kon Tum</option>
-
-
-
-                                                                <option data-code="LI" value="8">Lai Châu</option>
-
-
-
-                                                                <option data-code="LA" value="51">Long An</option>
-
-
-
-                                                                <option data-code="LO" value="6">Lào Cai</option>
-
-
-
-                                                                <option data-code="LD" value="44">Lâm Đồng</option>
-
-
-
-                                                                <option data-code="LS" value="13">Lạng Sơn</option>
-
-
-
-                                                                <option data-code="ND" value="24">Nam Định</option>
-
-
-
-                                                                <option data-code="NA" value="27">Nghệ An</option>
-
-
-
-                                                                <option data-code="NB" value="25">Ninh Bình</option>
-
-
-
-                                                                <option data-code="NT" value="38">Ninh Thuận</option>
-
-
-
-                                                                <option data-code="PT" value="16">Phú Thọ</option>
-
-
-
-                                                                <option data-code="PY" value="36">Phú Yên</option>
-
-
-
-                                                                <option data-code="QB" value="29">Quảng Bình</option>
-
-
-
-                                                                <option data-code="QM" value="33" selected="">
-                                                                    Quảng Nam</option>
-
-
-
-                                                                <option data-code="QG" value="34">Quảng Ngãi</option>
-
-
-
-                                                                <option data-code="QN" value="14">Quảng Ninh</option>
-
-
-
-                                                                <option data-code="QT" value="30">Quảng Trị</option>
-
-
-
-                                                                <option data-code="ST" value="61">Sóc Trăng</option>
-
-
-
-                                                                <option data-code="SL" value="9">Sơn La</option>
-
-
-
-                                                                <option data-code="TH" value="26">Thanh Hóa</option>
-
-
-
-                                                                <option data-code="TB" value="22">Thái Bình</option>
-
-
-
-                                                                <option data-code="TY" value="12">Thái Nguyên</option>
-
-
-
-                                                                <option data-code="TT" value="31">Thừa Thiên Huế
-                                                                </option>
-
-
-
-                                                                <option data-code="TG" value="52">Tiền Giang</option>
-
-
-
-                                                                <option data-code="TV" value="54">Trà Vinh</option>
-
-
-
-                                                                <option data-code="TQ" value="5">Tuyên Quang</option>
-
-
-
-                                                                <option data-code="TN" value="46">Tây Ninh</option>
-
-
-
-                                                                <option data-code="VL" value="55">Vĩnh Long</option>
-
-
-
-                                                                <option data-code="VT" value="17">Vĩnh Phúc</option>
-
-
-
-                                                                <option data-code="YB" value="10">Yên Bái</option>
-
-
-
-                                                                <option data-code="DB" value="7">Điện Biên</option>
-
-
-
-                                                                <option data-code="DC" value="42">Đắk Lắk</option>
-
-
-
-                                                                <option data-code="DO" value="43">Đắk Nông</option>
-
-
-
-                                                                <option data-code="DN" value="48">Đồng Nai</option>
-
-
-
-                                                                <option data-code="DT" value="56">Đồng Tháp</option>
-
-
-
+                                                                name="customer_shipping_province" required>
                                                             </select>
                                                         </div>
 
@@ -545,69 +257,6 @@
                                                                 name="customer_shipping_district">
                                                                 <option data-code="null" value="null">Chọn quận / huyện
                                                                 </option>
-
-
-                                                                <option data-code="QM381" value="381">Huyện Bắc Trà My
-                                                                </option>
-
-                                                                <option data-code="QM371" value="371">Huyện Đại Lộc
-                                                                </option>
-
-                                                                <option data-code="QM372" value="372">Huyện Điện Bàn
-                                                                </option>
-
-                                                                <option data-code="QM804" value="804">Huyện Đông Giang
-                                                                </option>
-
-                                                                <option data-code="QM373" value="373">Huyện Duy Xuyên
-                                                                </option>
-
-                                                                <option data-code="QM374" value="374">Huyện Giằng
-                                                                </option>
-
-                                                                <option data-code="QM370" value="370">Huyện Hiên
-                                                                </option>
-
-                                                                <option data-code="QM377" value="377">Huyện Hiệp Đức
-                                                                </option>
-
-                                                                <option data-code="QM806" value="806">Huyện Nam Giang
-                                                                </option>
-
-                                                                <option data-code="QM803" value="803">Huyện Nam Trà My
-                                                                </option>
-
-                                                                <option data-code="QM782" value="782">Huyện Nông Sơn
-                                                                </option>
-
-                                                                <option data-code="QM380" value="380">Huyện Núi Thành
-                                                                </option>
-
-                                                                <option data-code="QM783" value="783">Huyện Phú Ninh
-                                                                </option>
-
-                                                                <option data-code="QM379" value="379">Huyện Phước Sơn
-                                                                </option>
-
-                                                                <option data-code="QM376" value="376">Huyện Quế Sơn
-                                                                </option>
-
-                                                                <option data-code="QM805" value="805">Huyện Tây Giang
-                                                                </option>
-
-                                                                <option data-code="QM375" value="375">Huyện Thăng Bình
-                                                                </option>
-
-                                                                <option data-code="QM378" value="378">Huyện Tiên Phước
-                                                                </option>
-
-                                                                <option data-code="QM369" value="369" selected="">
-                                                                    Thành phố Hội An</option>
-
-                                                                <option data-code="QM368" value="368">Thành phố Tam Kỳ
-                                                                </option>
-
-
                                                             </select>
                                                         </div>
 
@@ -622,55 +271,9 @@
                                                                 name="customer_shipping_ward">
                                                                 <option data-code="null" value="null">Chọn phường / xã
                                                                 </option>
-
-
-                                                                <option data-code="20419" value="20419">Phường Cẩm An
-                                                                </option>
-
-                                                                <option data-code="20413" value="20413">Phường Cẩm Châu
-                                                                </option>
-
-                                                                <option data-code="20428" value="20428">Phường Cẩm Nam
-                                                                </option>
-
-                                                                <option data-code="20404" value="20404">Phường Cẩm Phô
-                                                                </option>
-
-                                                                <option data-code="20416" value="20416">Phường Cửa Đại
-                                                                </option>
-
-                                                                <option data-code="20398" value="20398">Phường Minh An
-                                                                </option>
-
-                                                                <option data-code="20410" value="20410">Phường Sơn Phong
-                                                                </option>
-
-                                                                <option data-code="20407" value="20407" selected="">
-                                                                    Phường Thanh Hà</option>
-
-                                                                <option data-code="20401" value="20401">Phường Tân An
-                                                                </option>
-
-                                                                <option data-code="20422" value="20422">Xã Cẩm Hà
-                                                                </option>
-
-                                                                <option data-code="20425" value="20425">Xã Cẩm Kim
-                                                                </option>
-
-                                                                <option data-code="20431" value="20431">Xã Cẩm Thanh
-                                                                </option>
-
-                                                                <option data-code="20434" value="20434">Xã Tân Hiệp
-                                                                </option>
-
-
                                                             </select>
                                                         </div>
-
                                                     </div>
-
-
-
                                                     <div id="div_location_country_not_vietnam"
                                                         class="section-customer-information " style="display: none;">
                                                         <div class="field field-two-thirds">
@@ -714,20 +317,173 @@
 
                         </div>
                         <div class="step-footer" id="step-footer-checkout">
-
-
-                            <form id="form_next_step" accept-charset="UTF-8" method="post">
-                                <input name="utf8" type="hidden" value="✓">
-                                <button type="submit" class="step-footer-continue-btn btn">
-                                    <span class="btn-content">Tiếp tục đến phương thức thanh toán</span>
-                                    <i class="btn-spinner icon icon-button-spinner"></i>
-                                </button>
-                            </form>
-                            <a class="step-footer-previous-link" href="/cart">
+                            <a href="#" id="btn-content-detail" class="step-footer-continue-btn btn">
+                                <span>Tiếp tục đến phương thức thanh toán</span>
+                                <i class="btn-spinner icon icon-button-spinner"></i>
+                            </a>
+                            <a class="step-footer-previous-link" href="{{ route('cart.index') }}">
                                 Giỏ hàng
                             </a>
 
 
+                        </div>
+                    </div>
+                </div>
+                <div class="main-content hidden" id="payment">
+
+
+                    <div id="checkout_order_information_changed_error_message" class="hidden" style="margin-bottom:15px">
+
+
+
+                        <p class="field-message field-message-error alert alert-danger"><svg x="0px"
+                                y="0px" viewBox="0 0 286.054 286.054"
+                                style="enable-background:new 0 0 286.054 286.054;" xml:space="preserve">
+                                <g>
+                                    <path style="fill:#E2574C;"
+                                        d="M143.027,0C64.04,0,0,64.04,0,143.027c0,78.996,64.04,143.027,143.027,143.027 c78.996,0,143.027-64.022,143.027-143.027C286.054,64.04,222.022,0,143.027,0z M143.027,259.236 c-64.183,0-116.209-52.026-116.209-116.209S78.844,26.818,143.027,26.818s116.209,52.026,116.209,116.209 S207.21,259.236,143.027,259.236z M143.036,62.726c-10.244,0-17.995,5.346-17.995,13.981v79.201c0,8.644,7.75,13.972,17.995,13.972 c9.994,0,17.995-5.551,17.995-13.972V76.707C161.03,68.277,153.03,62.726,143.036,62.726z M143.036,187.723 c-9.842,0-17.852,8.01-17.852,17.86c0,9.833,8.01,17.843,17.852,17.843s17.843-8.01,17.843-17.843 C160.878,195.732,152.878,187.723,143.036,187.723z">
+                                    </path>
+                                </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                                <g> </g>
+                            </svg>
+                            <span>
+
+
+
+                            </span>
+
+                        </p>
+                    </div>
+                    <div class="step">
+                        <div class="step-sections " step="2">
+                            <div id="section-shipping-rate" class="section">
+                                <div class="order-checkout__loading--box">
+                                    <div class="order-checkout__loading--circle"></div>
+                                </div>
+                                <div class="section-header">
+                                    <h2 class="section-title">Phương thức vận chuyển</h2>
+                                </div>
+                                <div class="section-content">
+
+                                    <div class="content-box">
+
+                                        <div class="content-box-row">
+                                            <div class="radio-wrapper">
+                                                <label class="radio-label" for="shipping_rate_id_1000409448">
+                                                    <div class="radio-input">
+                                                        <input id="shipping_rate_id_1000409448" class="input-radio"
+                                                            type="radio" name="shipping_rate_id" value="1000409448"
+                                                            checked="">
+                                                    </div>
+                                                    <span class="radio-label-primary">Giao hàng tận nơi</span>
+                                                    <span class="radio-accessory content-box-emphasis">
+                                                        0₫
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div id="section-payment-method" class="section">
+                                <div class="order-checkout__loading--box">
+                                    <div class="order-checkout__loading--circle"></div>
+                                </div>
+                                <div class="section-header">
+                                    <h2 class="section-title">Phương thức thanh toán</h2>
+                                </div>
+                                <div class="section-content">
+                                    <div class="content-box">
+
+
+                                        <div class="radio-wrapper content-box-row">
+                                            <label class="two-page" for="payment_method_">
+                                                <div class="radio-input payment-method-checkbox">
+                                                    <input id="payment_method_" class="input-radio"
+                                                        name="payment_method_id" type="radio" value="0"
+                                                        checked="">
+                                                </div>
+
+                                                <div class="radio-content-input">
+                                                    <img class="main-img"
+                                                        src="https://hstatic.net/0/0/global/design/seller/image/payment/cod.svg?v=4">
+                                                    <div class="content-wrapper">
+                                                        <span class="radio-label-primary">Thanh toán khi giao hàng
+                                                            (COD)</span>
+                                                        <span class="quick-tagline hidden"></span>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="radio-wrapper content-box-row">
+                                            <label class="two-page" for="payment_method__">
+                                                <div class="radio-input payment-method-checkbox">
+                                                    <input id="payment_method__" class="input-radio"
+                                                        name="payment_method_id" type="radio" value="1">
+                                                </div>
+
+                                                <div class="radio-content-input">
+                                                    <img class="main-img"
+                                                        src="https://hstatic.net/0/0/global/design/seller/image/payment/other.svg?v=4">
+                                                    <div class="content-wrapper">
+                                                        <span class="radio-label-primary">Chuyển khoản qua ngân hàng</span>
+                                                        <span class="quick-tagline hidden"></span>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        <div class="radio-wrapper content-box-row content-box-row-secondary"
+                                            for="payment_method_id_1003594838">
+                                            <div class="blank-slate">
+                                                *Lưu ý: Nhân viên sẽ gọi xác nhận và thông báo số tiền cần chuyển khoản của
+                                                quý khách, quý khách vui lòng không chuyển khoản trước.
+
+                                                • ACB CN Thống Nhất : 12466 - LƯƠNG NGỌC PHƯƠNG CHI
+
+                                                LƯU Ý
+                                                • Khi chuyển khoản quý khách ghi nội dung CK là: TÊN FB CÁ NHÂN + MÃ ĐƠN
+                                                HÀNG + SĐT
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="step-footer" id="step-footer-checkout">
+                            <form id="checkout_complete" method="post">
+                                <input name="form_type" type="hidden" value="checkout">
+                                <input name="utf8" type="hidden" value="✓">
+                                <input name="data_type" type="hidden" value="liquid">
+                                <button type="submit" id="btn-content-payment" class="step-footer-continue-btn btn">
+                                    <span>Hoàn tất đơn hàng</span>
+                                    <i class="btn-spinner icon icon-button-spinner"></i>
+                                </button>
+
+                                <input name="__RequestVerificationToken" type="hidden"
+                                    value="CfDJ8FyFPV59mBtNhmQGz0fYZt9IUhVONwdDqdEx1_c-6r_GT1he34ubQodHbzxtDJVVX6parqdtyr4MUZepybgPvMOWp67Qb5roLydPzn7MtdsJwCtyIKoKiJZ1VQ6uh21hI5MaCebu8hTZY57nTQftoqhIiuG8CY-Uxk8RChdLZ9kWqu0Es8gKE7M9344WTh8DQQ">
+
+                            </form> <a class="step-footer-previous-link" href="/cart">
+                                Giỏ hàng
+                            </a>
                         </div>
                     </div>
 

@@ -1143,6 +1143,11 @@ div#section-shipping-rate,
     color: #4d4d4d;
 }
 
+.main .main-header .breadcrumb .breadcrumb-item.breadcrumb-item-current>.breadcrumb-link {
+    color: #333 !important;
+    cursor: default;
+}
+
 .main .main-header .breadcrumb .breadcrumb-item:after {
     content: "";
     display: inline-block;
