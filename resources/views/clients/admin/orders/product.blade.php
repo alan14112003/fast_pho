@@ -59,6 +59,7 @@
                                             <th>Tên sản phẩm</th>
                                             <th>Loại</th>
                                             <th>Đơn giá</th>
+                                            <th>Giảm giá</th>
                                             <th>Số lượng</th>
                                             <th>Thành tiền</th>
                                         </tr>

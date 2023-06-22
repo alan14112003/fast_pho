@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\PhotoController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\SubProductController as AdminSubProductController;
@@ -28,6 +29,14 @@ Route::middleware(AdminMiddleware::class)
     ->name('admin.')
     ->group(function () {
         Route::get('', [AdminController::class, 'index'])->name('index');
+
+        Route::prefix('/photos')
+            ->name('photos.')
+            ->controller(PhotoController::class)
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+            })
+        ;
 
         Route::prefix('/slides')
             ->name('slides.')

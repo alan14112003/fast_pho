@@ -1,4 +1,4 @@
-import { formatCurrency, renderLoading, renderToast } from "../../helper.js";
+import {calculateMoneyAfterSale, formatCurrency, renderLoading, renderToast} from "../../helper.js";
 import { PRODUCT_ORDER } from "../../url.js";
 
 const bodyContent = $('#body-content')
@@ -31,23 +31,26 @@ const renderOrder = () => {
 
 
         const products = order.order_products
-            
+        let totalAll = 0;
+
         const html = products.map((p, index) => {
-          
-          const totalNumber = p.product_price * p.total
+
+          const totalNumber = calculateMoneyAfterSale(p.product_price, p.product_sale) * p.total
+          totalAll += totalNumber
+
           return `
             <tr>
               <td>${index + 1}</td>
               <td>${p.product_name}</td>
               <td>${p.product_type}</td>
               <td>${formatCurrency(p.product_price)}</td>
+              <td>${p.product_sale ? p.product_sale + '%' : '' }</td>
               <td>${p.total}</td>
               <td>${formatCurrency(totalNumber)}</td>
             </tr>
           `
         }).join('')
 
-        const totalAll = products.reduce((total, p) => total + (p.product_price * p.total), 0)
         $('.total').html(formatCurrency(totalAll))
 
         bodyContent.html(html)

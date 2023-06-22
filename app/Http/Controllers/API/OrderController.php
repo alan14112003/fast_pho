@@ -44,7 +44,7 @@ class OrderController extends Controller
                 'status' => $request->get('status')
             ];
 
-            return $this->responseTrait('thành công', true, $data);
+            return $this->responseTrait('Thành công', true, $data);
         } catch (\Exception $e) {
             return $this->responseTrait('có lỗi! ' . $e->getMessage());
         }
@@ -65,7 +65,7 @@ class OrderController extends Controller
             //  Nếu có đơn hàng thì đổi tình trạng của nó và trả về true
             $order->update($request->validated());
 
-            return $this->responseTrait('thay đổi trạng thái thành công', true, null);
+            return $this->responseTrait('Thay đổi trạng thái thành công', true, null);
         } catch (\Exception $e) {
             return $this->responseTrait('có lỗi! ' . $e->getMessage());
         }
@@ -90,7 +90,7 @@ class OrderController extends Controller
 
         $order->type = OrderTypeEnum::getNameByValue($order->type);
 
-        return $this->responseTrait('thay đổi trạng thái thành công', true, $order);
+        return $this->responseTrait('Thành công', true, $order);
     }
 
     //  hàm products trả về api order photo
@@ -122,7 +122,7 @@ class OrderController extends Controller
                 'status' => $request->get('status')
             ];
 
-            return $this->responseTrait('thành công', true, $data);
+            return $this->responseTrait('Thành công', true, $data);
         } catch (\Exception $e) {
             return $this->responseTrait('có lỗi! ' . $e->getMessage());
         }
@@ -145,13 +145,14 @@ class OrderController extends Controller
                 'order_photo.*',
                 'p.file',
                 'p.total',
-                'p.type',
+                'pt.name as type',
                 'p.face_number',
                 'p.is_cover',
                 'p.descriptions',
                 'p.price'
             )
             ->join('photos as p', 'p.id', '=', 'order_photo.photo_id')
+            ->join('photo_types as pt', 'pt.id', '=', 'p.type_id')
             ->where('order_photo.order_id', $id)
             ->get()
         ;
@@ -164,6 +165,6 @@ class OrderController extends Controller
 
         $order->type = OrderTypeEnum::getNameByValue($order->type);
 
-        return $this->responseTrait('thay đổi trạng thái thành công', true, $order);
+        return $this->responseTrait('Thành công', true, $order);
     }
 }
