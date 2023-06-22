@@ -6,6 +6,7 @@ use App\Enums\OrderTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ResponseTrait;
 use App\Http\Requests\Order\ChangeStatusRequest;
+use App\Http\Requests\Order\CreateProductsOrderRequest;
 use App\Models\Order;
 use App\Models\OrderPhoto;
 use App\Models\OrderProduct;
@@ -23,8 +24,7 @@ class OrderController extends Controller
             $ordersQr = Order::query()
                 ->addSelect('orders.*')
                 ->selectRaw('count(order_product.id) as item_count')
-                ->join('order_product', 'orders.id', '=', 'order_product.order_id')
-            ;
+                ->join('order_product', 'orders.id', '=', 'order_product.order_id');
 
             if ($request->has('status') && $request->get('status') !== 'All') {
                 $ordersQr->where('status', $request->get('status'));
@@ -77,8 +77,7 @@ class OrderController extends Controller
         //  Lấy ra đơn hàng có $id
         $order = Order::query()
             ->with('orderProducts')
-            ->find($id);
-        ;
+            ->find($id);;
 
         if (is_null($order)) {
             return $this->responseTrait('Không có đơn hàng với id đã cho');
@@ -93,6 +92,15 @@ class OrderController extends Controller
         return $this->responseTrait('thay đổi trạng thái thành công', true, $order);
     }
 
+    public function productsCreate(CreateProductsOrderRequest $request)
+    {
+        try {
+            return $this->responseTrait('Thành công', true, $request->validated());
+        } catch (\Throwable $e) {
+            return $this->responseTrait('có lỗi! ' . $e->getMessage());
+        }
+    }
+
     //  hàm products trả về api order photo
     public function photos(Request $request): \Illuminate\Http\JsonResponse
     {
@@ -101,8 +109,7 @@ class OrderController extends Controller
             $ordersQr = Order::query()
                 ->addSelect('orders.*')
                 ->selectRaw('count(order_photo.id) as item_count')
-                ->join('order_photo', 'orders.id', '=', 'order_photo.order_id')
-            ;
+                ->join('order_photo', 'orders.id', '=', 'order_photo.order_id');
 
             if ($request->has('status') && $request->get('status') !== 'All') {
                 $ordersQr->where('status', $request->get('status'));
@@ -133,8 +140,7 @@ class OrderController extends Controller
     {
         //  Lấy ra đơn hàng có $id
         $order = Order::query()
-            ->find($id);
-        ;
+            ->find($id);;
 
         if (is_null($order)) {
             return $this->responseTrait('Không có đơn hàng với id đã cho');
@@ -153,8 +159,7 @@ class OrderController extends Controller
             )
             ->join('photos as p', 'p.id', '=', 'order_photo.photo_id')
             ->where('order_photo.order_id', $id)
-            ->get()
-        ;
+            ->get();
 
         if (empty($orderPhotos->toArray())) {
             return $this->responseTrait('Đây không phải đơn hàng photo');
