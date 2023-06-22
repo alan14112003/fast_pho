@@ -75,7 +75,7 @@
                                     Bạn cũng có thể nhập mã giảm giá ở trang thanh toán.</p>
                             </div>
                             <div class="sidebox-order_action">
-                                <a href="{{ route('cart.detail') }}" class="button dark btncart-checkout">THANH TOÁN</a>
+                                <a href="{{ route('cart.details') }}" class="button dark btncart-checkout">THANH TOÁN</a>
                                 <p class="link-continue text-center">
                                     <a href="{{ route('products.index') }}">
                                         <i class="fa fa-reply"></i> Tiếp tục mua hàng
