@@ -40,6 +40,7 @@ Route::prefix('users')
     ->controller(UserController::class)
     ->group(function () {
         Route::get('/count', 'countUser')->name('count');
+
     });
 
 Route::prefix('categories')

@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\PhotoController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\SubProductController as AdminSubProductController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\User\CartController;
+use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Artisan;
@@ -28,6 +31,14 @@ Route::middleware(AdminMiddleware::class)
     ->name('admin.')
     ->group(function () {
         Route::get('', [AdminController::class, 'index'])->name('index');
+
+        Route::prefix('/photos')
+            ->name('photos.')
+            ->controller(PhotoController::class)
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+            })
+        ;
 
         Route::prefix('/slides')
             ->name('slides.')
@@ -70,23 +81,22 @@ Route::middleware(AdminMiddleware::class)
 
 
 //User
-Route::get('/', function () {
-    return view('clients/users/index');
-})->name('index');
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
-Route::prefix('/cart')->name('cart.')->group(function () {
-    Route::get('/', function () {
-        return view('clients/users/cart/index');
-    })->name('index');
-    Route::get('/details', function () {
-        return view('clients/users/cart/detail');
-    })->name('details');
+Route::prefix('/cart')
+    ->name('cart.')
+    ->controller(CartController::class)
+    ->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/details', 'details')->name('details');
 });
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('login_admin', 'login')->name('login_admin');
     Route::get('register', 'register')->name('register');
-    Route::get('/profile', 'profile')->name('profile');
+    Route::get('/profile', 'profile')
+        ->middleware('user')
+        ->name('profile');
 });
 
 Route::prefix('products/')

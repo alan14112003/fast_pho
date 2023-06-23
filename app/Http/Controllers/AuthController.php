@@ -96,7 +96,7 @@ class AuthController extends Controller
 
     public function register()
     {
-        $userGenderArr = UserGenderEnum::ArrayView();
+        $userGenderArr = UserGenderEnum::arrayView();
 
         return view('clients/auth/register', [
             'userGenderArr' => $userGenderArr
@@ -129,7 +129,12 @@ class AuthController extends Controller
         return $this->responseTrait('Thành công', true, route('index'));
     }
 
-    public function profile()
+    public function profile(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
+        $userGenderEnums = UserGenderEnum::arrayView();
+
+        return view('clients.auth.profile', [
+            'userGenderEnums' => $userGenderEnums
+        ]);
     }
 }

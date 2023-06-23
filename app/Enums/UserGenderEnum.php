@@ -16,7 +16,7 @@ final class UserGenderEnum extends Enum
     const MALE = 0;
     const FEMALE = 1;
 
-    public static function ArrayView()
+    public static function arrayView()
     {
         return [
             'Nam' => self::MALE,

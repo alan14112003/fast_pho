@@ -16,16 +16,17 @@ class AdminController extends Controller
         $currentPage = 'home';
         $userCount = User::query()->where('role', '=',UserRoleEnum::USER)->count();
         $productCount = Product::query()->count();
+
         $orderProductCount = Order::query()
             ->join('order_product', 'orders.id', '=', 'order_product.order_id')
             ->groupBy('orders.id')
-            ->count()
+            ->get()->count()
         ;
 
         $orderPhotoCount = Order::query()
             ->join('order_photo', 'orders.id', '=', 'order_photo.order_id')
             ->groupBy('orders.id')
-            ->count()
+            ->get()->count()
         ;
 
         return view('clients.admin.index', [

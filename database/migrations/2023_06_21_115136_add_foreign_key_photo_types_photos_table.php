@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('photos', function (Blueprint $table) {
-            // $table->dropColumn('type');
+            $table->dropColumn('type');
 
             $table->unsignedBigInteger('type_id')->nullable()->after('price');
             $table->boolean('is_paper')->default(1)->after('is_cover');

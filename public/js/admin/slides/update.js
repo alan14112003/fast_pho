@@ -40,9 +40,9 @@ const addIndexSelect = () => {
             contentType: false,
             success: function (response) {
                 const lastIndex = response.body
-    
+
                 $('#index').html('')
-    
+
                 for (let i = 1; i <= lastIndex; i++) {
                     $('#index').append(`<option value="${i}">${i}</option>`)
                 }
@@ -68,6 +68,7 @@ const renderSlide = async() => {
         success: function (response) {
             const slide = response.body
 
+            console.log($('#redirect'));
             $('#pic').attr('src', STORAGE + slide.src)
             $('#redirect').val(slide.redirect)
             $(`#status option[value="${slide.status}"]`).attr('selected', 'selected')

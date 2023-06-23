@@ -55,7 +55,7 @@ class CartController extends Controller
         $cart[$subProductId] = isset($cart[$subProductId]) ? $cart[$subProductId] + $quantity : $quantity;
 
         return $this->responseTrait('Thành công', true)
-            ->withCookie(cookie($this->cartName, json_encode($cart), $expiration));
+            ->withCookie(cookie($this->cartName, json_encode($cart), $expiration, '/'));
     }
 
     public function remove($id, Request $request)
@@ -73,7 +73,7 @@ class CartController extends Controller
         unset($cart[$id]);
         $expiration = Carbon::now()->addYear()->timestamp;
         return $this->responseTrait('Thành công', true)
-            ->withCookie(cookie($this->cartName, json_encode($cart), $expiration));
+            ->withCookie(cookie($this->cartName, json_encode($cart), $expiration, '/'));
     }
 
     public function emptyCart(): \Illuminate\Http\JsonResponse
@@ -82,6 +82,6 @@ class CartController extends Controller
 
         $expiration = Carbon::now()->addYear()->timestamp;
         return $this->responseTrait('Thành công')
-            ->withCookie(cookie($this->cartName, json_encode($cart), $expiration));
+            ->withCookie(cookie($this->cartName, json_encode($cart), $expiration, '/'));
     }
 }

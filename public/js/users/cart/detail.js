@@ -1,5 +1,5 @@
 import { formatMoney, renderToast } from '../../helper.js'
-import { PRODUCT_ORDER_CREATE } from '../../url.js';
+import {PRODUCT_ORDER_CREATE, STORAGE} from '../../url.js';
 import { HN_TREE } from '../../url.js'
 import { getCart } from '../header.js'
 
@@ -15,7 +15,7 @@ const renderEleCart = (id, image, name, quantity, type, price, sale) => {
             <div class="product-thumbnail">
                 <div class="product-thumbnail-wrapper">
                     <img class="product-thumbnail-image" alt="${name}"
-                        src="${image}">
+                        src="${STORAGE + image}">
                 </div>
                 <span class="product-thumbnail-quantity" aria-hidden="true">${quantity}</span>
             </div>
@@ -103,15 +103,33 @@ $('#checkout_complete').off('submit').on('submit', function (e) {
         pros.push({ id: $(e).attr('data-id'), quantity: quantity });
     })
 
+    const address = $('#address').val()
+    const ward = $('#customer_shipping_ward').val()
+    const district = $('#customer_shipping_district').val()
+    const province = $('#customer_shipping_province').val()
+
+    if (address == '' || ward == 'null' || district == 'null' || province == 'null') {
+        renderToast({
+            status: 'danger',
+            title: 'Thất bại',
+            text: 'Bạn phải điền đầy đủ địa chỉ',
+        })
+        return
+    }
+
+    const fullAddress =
+        `${address}, ${$(`#customer_shipping_ward option[value="${ward}"]`).html()}, ${$(`#customer_shipping_district option[value="${district}"]`).html()}, ${$(`#customer_shipping_province option[value="${province}"]`).html()}`
+
     const data = new FormData()
     data.append('user_name', $('#full_name').val())
     data.append('user_phone', $('#phone').val())
-    data.append('user_address', $('#address').val())
-    data.append('user_ward', $('#customer_shipping_ward').val())
-    data.append('user_district', $('#customer_shipping_district').val())
-    data.append('user_province', $('#customer_shipping_province').val())
+    data.append('user_address', address)
+    data.append('user_ward', ward)
+    data.append('user_district', district)
+    data.append('user_province', province)
     data.append('products', JSON.stringify(pros))
     data.append('payment', $('input[name="payment_method_id"]:checked').val())
+    data.append('full_address', fullAddress)
 
     $.ajax({
         url: PRODUCT_ORDER_CREATE,

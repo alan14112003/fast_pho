@@ -78,8 +78,6 @@
                                                 </span>
                                             </td>
                                         </tr>
-
-
                                         <tr class="total-line total-line-shipping">
                                             <td class="total-line-name">Phí vận chuyển</td>
                                             <td class="total-line-price">
@@ -100,8 +98,6 @@
                                                 <span class="payment-due-price"
                                                     data-checkout-payment-due-target="173000000">
                                                     0₫
-                                                </span>
-                                                <span class="checkout_version" display:none="" data_checkout_version="35">
                                                 </span>
                                             </td>
                                         </tr>
@@ -177,7 +173,7 @@
                                         <div class="logged-in-customer-information-avatar-wrapper">
                                             <div class="logged-in-customer-information-avatar gravatar"
                                                 style="background-image: url(//www.gravatar.com/avatar/f9c70ec134cefbbe4124e7178fb0e1b3.jpg?s=100&amp;d=blank);
-                                                filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='//www.gravatar.com/avatar/f9c70ec134cefbbe4124e7178fb0e1b3.jpg?s=100&amp;d=blank', 
+                                                filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='//www.gravatar.com/avatar/f9c70ec134cefbbe4124e7178fb0e1b3.jpg?s=100&amp;d=blank',
                                                 sizingMethod='scale')">
                                             </div>
                                         </div>
@@ -194,7 +190,7 @@
                                                     tên</label>
                                                 <input placeholder="Họ và tên" autocapitalize="off" spellcheck="false"
                                                     class="field-input" size="30" type="text" id="full_name"
-                                                    name="billing_address[full_name]" value="Phan Xuân Sỹ"
+                                                       @auth value="{{ auth()->user()->name }}" @endauth
                                                     autocomplete="false" required>
                                             </div>
                                         </div>
@@ -205,7 +201,7 @@
                                                 <input autocomplete="false" placeholder="Số điện thoại"
                                                     autocapitalize="off" spellcheck="false" class="field-input"
                                                     size="30" maxlength="15" type="tel" id="phone"
-                                                    name="billing_address[phone]" value="0788641673" required>
+                                                    @auth value="{{ auth()->user()->phone }}" @endauth required>
                                             </div>
                                         </div>
                                     </div>
@@ -230,7 +226,7 @@
                                                             <input placeholder="Địa chỉ" autocapitalize="off"
                                                                 spellcheck="false" class="field-input" size="30"
                                                                 type="text" id="address"
-                                                                name="billing_address[address1]" value="112 Hùng Vương"
+                                                                @auth value="{{ optional(auth()->user())->address }}" @endauth
                                                                 required>
                                                         </div>
                                                     </div>
