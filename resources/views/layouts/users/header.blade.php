@@ -34,13 +34,13 @@
                         <a href="">Trách nhiệm xã hội</a>
                     </div>
                 </li>
-                <li>
-                    <a href="https://vn.deliworld.com/contact/contact_us.html " class="a">Liên hệ </a>
-                    <div class="sub-box">
-                        <a href="https://vn.deliworld.com/contact/contact_us.html ">Liên hệ chúng tôi</a>
-                        <a href="https://vn.deliworld.com/contact/join.html ">Tham gia với chúng tôi</a>
-                    </div>
-                </li>
+{{--                <li>--}}
+{{--                    <a href="https://vn.deliworld.com/contact/contact_us.html " class="a">Liên hệ </a>--}}
+{{--                    <div class="sub-box">--}}
+{{--                        <a href="https://vn.deliworld.com/contact/contact_us.html ">Liên hệ chúng tôi</a>--}}
+{{--                        <a href="https://vn.deliworld.com/contact/join.html ">Tham gia với chúng tôi</a>--}}
+{{--                    </div>--}}
+{{--                </li>--}}
             </ul>
 
             <div class="btn-bar por fr" id="btn-bar">
@@ -104,23 +104,6 @@
                                     <div class="cart-view-scroll">
                                         <table id="cart-view">
                                             <tbody id="cart-body">
-                                                {{-- <tr class="item-cart_empty">
-                                                    <td>
-                                                        <div class="svgico-mini-cart"> <svg width="81"
-                                                                height="70" viewBox="0 0 81 70">
-                                                                <g transform="translate(0 2)" stroke-width="4"
-                                                                    stroke="#1e2d7d" fill="none" fill-rule="evenodd">
-                                                                    <circle stroke-linecap="square" cx="34"
-                                                                        cy="60" r="6"></circle>
-                                                                    <circle stroke-linecap="square" cx="67"
-                                                                        cy="60" r="6"></circle>
-                                                                    <path
-                                                                        d="M22.9360352 15h54.8070373l-4.3391876 30H30.3387146L19.6676025 0H.99560547">
-                                                                    </path>
-                                                                </g>
-                                                            </svg></div> Hiện chưa có sản phẩm
-                                                    </td>
-                                                </tr> --}}
                                             </tbody>
                                         </table>
                                     </div>
@@ -166,8 +149,8 @@
                                             </header>
                                             <ul>
                                                 <li><span>{{ auth()->user()->name }}</span></li>
-                                                <li><a href="/account">Tài khoản của tôi</a></li>
-                                                <li><a href="/account/addresses">Danh sách địa chỉ</a></li>
+                                                <li><a href="{{ route('profile') }}">Tài khoản của tôi</a></li>
+                                                <li><a href="/account/addresses">Lịch sử đơn hàng</a></li>
                                                 <li><a id="logout-btn">Đăng xuất</a></li>
                                             </ul>
                                         </div>

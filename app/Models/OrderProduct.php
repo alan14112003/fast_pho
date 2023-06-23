@@ -17,5 +17,7 @@ class OrderProduct extends Model
         "product_price",
         "product_sale",
         "total",
+        'sub_product_id',
+        'product_type'
     ];
 }

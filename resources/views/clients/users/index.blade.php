@@ -6,25 +6,23 @@
 @section('content')
     <div class="swiper">
         <div class="swiper-wrapper">
+            @foreach($slides as $slide)
             <div class="swiper-slide" style="background-color: black">
+                @if($slide->redirect !== null)
+                    <a href="{{ $slide->redirect }}">
+                @endif
                 <div class="swiper-content">
                     <div class="banner">
-                        <img src="{{ asset('images/slide_1.jpg') }}" alt="">
+                        <img src="{{ asset("storage/{$slide->src}") }}"
+                             style="object-fit: cover; height: 100vh; width: 100%"
+                             alt="{{ $slide->id . $slide->src }}">
                     </div>
                 </div>
+                @if($slide->redirect !== null)
+                    </a>
+                @endif
             </div>
-            <div class="swiper-slide" style="background-color: yellowgreen">
-                <div class="swiper-content">
-                </div>
-            </div>
-            <div class="swiper-slide" style="background-color: yellow">
-                <div class="swiper-content">
-                </div>
-            </div>
-            <div class="swiper-slide" style="background-color: yellow">
-                <div class="swiper-content">
-                </div>
-            </div>
+            @endforeach
         </div>
         <div class="swiper-pagination"></div>
     </div>

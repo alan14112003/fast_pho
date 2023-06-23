@@ -52,7 +52,10 @@ class CreateProductsOrderRequest extends FormRequest
             'payment' => [
                 'required',
                 Rule::in(OrderTypeEnum::asArray())
-            ]
+            ],
+            'full_address' => [
+                'required'
+            ],
         ];
     }
 }

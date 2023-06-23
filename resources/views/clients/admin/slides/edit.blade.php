@@ -44,10 +44,10 @@
                                                 style="cursor: pointer; max-width: 100%">
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <label class="form-label" for="exampleInputPassword1">Chuyển hướng</label>
-                                            <input class="form-control" id="exampleInputPassword1" name="redirect">
+                                    <div class="row mb-5">
+                                        <div class="col-sm-5">
+                                            <label class="form-label" for="redirect">Chuyển hướng</label>
+                                            <input class="form-control" id="redirect" name="redirect">
                                         </div>
                                         <div class="col-sm-3">
                                             <label class="form-label" for="status">Trạng thái</label>

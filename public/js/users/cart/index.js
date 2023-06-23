@@ -1,5 +1,5 @@
 import { formatMoney, moneyToNumber } from "../../helper.js";
-import { CART_REMOVE, CART_UPDATE, PRODUCT_VIEW } from "../../url.js";
+import { CART_REMOVE, CART_UPDATE, PRODUCT_VIEW, STORAGE } from "../../url.js";
 import { getCart } from "../header.js";
 
 let removeCartBtns, btnDown, btnUp;
@@ -93,7 +93,7 @@ const renderEleCart = (linkToProduct, id, image, name, quantity, type, price, sa
             <div class="product_image">
                 <a
                     href="${linkToProduct}">
-                    <img src="${image}"
+                    <img src="${ STORAGE + image}"
                         alt="${name}">
                 </a>
 
@@ -129,6 +129,9 @@ const renderEleCart = (linkToProduct, id, image, name, quantity, type, price, sa
 }
 
 const renderCart = async (result) => {
+
+    $('.count-cart span').html(result.length)
+
     let preTotal = 0;
     result.forEach(p => {
         const linkToProduct = PRODUCT_VIEW.replace(':slug', p.slug)

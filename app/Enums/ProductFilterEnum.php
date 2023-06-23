@@ -22,7 +22,7 @@ final class ProductFilterEnum extends Enum
         return [
             'Tất cả' => self::ALL,
             'Mới' => self::NEW,
-            'Bán chạy' => self::SALE,
+            'Giảm giá' => self::SALE,
         ];
     }
 }

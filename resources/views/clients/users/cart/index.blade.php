@@ -11,7 +11,7 @@
             <div class="heading-page">
                 <div class="header-page">
                     <h1>Giỏ hàng của bạn</h1>
-                    <p class="count-cart">Có <span>2 sản phẩm </span>trong giỏ hàng</p>
+                    <p class="count-cart">Có <span>0</span> sản phẩm trong giỏ hàng</p>
                 </div>
             </div>
             <div class="row wrapbox-content-cart">
