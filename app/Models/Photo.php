@@ -15,11 +15,8 @@ class Photo extends Model
         "type",
         "face_number",
         "is_cover",
-        "status",
-        "user_name",
-        "user_phone",
-        "user_address",
         "descriptions",
-        "user_id",
+        "is_paper",
+        "price",
     ];
 }

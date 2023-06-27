@@ -2,18 +2,23 @@
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/users/cart/detail.css') }}">
     <link rel="stylesheet" href="{{ asset('css/users/photocopy.css') }}">
+    <style>
+        .section-title {
+            margin-bottom: 6px;
+        }
+    </style>
 @endpush
 @section('content')
     <div class="container row col-xl-12">
         <div class="col-xl-9">
             <div class="step mb-2">
+                <h2 class="section-title">Thông tin giao hàng</h2>
                 <div class="line_ show">
                 </div>
                 <div class="panel" style="padding: 0 10px;">
                     <div class="step-sections " step="1">
                         <div class="section">
                             <div class="section-header">
-                                <h2 class="section-title">Thông tin giao hàng</h2>
                             </div>
                             <div class="section-content section-customer-information no-mb">
                                 <div class="logged-in-customer-information">&nbsp;
@@ -124,6 +129,71 @@
                 </div>
             </div>
             <div class="group">
+            </div>
+            <div class="mb-2">
+                <h2 class="section-title">Phương thức thanh toán</h2>
+                <div class="line_ show">
+                </div>
+                <div class="panel" style="padding: 0 10px;">
+                    <div class="section">
+                        <div class="section-header">
+                        </div>
+                        <div class="section-content mb-1">
+                            <div class="content-box">
+                                <div class="radio-wrapper content-box-row">
+                                    <label class="two-page" for="payment_method_">
+                                        <div class="radio-input payment-method-checkbox">
+                                            <input id="payment_method_" class="input-radio"
+                                                name="payment" type="radio" value="0"
+                                                checked="">
+                                        </div>
+
+                                        <div class="radio-content-input">
+                                            <img class="main-img"
+                                                src="https://hstatic.net/0/0/global/design/seller/image/payment/cod.svg?v=4">
+                                            <div class="content-wrapper">
+                                                <span class="radio-label-primary">Thanh toán khi giao hàng
+                                                    (COD)</span>
+                                                <span class="quick-tagline hidden"></span>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="radio-wrapper content-box-row">
+                                    <label class="two-page" for="payment_method__">
+                                        <div class="radio-input payment-method-checkbox">
+                                            <input id="payment_method__" class="input-radio"
+                                                name="payment" type="radio" value="1">
+                                        </div>
+
+                                        <div class="radio-content-input">
+                                            <img class="main-img"
+                                                src="https://hstatic.net/0/0/global/design/seller/image/payment/other.svg?v=4">
+                                            <div class="content-wrapper">
+                                                <span class="radio-label-primary">Chuyển khoản qua ngân hàng</span>
+                                                <span class="quick-tagline hidden"></span>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="radio-wrapper content-box-row content-box-row-secondary"
+                                    for="payment_method_id_1003594838">
+                                    <div class="blank-slate">
+                                        *Lưu ý: Nhân viên sẽ gọi xác nhận và thông báo số tiền cần chuyển khoản của
+                                        quý khách, quý khách vui lòng không chuyển khoản trước.
+
+                                        • ACB CN Thống Nhất : 12466 - LƯƠNG NGỌC PHƯƠNG CHI
+
+                                        LƯU Ý
+                                        • Khi chuyển khoản quý khách ghi nội dung CK là: TÊN FB CÁ NHÂN + MÃ ĐƠN
+                                        HÀNG + SĐT
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-xl-3">

@@ -10,6 +10,7 @@ use App\Http\Requests\Order\CreateProductsOrderRequest;
 use App\Models\Order;
 use App\Models\OrderPhoto;
 use App\Models\OrderProduct;
+use App\Models\Photo;
 use App\Models\Product;
 use App\Models\SubProduct;
 use App\Models\User;
@@ -17,6 +18,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
@@ -260,8 +262,73 @@ class OrderController extends Controller
         return $this->responseTrait('Thành công', true, $order);
     }
 
-    public function photosCreate(Request $request)
+    public function photosCreate(Request $request): \Illuminate\Http\JsonResponse
     {
-        # code...
+        DB::beginTransaction();
+        try {
+            $data = $request->get('data');
+
+            $info = json_decode($request->get('info'));
+
+            if (Auth::check()) {
+                if (
+                    Auth::user()->province != $info->province ||
+                    Auth::user()->district != $info->district ||
+                    Auth::user()->ward != $info->ward ||
+                    Auth::user()->address != $info->address
+                ) {
+                    User::query()->find(Auth::id())->update([
+                        'province' => $info->province,
+                        'district' => $info->district,
+                        'ward' => $info->ward,
+                        'address' => $info->address,
+                    ]);
+                }
+            }
+
+            $order = Order::query()->create([
+                'delivery_time' => $info->time_receive,
+                'user_id' => Auth::id(),
+                'user_name' => $info->name,
+                'user_phone' => $info->phone,
+                'user_address' => $info->full_address,
+                'type' => $info->payment
+            ]);
+
+            foreach ($data as $key => $value) {
+                $photoValue = json_decode($value);
+                $photo = Photo::query()->create([
+                    'total' => $photoValue->quantity,
+                    'face_number' => $photoValue->face_number,
+                    'is_cover' => $photoValue->cover,
+                    'is_paper' => $photoValue->is_paper,
+                    'descriptions' => $photoValue->descriptions,
+                    'price' => 0,
+                    'type' => $photoValue->type,
+                ]);
+
+                $filePath = Storage::disk('public')->putFileAs(
+                    "photos/{$photo->id}",
+                    $request->file('files')[$key],
+                    $request->file('files')[$key]->getClientOriginalName()
+                );
+
+                $photo->update([
+                    'file' => $filePath,
+                ]);
+
+                OrderPhoto::query()->create([
+                    'order_id' => $order->id,
+                    'photo_id' => $photo->id,
+                    'photo_price' => $photo->price,
+                ]);
+            }
+
+            DB::commit();
+            return $this->responseTrait('Đặt photo thành công', true);
+        }  catch (\Throwable $e) {
+            DB::rollBack();
+            return $this->responseTrait('có lỗi! ' . $e->getMessage());
+        }
     }
 }

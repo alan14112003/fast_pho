@@ -340,6 +340,7 @@ const createPhotoOrder = () => {
     const name = $('#full_name').val()
     const phone = $('#phone').val()
     const timeReceive = $('#time_receive').val()
+    const payment = $('input[name="payment"]:checked').val()
 
     const info = {
         address: address,
@@ -349,6 +350,8 @@ const createPhotoOrder = () => {
         name: name,
         phone: phone,
         time_receive: timeReceive,
+        payment,
+        full_address: `${address}, ${ward}, ${district}, ${province}` 
     }
 
     formData.append('info', JSON.stringify(info))
@@ -369,7 +372,7 @@ const createPhotoOrder = () => {
             face_number: faceNumber,
             cover: cover,
             is_paper: isPaper,
-            desciptions: note,
+            descriptions: note,
             type: paperType,
             quantity: quantity,
         }
