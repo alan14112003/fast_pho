@@ -35,12 +35,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('users')
+Route::prefix('users/')
     ->name('users.')
     ->controller(UserController::class)
     ->group(function () {
-        Route::get('/count', 'countUser')->name('count');
-
+        Route::get('count', 'countUser')->name('count');
+        Route::post('update_address', 'updateAddress')->name('update_address');
     });
 
 Route::prefix('categories')
@@ -116,6 +116,7 @@ Route::prefix('orders')
             Route::put('/change-status', 'changeStatus')->name('change_status');
         });
         Route::get('/photos', 'photos')->name('photos');
+        Route::post('/photos', 'photosCreate')->name('photos_create');
     });
 
 Route::prefix('cart')

@@ -37,8 +37,7 @@ Route::middleware(AdminMiddleware::class)
             ->controller(PhotoController::class)
             ->group(function () {
                 Route::get('/', 'index')->name('index');
-            })
-        ;
+            });
 
         Route::prefix('/slides')
             ->name('slides.')
@@ -82,14 +81,17 @@ Route::middleware(AdminMiddleware::class)
 
 //User
 Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/photocopy', function () {
+    return view('clients.users.photocopy');
+})->name('photocopy');
 
 Route::prefix('/cart')
     ->name('cart.')
     ->controller(CartController::class)
     ->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('/details', 'details')->name('details');
-});
+        Route::get('/', 'index')->name('index');
+        Route::get('/details', 'details')->name('details');
+    });
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('login_admin', 'login')->name('login_admin');

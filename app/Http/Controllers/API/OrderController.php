@@ -112,14 +112,17 @@ class OrderController extends Controller
             }
 
             if (Auth::check()) {
-                if (Auth::user()->province != $request->get('user_province') ||
+                if (
+                    Auth::user()->province != $request->get('user_province') ||
                     Auth::user()->district != $request->get('user_district') ||
-                    Auth::user()->ward != $request->get('user_ward')
+                    Auth::user()->ward != $request->get('user_ward') ||
+                    Auth::user()->address != $request->get('user_address')
                 ) {
                     User::query()->find(Auth::id())->update([
                         'province' => $request->get('user_province'),
                         'district' => $request->get('user_district'),
                         'ward' => $request->get('user_ward'),
+                        'address' => $request->get('user_address'),
                     ]);
                 }
             }
@@ -137,8 +140,7 @@ class OrderController extends Controller
                 )
                 ->join('sub_products as sp', 'sp.product_id', '=', 'products.id')
                 ->whereIn('sp.id', $productIds)
-                ->get()
-            ;
+                ->get();
 
             //  Kiểm tra sản phẩm đã hết hàng chưa
             foreach ($products as $product) {
@@ -256,5 +258,10 @@ class OrderController extends Controller
         $order->type = OrderTypeEnum::getNameByValue($order->type);
 
         return $this->responseTrait('Thành công', true, $order);
+    }
+
+    public function photosCreate(Request $request)
+    {
+        # code...
     }
 }

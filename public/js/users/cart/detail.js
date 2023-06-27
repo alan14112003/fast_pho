@@ -1,5 +1,5 @@
 import { formatMoney, renderToast } from '../../helper.js'
-import {PRODUCT_ORDER_CREATE, STORAGE} from '../../url.js';
+import { ADDRESS_UPDATE, PRODUCT_ORDER_CREATE, STORAGE } from '../../url.js';
 import { HN_TREE } from '../../url.js'
 import { getCart } from '../header.js'
 
@@ -155,6 +155,42 @@ $('#checkout_complete').off('submit').on('submit', function (e) {
     })
 })
 
+const updateAddress = () => {
+    const address = $('#address').val()
+    const ward = $('#customer_shipping_ward').val()
+    const district = $('#customer_shipping_district').val()
+    const province = $('#customer_shipping_province').val()
+
+    const data = new FormData()
+    data.append('address', address)
+    data.append('ward', ward)
+    data.append('district', district)
+    data.append('province', province)
+
+    $.ajax({
+        url: ADDRESS_UPDATE,
+        type: 'POST',
+        data: data,
+        processData: false,
+        contentType: false,
+        success: async function (response) {
+            if (response.status) {
+                renderToast({
+                    title: 'Lưu địa chỉ thành công',
+                    text: response.message,
+                })
+            }
+        },
+        error: function (response) {
+            renderToast({
+                status: 'danger',
+                title: 'Lỗi',
+                text: response.responseJSON.message
+            })
+        }
+    })
+}
+
 const setOnChangeAddress = () => {
     $('#customer_shipping_district').off('change').on('change', function (e) {
         console.log(this.value);
@@ -170,6 +206,10 @@ const main = async () => {
     addressTree = await getAddressTree();
     await renderAddressTree()
     setOnChangeAddress()
+
+    $('#update_address').off('click').on('click', function () {
+        if (confirm('Bạn muốn thay đổi địa chỉ?')) { updateAddress() }
+    })
 
     $('#btn-content-detail').off('click').on('click', function () {
         mainContentDetails.addClass('hidden')

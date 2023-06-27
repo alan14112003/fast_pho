@@ -13,7 +13,7 @@
                         Trang chủ
                     </a>
                 <li>
-                    <a href="" class="a">Photocopy</a>
+                    <a href="{{ route('photocopy') }}" class="a">Photocopy</a>
                 </li>
                 </li>
                 <li>
@@ -34,13 +34,13 @@
                         <a href="">Trách nhiệm xã hội</a>
                     </div>
                 </li>
-{{--                <li>--}}
-{{--                    <a href="https://vn.deliworld.com/contact/contact_us.html " class="a">Liên hệ </a>--}}
-{{--                    <div class="sub-box">--}}
-{{--                        <a href="https://vn.deliworld.com/contact/contact_us.html ">Liên hệ chúng tôi</a>--}}
-{{--                        <a href="https://vn.deliworld.com/contact/join.html ">Tham gia với chúng tôi</a>--}}
-{{--                    </div>--}}
-{{--                </li>--}}
+                {{--                <li> --}}
+                {{--                    <a href="https://vn.deliworld.com/contact/contact_us.html " class="a">Liên hệ </a> --}}
+                {{--                    <div class="sub-box"> --}}
+                {{--                        <a href="https://vn.deliworld.com/contact/contact_us.html ">Liên hệ chúng tôi</a> --}}
+                {{--                        <a href="https://vn.deliworld.com/contact/join.html ">Tham gia với chúng tôi</a> --}}
+                {{--                    </div> --}}
+                {{--                </li> --}}
             </ul>
 
             <div class="btn-bar por fr" id="btn-bar">
@@ -50,9 +50,6 @@
             </div>
 
             <div class="right_box fr">
-                <div class="item" id="pcsearch_btn">
-                    <img src="{{ asset('icons/head_ico2.svg') }}" alt="">
-                </div>
                 <div class="item por">
                     <div class="item_up">
                         <img src="{{ asset('icons/media.svg') }}" alt="">
@@ -243,13 +240,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="search-dialog f-cb poa">
-                <form action="" method="get" id="form-search" class="search f-cb">
-                    <input type="text" name="q" autocomplete="off" placeholder="Tìm kiếm ">
-                    <input type="submit" value="">
-                </form>
-                <a href="javascript:;" class="search-close" id="search-close"></a>
             </div>
         </div>
     </div>

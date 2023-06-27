@@ -129,7 +129,7 @@ export const moneyToNumber = (money) => {
 };
 
 export const calculateMoneyAfterSale = (m, s) => {
-    return m * (100 - s) / 100;
+    return Math.round(m * (100 - s) / 100);
 }
 
 export const formatCurrency = (number) => {

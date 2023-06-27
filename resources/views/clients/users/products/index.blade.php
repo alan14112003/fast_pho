@@ -81,7 +81,6 @@
             </div>
         </div>
     </div>
-    </div>
 @endsection
 @push('scripts')
     <script src="{{ asset('js/users/products/index.js') }}" type="module"></script>

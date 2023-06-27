@@ -5,8 +5,8 @@ import { calculateMoneyAfterSale, formatMoney, getParam, pushState, pushStates, 
 const pcproList = $('.pcpro_list'), mproList = $('#mpro_list'), prolistList = $('.prolist_list');
 const inputSearch = $('#search_input')
 const icoItems = $('.ico-item')
-let firstTabs, secTabs;
-let curFirstTab, curSecTab, curIcoItem;
+let firstTabs, secTabs, thirdTabs;
+let curFirstTab, curSecTab, curThirdTab, curIcoItem;
 
 let perPage = 12,
     q,
@@ -16,11 +16,13 @@ let perPage = 12,
     categorySlug,
     categoryIndex
 
-const setOnClickTab = (tabs, curTab) => {
+const setOnClickTab = (tabs, curTab, flag = true) => {
     tabs.off('click').on('click', function () {
         if (!this.isSameNode(curTab)) {
-            $(curTab).toggleClass('active')
-            curTab = this;
+            if (flag) {
+                $(curTab).toggleClass('active')
+                curTab = this;
+            }
 
             category = $(this).attr('data-slug');
             if (category) {
@@ -112,14 +114,13 @@ const showProducts = (tempPage) => {
             if (response.status) {
                 const products = response.body.data
 
+
                 prolistList.html("")
                 products.forEach(p => {
                     prolistList.append(`
                     <li class="fl por antart_b">
                         <a href="${PRODUCT_VIEW.replace(':slug', p.slug)}">
                             <div class="hoverimg js-m imgwidth por animate">
-                                <!--                     <img class="img" src="https://vn.deliworld.com/bocupload/product/100120196/100120196&(1).jpg" alt="Bút chì 2 đầu 12 màu  - 1/24/240">
-                                             -->
                                 <img class="img"
                                     src="${STORAGE + p.image}"
                                     alt="">
@@ -194,9 +195,10 @@ const main = async () => {
     setOnClickFilterItem()
 
     //Tabs Init
-    firstTabs = $('.first_tab'), secTabs = $('.sec_tab');
-    setOnClickTab(firstTabs, curFirstTab, curSecTab);
-    setOnClickTab(secTabs, curSecTab, curFirstTab);
+    firstTabs = $('.first_tab'), secTabs = $('.sec_tab'), thirdTabs = $('.third_tab');
+    setOnClickTab(firstTabs, curFirstTab);
+    setOnClickTab(secTabs, curSecTab);
+    setOnClickTab(thirdTabs, null, false);
 
     //Filters Init
     $('.allproduct').off('click').on('click', () => {

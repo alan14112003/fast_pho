@@ -26,6 +26,9 @@ export const REGISTERING = DOMAIN + 'api/registering'
 export const LOGINING = DOMAIN + 'api/logining'
 export const LOGOUT = DOMAIN + 'api/logout'
 
+//User
+export const ADDRESS_UPDATE = DOMAIN + 'api/update_address'
+
 
 //Slide
 export const SLIDES = DOMAIN + 'api/slides'
@@ -59,6 +62,7 @@ export const CATEGORY_DELETE = DOMAIN + 'api/categories/:id'
 export const PRODUCT_ORDERS = DOMAIN + 'api/orders/products'
 export const PRODUCT_ORDER_CREATE = DOMAIN + 'api/orders/products'
 export const PHOTOS_ORDERS = DOMAIN + 'api/orders/photos'
+export const PHOTOS_ORDER_CREATE = DOMAIN + 'api/orders/photos'
 export const CHANGE_STATUS_ORDER = DOMAIN + 'api/orders/:id/change-status'
 export const PRODUCT_ORDER = DOMAIN + 'api/orders/:id/product'
 export const PHOTO_ORDER = DOMAIN + 'api/orders/:id/photo'
