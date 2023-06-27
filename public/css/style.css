@@ -4188,6 +4188,8 @@ svg:not(:root) {
     width: 80%;
     box-sizing: border-box;
     background: none;
+    border: none;
+    outline: none;
 }
 
 .prolist-wrap .prori_title .sub_btn img {

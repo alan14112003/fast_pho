@@ -330,12 +330,6 @@ input::-moz-focus-inner {
     padding: 0;
 }
 
-textarea:focus,
-input:focus {
-    outline: none;
-    background: none !important;
-}
-
 /**
    * Address Firefox 4+ setting `line-height` on `input` using `!important` in
    * the UA stylesheet.
@@ -728,16 +722,11 @@ select::-ms-expand {
 }
 
 input,
-select,
-textarea {
+select {
     box-shadow: none;
     outline: none;
     border: none;
     border-radius: 0;
-    -ms-appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
     padding: 0;
 }
 
