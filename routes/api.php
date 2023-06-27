@@ -41,6 +41,9 @@ Route::prefix('users/')
     ->group(function () {
         Route::get('count', 'countUser')->name('count');
         Route::post('update_address', 'updateAddress')->name('update_address');
+        Route::get('/count', 'countUser')->name('count');
+        Route::put('/profile', 'updateProfile')->name('update_profile');
+        Route::put('/change-password', 'changePassword')->name('change_password');
     });
 
 Route::prefix('categories')

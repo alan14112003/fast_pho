@@ -25,6 +25,8 @@ export const CART_VIEW = DOMAIN + 'cart'
 export const REGISTERING = DOMAIN + 'api/registering'
 export const LOGINING = DOMAIN + 'api/logining'
 export const LOGOUT = DOMAIN + 'api/logout'
+export const UPDATE_PROFILE = DOMAIN + 'api/users/profile'
+export const CHANGE_PASSWORD = DOMAIN + 'api/users/change-password'
 
 //User
 export const ADDRESS_UPDATE = DOMAIN + 'api/update_address'

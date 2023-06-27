@@ -20,4 +20,8 @@ class HomeController extends Controller
             'slides' => $slides
         ]);
     }
+    
+    public function about() {
+        return view('clients.users.about');
+    }
 }
