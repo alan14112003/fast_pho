@@ -40,7 +40,8 @@ Route::prefix('users')
     ->controller(UserController::class)
     ->group(function () {
         Route::get('/count', 'countUser')->name('count');
-
+        Route::put('/profile', 'updateProfile')->name('update_profile');
+        Route::put('/change-password', 'changePassword')->name('change_password');
     });
 
 Route::prefix('categories')

@@ -25,7 +25,7 @@
     @include('layouts.users.header')
     @yield('content')
     @include('layouts.users.footer')
-    <div class="toast-container position-fixed p-3 bottom-0 end-0">
+    <div class="toast-container position-fixed p-3 bottom-0 end-0" style="z-index: 1070">
         <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         </div>
     </div>
