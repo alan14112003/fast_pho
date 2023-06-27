@@ -24,23 +24,8 @@
                     </div>
                 </li>
                 <li>
-                    <a href="" class="a">Về chúng tôi</a>
-
-                    <div class="sub-box"
-                        style="width: 250%; display: none; height: 68px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
-                        <a href="">Hồ sơ công ty</a>
-
-
-                        <a href="">Trách nhiệm xã hội</a>
-                    </div>
+                    <a href="{{ route('about') }}" class="a">Về chúng tôi</a>
                 </li>
-{{--                <li>--}}
-{{--                    <a href="https://vn.deliworld.com/contact/contact_us.html " class="a">Liên hệ </a>--}}
-{{--                    <div class="sub-box">--}}
-{{--                        <a href="https://vn.deliworld.com/contact/contact_us.html ">Liên hệ chúng tôi</a>--}}
-{{--                        <a href="https://vn.deliworld.com/contact/join.html ">Tham gia với chúng tôi</a>--}}
-{{--                    </div>--}}
-{{--                </li>--}}
             </ul>
 
             <div class="btn-bar por fr" id="btn-bar">
@@ -150,7 +135,7 @@
                                             <ul>
                                                 <li><span>{{ auth()->user()->name }}</span></li>
                                                 <li><a href="{{ route('profile') }}">Tài khoản của tôi</a></li>
-                                                <li><a href="/account/addresses">Lịch sử đơn hàng</a></li>
+                                                <li><a href="{{ route('cart.history') }}">Lịch sử đơn hàng</a></li>
                                                 <li><a id="logout-btn">Đăng xuất</a></li>
                                             </ul>
                                         </div>

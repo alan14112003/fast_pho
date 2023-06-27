@@ -22,4 +22,8 @@ class CartController extends Controller
         }
         return view('clients/users/cart/detail');
     }
+
+    public function history() {
+        return view('clients.users.cart.history');
+    }
 }

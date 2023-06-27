@@ -81,7 +81,10 @@ Route::middleware(AdminMiddleware::class)
 
 
 //User
-Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/about', 'about')->name('about');
+});
 
 Route::prefix('/cart')
     ->name('cart.')
@@ -89,6 +92,7 @@ Route::prefix('/cart')
     ->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/details', 'details')->name('details');
+    Route::get('/history', 'history')->name('history');
 });
 
 Route::controller(AuthController::class)->group(function () {
