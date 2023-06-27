@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('photo_types', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->unsignedInteger('distance');
-            $table->unsignedInteger('price');
-            $table->float('rate');
-            $table->unsignedInteger('cover_price');
-            $table->timestamps();
+        Schema::table('photos', function (Blueprint $table) {
+            $table->dropForeign('photos_type_id_foreign');
+            $table->dropColumn('type_id');
+
+            $table->string('type')->nullable()->after('price');
         });
     }
 
@@ -31,6 +28,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('photo_types');
+        Schema::table('photos', function (Blueprint $table) {
+            //
+        });
     }
 };

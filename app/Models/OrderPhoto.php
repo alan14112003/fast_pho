@@ -10,4 +10,10 @@ class OrderPhoto extends Model
     use HasFactory;
 
     protected $table = 'order_photo';
+
+    protected $fillable = [
+        'order_id',
+        'photo_id',
+        'photo_price',
+    ];
 }
