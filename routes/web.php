@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ConfigController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\PhotoController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
@@ -46,6 +47,15 @@ Route::middleware(AdminMiddleware::class)
                 Route::get('/', 'index')->name('index');
                 Route::get('/create', 'create')->name('create');
                 Route::get('/edit/{id}', 'edit')->name('edit');
+            });
+
+        Route::prefix('/config')
+            ->name('config.')
+            ->controller(ConfigController::class)
+            ->group(function () {
+               Route::get('/', 'index')->name('index');
+               Route::get('create-bank', 'createBank')->name('create_bank');
+               Route::get('edit-bank/{id}', 'editBank')->name('edit_bank');
             });
 
         Route::prefix('products/')

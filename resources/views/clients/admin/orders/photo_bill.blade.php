@@ -56,6 +56,7 @@
                                         <tr>
                                             <th>STT</th>
                                             <th>Tên photo</th>
+                                            <th>Hình thức</th>
                                             <th>loại giấy</th>
                                             <th>số mặt</th>
                                             <th>bìa</th>

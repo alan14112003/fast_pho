@@ -8,14 +8,14 @@ use BenSampo\Enum\Enum;
 
 final class PhotoPrintTypeEnum extends Enum
 {
-    const PAPER = 0;
-    const SHEETS = 1;
+    const PAPER = 1;
+    const SHEETS = 0;
 
     public static function arrayView(): array
     {
         return [
-            'Trang - Theo dạng từng tờ' => self::PAPER,
-            'Tập - Theo dạng cuốn' => self::SHEETS,
+            'Trang' => self::PAPER,
+            'Tập' => self::SHEETS,
         ];
     }
 

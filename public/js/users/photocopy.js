@@ -44,15 +44,19 @@ const object = {
     photo_covers: [
         {
             key: 1,
-            text: 'Bìa xanh',
+            text: 'Bìa xanh dương',
         },
         {
             key: 2,
-            text: 'Bìa đỏ',
+            text: 'Bìa xanh lá',
         },
         {
             key: 3,
             text: 'Bìa hồng',
+        },
+        {
+            key: 4,
+            text: 'Bìa vàng',
         }
     ]
 }

@@ -1,6 +1,7 @@
 @extends('layouts.admin.master')
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/admin/product.css') }}">
+    <link rel="stylesheet" href="{{ asset('richtexteditor/rte_theme_default.css') }}">
 @endpush
 @section('content')
     <div class="page-content form-page">
@@ -128,10 +129,7 @@
                                             <tr class="row">
                                                 <div class="col-12 mt-3">
                                                     <label for="descriptions">Mô tả:</label>
-                                                    <textarea name="descriptions"
-                                                        id="descriptions"
-                                                        rows="4"
-                                                        class="form-control mt-1 pb-3">
+                                                    <textarea name="descriptions" id="descriptions" rows="4" class="form-control mt-1 pb-3">
                                                     </textarea>
                                                 </div>
                                             </tr>
@@ -150,8 +148,8 @@
             id="footer">
             <div class="container-fluid text-center">
                 <!-- Please do not remove the backlink to us unless you support
-                    us at https://bootstrapious.com/donate. It is part of the license
-                    conditions. Thank you for understanding :)-->
+                        us at https://bootstrapious.com/donate. It is part of the license
+                        conditions. Thank you for understanding :)-->
                 <p class="mb-0 text-dash-gray">2023{{ now()->year - 2023 === 0 ? '' : ' - ' . now()->year }} © Fast Pho.
                     Design by <a href="https://www.facebook.com/profile.php?id=100048327580198">DoubleS
                         Team</a>.</p>
@@ -160,9 +158,10 @@
     </div>
 @endsection
 @push('scripts')
-    <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
+    <script src="{{ asset('richtexteditor/rte.js') }}"></script>
+    <script src="{{ asset('richtexteditor/plugins/all_plugins.js') }}"></script>
     <script>
-        ClassicEditor.create(document.getElementById('descriptions'))
+        new RichTextEditor("#descriptions")
     </script>
     <script src="{{ asset('js/admin/products/store.js') }}" type="module"></script>
 @endpush
