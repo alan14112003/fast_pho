@@ -56,7 +56,7 @@ const object = {
         },
         {
             key: 4,
-            text: 'Bìa đỏ',
+            text: 'Bìa hồng',
         }
     ]
 }
