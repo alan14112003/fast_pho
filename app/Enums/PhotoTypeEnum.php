@@ -8,10 +8,10 @@ use BenSampo\Enum\Enum;
 
 final class PhotoTypeEnum extends Enum
 {
-    const A5 = 0;
-    const A4_70 = 1;
-    const A4_80 = 2;
-    const A3 = 3;
+    const A5 = 46;
+    const A4_70 = 100;
+    const A4_80 = 134;
+    const A3 = 200;
 
     public static function arrayView(): array
     {
@@ -21,10 +21,5 @@ final class PhotoTypeEnum extends Enum
             'A4 80gsm' => self::A4_80,
             'A3' => self::A3,
         ];
-    }
-
-    public static function getNameByValue($value): bool|int|string
-    {
-        return array_search($value, self::arrayView(), true);
     }
 }
