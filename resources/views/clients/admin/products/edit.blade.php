@@ -1,6 +1,7 @@
 @extends('layouts.admin.master')
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/admin/product.css') }}">
+    <link rel="stylesheet" href="{{ asset('richtexteditor/rte_theme_default.css') }}">
 @endpush
 @section('content')
     <div class="page-content form-page">
@@ -128,10 +129,7 @@
                                             <tr>
                                                 <div class="col-12 mt-3">
                                                     <label for="descriptions">Mô tả:</label>
-                                                    <textarea
-                                                        name="descriptions"
-                                                        id="descriptions" rows="4"
-                                                        class="form-control mt-1 pb-3">
+                                                    <textarea name="descriptions" id="descriptions" rows="4" class="form-control mt-1 pb-3">
                                                     </textarea>
                                                 </div>
                                             </tr>
@@ -158,6 +156,7 @@
     </div>
 @endsection
 @push('scripts')
-    <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
+    <script src="{{ asset('richtexteditor/rte.js') }}"></script>
+    <script src="{{ asset('richtexteditor/plugins/all_plugins.js') }}"></script>
     <script src="{{ asset('js/admin/products/update.js') }}" type="module"></script>
 @endpush

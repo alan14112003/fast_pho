@@ -25,7 +25,7 @@
         </div>
         <div class="container-fluid d-flex align-items-center justify-content-between py-1">
             <div class="navbar-header d-flex align-items-center"><a class="navbar-brand text-uppercase text-reset"
-                    href="index.html">
+                    href="{{ route('admin.index') }}">
                     <div class="brand-text brand-big"><strong class="text-primary">Dark</strong><strong>Admin</strong>
                     </div>
                     <div class="brand-text brand-sm"><strong class="text-primary">D</strong><strong>A</strong></div>

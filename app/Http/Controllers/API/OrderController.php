@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Enums\OrderTypeEnum;
+use App\Enums\PhotoCoverEnum;
 use App\Enums\PhotoPrintTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ResponseTrait;
@@ -231,7 +232,7 @@ class OrderController extends Controller
     {
         //  Lấy ra đơn hàng có $id
         $order = Order::query()
-            ->find($id);;
+            ->find($id);
 
         if (is_null($order)) {
             return $this->responseTrait('Không có đơn hàng với id đã cho');
@@ -242,19 +243,24 @@ class OrderController extends Controller
                 'order_photo.*',
                 'p.file',
                 'p.total',
-                'pt.name as type',
+                'p.type',
                 'p.face_number',
                 'p.is_cover',
                 'p.descriptions',
-                'p.price'
+                'p.price',
+                'p.is_paper'
             )
             ->join('photos as p', 'p.id', '=', 'order_photo.photo_id')
-            ->join('photo_types as pt', 'pt.id', '=', 'p.type_id')
             ->where('order_photo.order_id', $id)
             ->get();
 
         if (empty($orderPhotos->toArray())) {
             return $this->responseTrait('Đây không phải đơn hàng photo');
+        }
+
+        foreach ($orderPhotos as $orderPhoto) {
+            $orderPhoto->is_cover = PhotoCoverEnum::getNameByValue($orderPhoto->is_cover);
+            $orderPhoto->is_paper = PhotoPrintTypeEnum::getNameByValue($orderPhoto->is_paper);
         }
 
         $order->order_photos = $orderPhotos;

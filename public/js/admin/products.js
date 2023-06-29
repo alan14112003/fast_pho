@@ -29,7 +29,6 @@ const renderProducts = () => {
                             src="${STORAGE + p.image}?${Date.now()}" alt="${p.slug}"/>`
                         const info = `
                             <strong>${p.name}</strong>
-                            <p class="text-ellipsis" style="-webkit-line-clamp: 2;">${p.descriptions}</p>
                         `
                         const price = `
                             <strong>${p.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</strong>

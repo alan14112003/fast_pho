@@ -19,6 +19,8 @@ export const PRODUCT_VIEW = DOMAIN + 'products/:slug'
 
 export const CART_VIEW = DOMAIN + 'cart'
 
+export const BANK_EDIT = DOMAIN + 'admin/config/edit-bank/:id'
+
 //Api:
 
 //Auth
@@ -73,6 +75,14 @@ export const PHOTO_ORDER = DOMAIN + 'api/orders/:id/photo'
 export const CART = DOMAIN + 'api/cart'
 export const CART_UPDATE = DOMAIN + 'api/cart/update'
 export const CART_REMOVE = DOMAIN + 'api/cart/:id'
+
+//About
+export const ABOUT = DOMAIN + 'api/about'
+
+//Config
+export const MAIL_ADMIN = DOMAIN + 'api/config/mail-admin'
+export const BANKS = DOMAIN + 'api/config/banks'
+export const BANK = DOMAIN + 'api/config/banks/:id'
 
 //Json
 export const HN_TREE = DOMAIN + 'js/ha_noi_tree.json'

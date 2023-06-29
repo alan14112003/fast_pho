@@ -91,6 +91,7 @@ const showProduct = async () => {
 
     $('#p_name').html(result.name)
     $('#category-name').html(result.category_name)
+    $('#descriptions').html(result.descriptions)
 
     $('#add_cart').off('click').on('click', function () {
         let quantity = $('.number-input input.quantity').val()

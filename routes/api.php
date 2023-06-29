@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\API\AboutController;
 use App\Http\Controllers\API\CartController;
 use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\ConfigController;
 use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\SlideController;
@@ -130,4 +132,28 @@ Route::prefix('cart')
         Route::post('/update', 'update')->name('update');
         Route::delete('/{id}', 'remove')->name('remove');
         Route::delete('/', 'emptyCart')->name('empty_cart');
+    });
+
+Route::prefix('/about')
+    ->name('about.')
+    ->controller(AboutController::class)
+    ->group(function () {
+        Route::get('/', 'get')->name('get');
+        Route::put('/', 'update')->name('update');
+    });
+
+Route::prefix('/config')
+    ->name('config.')
+    ->controller(ConfigController::class)
+    ->group(function () {
+        Route::get('/mail-admin', 'getEmailAdmin')->name('get_email_admin');
+        Route::put('/mail-admin', 'updateEmailAdmin')->name('update_email_admin');
+        Route::prefix('/banks')->name('banks.')
+        ->group(function () {
+            Route::get('/', 'allBank')->name('all');
+            Route::post('/', 'createBank')->name('create');
+            Route::get('/{id}', 'getBank')->name('get');
+            Route::put('/{id}', 'updateBank')->name('update');
+            Route::delete('/{id}', 'destroyBank')->name('destroy');
+        });
     });

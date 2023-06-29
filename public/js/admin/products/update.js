@@ -70,7 +70,7 @@ $('#form-update-comic').on('submit', function (e) {
 const main = async () => {
     await categoriesReload()
     await getProduct()
-    ClassicEditor.create(document.getElementById('descriptions'))
+    new RichTextEditor("#descriptions")
 }
 
 await main()
