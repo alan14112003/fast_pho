@@ -1,4 +1,4 @@
-import { formatMoney } from '../helper.js'
+import { formatMoney, renderToast } from '../helper.js'
 import { HN_TREE, PHOTOS_ORDER_CREATE } from '../url.js';
 
 const group = $('.group')
@@ -21,22 +21,22 @@ const object = {
     },
     photo_types: [
         {
-            key: 0,
+            key: 'A5',
             text: 'A5',
             rate: 46
         },
         {
-            key: 1,
+            key: 'A4_70',
             text: 'A4 70gsm',
             rate: 100
         },
         {
-            key: 2,
+            key: 'A4_80',
             text: 'A4 80gsm',
             rate: 134
         },
         {
-            key: 3,
+            key: 'A3',
             text: 'A3',
             rate: 200
         }
@@ -44,15 +44,19 @@ const object = {
     photo_covers: [
         {
             key: 1,
-            text: 'Bìa xanh',
+            text: 'Bìa xanh dương',
         },
         {
             key: 2,
-            text: 'Bìa đỏ',
+            text: 'Bìa xanh lá',
         },
         {
             key: 3,
-            text: 'Bìa hồng',
+            text: 'Bìa vàng',
+        },
+        {
+            key: 4,
+            text: 'Bìa đỏ',
         }
     ]
 }
@@ -72,7 +76,7 @@ const createPhotoPanel = () => {
     object.photo_types.forEach(e => {
         photoTypes += `
         <li>
-            <input type="radio" name="paper_type" id="paper_type_${e.key}_${countPhotos}" value="a4_70" checked>
+            <input type="radio" name="paper_type" id="paper_type_${e.key}_${countPhotos}" value="${e.key}" checked>
             <input type="text" hidden name="photo_rate" value="${e.rate}">
             <label for="paper_type_${e.key}_${countPhotos}">${e.text}</label>
         </li>
@@ -170,24 +174,24 @@ const createPhotoPanel = () => {
                         <div class="d-flex">
                             <ul class="paper-group is-paper-group">
                                 <li>
-                                    <input type="radio" name="is_paper" id="paper_1" value="1" checked>
-                                    <label for="paper_1">Trang - Theo dạng từng tờ</label>
+                                    <input type="radio" name="is_paper" id="paper_1_${countPhotos}" value="1" checked>
+                                    <label for="paper_1_${countPhotos}">Trang - Theo dạng từng tờ</label>
                                 </li>
                                 <li>
-                                    <input type="radio" name="is_paper" id="paper_0" value="0">
-                                    <label for="paper_0">Tập - Theo dạng cuốn</label>
+                                    <input type="radio" name="is_paper" id="paper_0_${countPhotos}" value="0">
+                                    <label for="paper_0_${countPhotos}">Tập - Theo dạng cuốn</label>
                                 </li>
                             </ul>
                             <ul class="paper-group is-paper-group">
                                 <li>
-                                    <input type="radio" name="face_number" id="face_number_0" value="1"
+                                    <input type="radio" name="face_number" id="face_number_0_${countPhotos}" value="1"
                                         checked>
-                                    <label for="face_number_0">In một mặt</label>
+                                    <label for="face_number_0_${countPhotos}">In một mặt</label>
                                 </li>
                                 <li>
-                                    <input type="radio" name="face_number" id="face_number_1"
+                                    <input type="radio" name="face_number" id="face_number_1_${countPhotos}"
                                         value="2">
-                                    <label for="face_number_1">In hai mặt</label>
+                                    <label for="face_number_1_${countPhotos}">In hai mặt</label>
                                 </li>
                             </ul>
                         </div>
@@ -218,6 +222,7 @@ const createPhotoPanel = () => {
     lines = $('.line_');
     setOnClickShowPanel()
     setOnClickRemovePanel()
+    setOnChangePaperRadio()
 }
 
 const calculateWithQuantity = (quantity, rate) => {
@@ -330,6 +335,18 @@ const setOnChangeAddress = () => {
     })
 }
 
+const setOnChangePaperRadio = () => {
+    $('input[type=radio][name=is_paper]').change(function () {
+        const parent = $(this).parent().parent().parent().parent().parent()
+        if (this.value == 1) {
+            $(parent).find('select[name=cover]').val(0).attr('disabled', 'disabled')
+        }
+        else if (this.value == 0) {
+            $(parent).find('select[name=cover]').removeAttr('disabled')
+        }
+    });
+}
+
 const createPhotoOrder = () => {
     const formData = new FormData()
 
@@ -342,6 +359,14 @@ const createPhotoOrder = () => {
     const timeReceive = $('#time_receive').val()
     const payment = $('input[name="payment"]:checked').val()
 
+    if (name.trim() == "" || phone.trim() == "" || address.trim() == "" || ward.trim() == "" || province.trim() == "" || district.trim() == "") {
+        renderToast({
+            status: 'danger',
+            title: 'Lỗi',
+            text: "Điền thiếu thông tin!"
+        })
+    }
+
     const info = {
         address: address,
         ward: ward,
@@ -351,7 +376,7 @@ const createPhotoOrder = () => {
         phone: phone,
         time_receive: timeReceive,
         payment,
-        full_address: `${address}, ${ward}, ${district}, ${province}` 
+        full_address: `${address}, ${ward}, ${district}, ${province}`
     }
 
     formData.append('info', JSON.stringify(info))

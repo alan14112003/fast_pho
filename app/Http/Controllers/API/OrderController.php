@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Enums\OrderTypeEnum;
+use App\Enums\PhotoPrintTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ResponseTrait;
 use App\Http\Requests\Order\ChangeStatusRequest;
@@ -19,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+
 
 class OrderController extends Controller
 {
@@ -297,14 +299,25 @@ class OrderController extends Controller
 
             foreach ($data as $key => $value) {
                 $photoValue = json_decode($value);
+                $price = 0;
+
+                $type = $photoValue->type;
+                $quantity = $photoValue->quantity;
+                $cover = $photoValue->cover;
+                $isPaper = $photoValue->is_paper;
+
+                if ($isPaper === PhotoPrintTypeEnum::PAPER) {
+                    $price = calculatePhotoOrderPrice($type, $cover, $quantity);
+                }
+
                 $photo = Photo::query()->create([
-                    'total' => $photoValue->quantity,
+                    'total' => $quantity,
                     'face_number' => $photoValue->face_number,
-                    'is_cover' => $photoValue->cover,
-                    'is_paper' => $photoValue->is_paper,
+                    'is_cover' => $cover,
+                    'is_paper' => $isPaper,
                     'descriptions' => $photoValue->descriptions,
-                    'price' => 0,
-                    'type' => $photoValue->type,
+                    'price' => $price,
+                    'type' => $type,
                 ]);
 
                 $filePath = Storage::disk('public')->putFileAs(
@@ -326,7 +339,7 @@ class OrderController extends Controller
 
             DB::commit();
             return $this->responseTrait('Đặt photo thành công', true);
-        }  catch (\Throwable $e) {
+        } catch (\Throwable $e) {
             DB::rollBack();
             return $this->responseTrait('có lỗi! ' . $e->getMessage());
         }
