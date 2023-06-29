@@ -63,120 +63,12 @@
                         <a href="#" class="contact_link _" id="add_cart">
                             Thêm vào giỏ hàng
                         </a>
-                        <a href="#" class="contact_link" id="go_to_cart">
-                            Mua hàng
-                        </a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="samepor">
-            <div class="w1400 por">
-                <div class="title wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">Kết nối
-                </div>
-                <ul class="prolist_list f-cb wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
-                    <li class="fl por antart_b">
-                        <a href="https://vn.deliworld.com/product/detail/19871.html ">
-                            <div class="hoverimg js-m imgwidth por animate">
-                                <img class="img"
-                                    src="http://pcm.deliworld.com/ProductImages/basic-images/thumbnail/300x300/100120194%23EC00520/4%23EC00520%20RED.png"
-                                    alt="">
-                                <div class="ico poa">
-                                </div>
-                            </div>
-
-                            <div class="cont">
-                                Deli#EC00520 Bút chì 2 đầu 24 màu - 1/24/144 </div>
-                            <!-- <div class="new-tip tov">EC00520</div> -->
-                            <div class="new-tip">Bút chì màu | </div>
-                        </a>
-                    </li>
-                    <li class="fl por antart_b">
-                        <a href="https://vn.deliworld.com/product/detail/19870.html ">
-                            <div class="hoverimg js-m imgwidth por animate">
-                                <img class="img"
-                                    src="http://pcm.deliworld.com/ProductImages/basic-images/thumbnail/300x300/100120196%23EC00500/4%23EC00500%20ASST.png"
-                                    alt="">
-                                <div class="ico poa">
-                                </div>
-                            </div>
-
-                            <div class="cont">
-                                Deli#EC00500 Bút chì 2 đầu 12 màu - 1/24/240 </div>
-                            <!-- <div class="new-tip tov">EC00500</div> -->
-                            <div class="new-tip">Bút chì màu | </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="navbar-wrap antart_b wow fadeInUp animated" id="subnav_tab"
-            style="visibility: visible; animation-name: fadeInUp;">
-            <div class="nav-container">
-                <div class="nav-item cur">
-                    Graphic details
-                </div>
-                <div class="nav-item">
-                    Download
-                </div>
-            </div>
-        </div>
-
-        <div class="prode-main" style="display: block;">
-            <div class="w1080" style="text-align:center">
-                <img src="http://pcm.deliworld.com/ProductImages/e-commerce-detailed-images/100120194%23EC00520/100120194%23EC00520_06.jpg"
-                    alt="">
-                <img src="http://pcm.deliworld.com/ProductImages/e-commerce-detailed-images/100120194%23EC00520/100120194%23EC00520_05.jpg"
-                    alt="">
-                <img src="http://pcm.deliworld.com/ProductImages/e-commerce-detailed-images/100120194%23EC00520/100120194%23EC00520_04.jpg"
-                    alt="">
-                <img src="http://pcm.deliworld.com/ProductImages/e-commerce-detailed-images/100120194%23EC00520/100120194%23EC00520_03.jpg"
-                    alt="">
-                <img src="http://pcm.deliworld.com/ProductImages/e-commerce-detailed-images/100120194%23EC00520/100120194%23EC00520_02.jpg"
-                    alt="">
-                <img src="http://pcm.deliworld.com/ProductImages/e-commerce-detailed-images/100120194%23EC00520/100120194%23EC00520_01.jpg"
-                    alt="">
-                <img src="http://pcm.deliworld.com/ProductImages/e-commerce-detailed-images/100120194%23EC00520/100120194%23EC00520_06.jpg"
-                    alt="">
-                <img src="http://pcm.deliworld.com/ProductImages/e-commerce-detailed-images/100120194%23EC00520/100120194%23EC00520_05.jpg"
-                    alt="">
-                <img src="http://pcm.deliworld.com/ProductImages/e-commerce-detailed-images/100120194%23EC00520/100120194%23EC00520_04.jpg"
-                    alt="">
-                <img src="http://pcm.deliworld.com/ProductImages/e-commerce-detailed-images/100120194%23EC00520/100120194%23EC00520_03.jpg"
-                    alt="">
-                <img src="http://pcm.deliworld.com/ProductImages/e-commerce-detailed-images/100120194%23EC00520/100120194%23EC00520_02.jpg"
-                    alt="">
-                <img src="http://pcm.deliworld.com/ProductImages/e-commerce-detailed-images/100120194%23EC00520/100120194%23EC00520_01.jpg"
-                    alt="">
-                <img src="http://pcm.deliworld.com/ProductImages/e-commerce-detailed-images/100120194%23EC00520/100120194%23EC00520_06.jpg"
-                    alt="">
-                <img src="http://pcm.deliworld.com/ProductImages/e-commerce-detailed-images/100120194%23EC00520/100120194%23EC00520_05.jpg"
-                    alt="">
-                <img src="http://pcm.deliworld.com/ProductImages/e-commerce-detailed-images/100120194%23EC00520/100120194%23EC00520_04.jpg"
-                    alt="">
-                <img src="http://pcm.deliworld.com/ProductImages/e-commerce-detailed-images/100120194%23EC00520/100120194%23EC00520_03.jpg"
-                    alt="">
-                <img src="http://pcm.deliworld.com/ProductImages/e-commerce-detailed-images/100120194%23EC00520/100120194%23EC00520_02.jpg"
-                    alt="">
-                <img src="http://pcm.deliworld.com/ProductImages/e-commerce-detailed-images/100120194%23EC00520/100120194%23EC00520_01.jpg"
-                    alt="">
-            </div>
-        </div>
-
-
-        <div class="prode-main" style="display: none;">
-            <div class="w1080">
-                <div class="prode-tab js-m fadep animate" id="prode_tab">
-                </div>
-
-                <div class="prode_con">
-                </div>
-                <div class="prode_con">
-                </div>
-
-                <div class="prode_con">
-                </div>
-            </div>
+        <div class="container" id="descriptions">
+            
         </div>
     </div>
 @endsection

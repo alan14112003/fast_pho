@@ -22,11 +22,11 @@
                     <use xlink:href="#sales-up-1"> </use>
                 </svg><span>Slide </span></a>
         </li>
-        <li class="sidebar-item {{ $currentPage === 'photo' ? 'active' : '' }}"><a class="sidebar-link"
-                href="tables.html">
+        <li class="sidebar-item {{ $currentPage === 'config' ? 'active' : '' }}"><a class="sidebar-link"
+                href="{{ route('admin.config.index') }}">
                 <svg class="svg-icon svg-icon-sm svg-icon-heavy">
                     <use xlink:href="#portfolio-grid-1"> </use>
-                </svg><span>Photocopy </span></a></li>
+                </svg><span>Cài đặt </span></a></li>
         <li class="sidebar-item {{ $currentPage === 'product' ? 'active' : '' }}">
             <a class="sidebar-link" href="{{ route('admin.products.index') }}">
                 <svg class="svg-icon svg-icon-sm svg-icon-heavy">

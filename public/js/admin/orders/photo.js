@@ -41,9 +41,10 @@ const renderOrder = () => {
             <tr>
               <td>${index + 1}</td>
               <td>${photoName.replace(`photos/${p.photo_id}/`, '')}</td>
+              <td>${p.is_paper}</td>
               <td>${p.type}</td>
               <td>${p.face_number}</td>
-              <td>${p.is_cover == 1 ? 'Có' : 'Không' }</td>
+              <td class="col-2">${p.is_cover}</td>
               <td>${p.total}</td>
               <td>${p.descriptions}</td>
               <td>${formatCurrency(p.price)}</td>
