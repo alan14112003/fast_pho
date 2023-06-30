@@ -231,6 +231,22 @@ const main = async () => {
         $('#btn-details').parent().removeClass('breadcrumb-item-current')
         $(this).parent().addClass('breadcrumb-item-current')
     })
+
+    $('.order-summary-toggle').on('click', function () {
+        if ($(this).hasClass('order-summary-toggle-hide')) {
+            $(this).removeClass('order-summary-toggle-hide')
+            $(this).addClass('order-summary-toggle-show')
+
+            $('.order-summary').removeClass('order-summary-is-collapsed')
+            $('.order-summary').addClass('order-summary-is-expanded')
+        } else {
+            $(this).removeClass('order-summary-toggle-show')
+            $(this).addClass('order-summary-toggle-hide')
+
+            $('.order-summary').removeClass('order-summary-is-expanded')
+            $('.order-summary').addClass('order-summary-is-collapsed')
+        }
+    })
 }
 
 main()

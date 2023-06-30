@@ -1,5 +1,5 @@
 import { CHANGE_PASSWORD, HN_TREE, UPDATE_PROFILE } from './url.js'
-import {renderToast} from "./helper.js";
+import { renderToast } from "./helper.js";
 
 let addressTree = [];
 

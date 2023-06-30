@@ -84,7 +84,6 @@ const showCategories = async () => {
 
         rootContent = rootContent.replace(':nodeContent', nodeContent);
         pcproList.append(rootContent)
-        mproList.append(rootContent)
     });
 }
 

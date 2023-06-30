@@ -2467,3 +2467,21 @@ h3.coupon_heading {
 .order-summary-section.order-summary-section-total-lines.payment-lines[data-order-summary-section="payment-lines"] {
     padding-top: 1em !important;
 }
+
+@media (max-width: 767px) {
+    .step-footer-continue-btn {
+        font-size: 1rem;
+        padding-top: 1em;
+        padding-bottom: 1em;
+    }
+
+    .sidebar .sidebar-content .order-summary .product .product-image .product-thumbnail .product-thumbnail-quantity {
+        height: 1.3rem;
+        width: 1.3rem;
+    }
+
+    .sidebar .sidebar-content .order-summary .order-summary-emphasis {
+        line-height: 1.8rem;
+        font-size: 1.1rem;
+    }
+}

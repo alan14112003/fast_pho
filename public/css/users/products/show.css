@@ -86,6 +86,18 @@ input[type=number]::-webkit-outer-spin-button {
     border-left: .5px solid rgba(0, 0, 0, 0.15);
 }
 
+@media (max-width: 767px) {
+    .number-input button {
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+
+    .number-input button:before,
+    .number-input button:after {
+        width: .8rem;
+    }
+}
+
 .number-input button:before,
 .number-input button:after {
     display: inline-block;

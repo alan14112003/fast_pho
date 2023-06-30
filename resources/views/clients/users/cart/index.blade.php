@@ -1,5 +1,6 @@
 @extends('layouts.users.master')
 @push('styles')
+    <link rel="stylesheet" href="{{ asset('css/users/cart/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/users/cart/index.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
@@ -59,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-4 sidebarCart-sticky">
+                <div class="col-md-4 col-sm-4 sidebarCart-sticky mt-3">
                     <div class="sidebox-order">
                         <div class="sidebox-order-inner">
                             <div class="sidebox-order_title">

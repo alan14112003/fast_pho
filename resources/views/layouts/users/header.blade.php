@@ -56,8 +56,10 @@
                     </div>
                 </div>
                 <div class="item header-action header-action_cart" id="pccart_btn">
-                    <img src="{{ asset('images/shopping-cart.png') }}" alt="">
-                    <div class="header-action_dropdown">
+                    <div class="item_up">
+                        <img src="{{ asset('images/shopping-cart.png') }}" alt="">
+                    </div>
+                    <div class="header-action_dropdown cart">
                         <span class="box-triangle">
                             <svg viewBox="0 0 20 9" role="presentation">
                                 <path
@@ -112,8 +114,10 @@
                     </div>
                 </div>
                 <div class="item header-action header-action_account" id="pccart_btn">
-                    <img src="{{ asset('images/user.png') }}" alt="">
-                    <div class="header-action_dropdown ">
+                    <div class="item_up">
+                        <img src="{{ asset('images/user.png') }}" alt="">
+                    </div>
+                    <div class="header-action_dropdown user">
                         <span class="box-triangle">
                             <svg viewBox="0 0 20 9" role="presentation">
                                 <path
@@ -236,40 +240,26 @@
                 <li>
                     <dl>
                         <dt class="por">
-                            <a class="dib" href="/">Trang chủ</a>
+                            <a class="dib" href="{{ route('index') }}">Trang chủ</a>
                         </dt>
                     </dl>
                 </li>
                 <li>
                     <dl>
                         <dt class="por">
-                            <a class="dib">Về chúng tôi</a>
-                            <div class="ico por">
-                                <div class="line line1"></div>
-                                <div class="line line2"></div>
-                            </div>
+                            <a class="dib" href="{{ route('about') }}">Về chúng tôi</a>
                         </dt>
-                        <dd>
-                            <a href="https://vn.deliworld.com/about/profile.html ">Về tập đoàn Deli</a>
-                        </dd>
-                        <dd>
-                            <a href="https://vn.deliworld.com/about/profile.html ">Về Deli Việt Nam và Công ty TNHH TM
-                                Long Á</a>
-                        </dd>
-
-                        <dd>
-                            <a href="https://vn.deliworld.com/about/profile.html ">Văn hóa doanh nghiệp</a>
-                        </dd>
-                        <dd>
-                            <a href="https://vn.deliworld.com/about/profile.html ">Sản xuất</a>
-                        </dd>
-                        <dd>
-                            <a href="https://vn.deliworld.com/about/social.html ">Trách nhiệm xã hội</a>
-                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt class="por">
+                            <a class="dib" href="{{ route('photocopy') }}">Photocopy</a>
+                        </dt>
                     </dl>
                 </li>
                 <li class="pro">
-                    <dl>
+                    <dl id="mlist_pro">
                         <dt class="por">
                             <a class="dib">Sản phẩm </a>
                             <div class="ico por">
@@ -277,68 +267,6 @@
                                 <div class="line line2"></div>
                             </div>
                         </dt>
-                        <dd>
-                            <a href="https://vn.deliworld.com/product/lists/6049.html?0 "
-                                class="second_title antart_b">
-                                Dụng cụ thể thao </a>
-                        </dd>
-                    </dl>
-                </li>
-                <li>
-                    <dl>
-                        <dt class="por">
-                            <a class="dib">Phòng tin tức</a>
-                            <div class="ico por">
-                                <div class="line line1"></div>
-                                <div class="line line2"></div>
-                            </div>
-                        </dt>
-                        <dd>
-                            <a href="https://vn.deliworld.com/news/lists.html ">Trung tâm tin tức</a>
-                        </dd>
-                        <dd>
-                            <a href="https://vn.deliworld.com/news/media.html ">Truyền thông xã hội</a>
-                        </dd>
-                    </dl>
-                </li>
-                <li>
-                    <dl>
-                        <dt class="por">
-
-                            <a class="dib">Hệ Thống kinh doanh</a>
-                            <div class="ico por">
-                                <div class="line line1"></div>
-                                <div class="line line2"></div>
-                            </div>
-
-
-                        </dt>
-                        <dd>
-                            <a href="https://vn.deliworld.com/tt.html ">Kênh truyền thống</a>
-                        </dd>
-                        <dd>
-                            <a href="https://vn.deliworld.com/tmdt.html ">kênh thương mại điện tử</a>
-                        </dd>
-                        <dd>
-                            <a href="https://vn.deliworld.com/lpdeli.html ">Mini game</a>
-                        </dd>
-                    </dl>
-                </li>
-                <li>
-                    <dl>
-                        <dt class="por">
-                            <a class="dib">Liên hệ </a>
-                            <div class="ico por">
-                                <div class="line line1"></div>
-                                <div class="line line2"></div>
-                            </div>
-                        </dt>
-                        <dd>
-                            <a href="https://vn.deliworld.com/contact/contact_us.html ">Liên hệ chúng tôi</a>
-                        </dd>
-                        <dd>
-                            <a href="https://vn.deliworld.com/contact/join.html ">Tham gia với chúng tôi</a>
-                        </dd>
                     </dl>
                 </li>
             </ul>

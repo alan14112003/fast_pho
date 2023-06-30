@@ -1,7 +1,7 @@
 import { formatMoney, moneyToNumber } from "../helper.js";
 import { CART, CART_REMOVE, CART_UPDATE, CATEGORIES, DOMAIN, ICONS, IMAGES, PRODUCT_VIEW, STORAGE, _PRODUCTS } from "../url.js";
 
-const proSubBox = $('#prosub-box');
+const proSubBox = $('#prosub-box'), mListPro = $('#mlist_pro');
 
 $.ajax({
     url: CATEGORIES,
@@ -29,6 +29,14 @@ $.ajax({
                             ${element.name}</a>
                         ${thirdBox}
                     </div>
+                `)
+
+                mListPro.append(`
+                <dd>
+                    <a href="${_PRODUCTS}?c=${element.slug}_${element.index}"
+                        class="second_title antart_b">
+                        ${element.name}</a>
+                </dd>
                 `)
             });
         }

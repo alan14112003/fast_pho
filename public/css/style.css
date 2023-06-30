@@ -475,7 +475,7 @@
 
 .header-wrap .right_box .item_option {
     width: 3rem;
-    left: 0;
+    left: 5px;
     transform: translateX(-50%);
     top: 2rem;
     visibility: hidden;
@@ -521,7 +521,7 @@
 
 @media(max-width: 767px) {
     .header-wrap .right_box .item {
-        height: 1.2rem;
+        height: 4.2rem;
         line-height: 1.2rem;
     }
 }
@@ -530,6 +530,12 @@
     transition: all 0.3s ease 0s;
     max-height: 0.5rem;
     height: 100%;
+}
+
+@media(max-width: 1023px) {
+    .header-wrap .right_box .item img {
+        max-height: 0.7rem;
+    }
 }
 
 .header-wrap .right_box .item:hover img {
@@ -678,11 +684,15 @@
     margin: 0 auto;
     width: 22px;
     height: 15px;
-    right: 20px;
+    right: 4rem;
 }
 
-.header-action_account .header-action_dropdown .box-triangle {
-    right: 31px;
+.header-action_dropdown.cart .box-triangle {
+    right: 2.4rem;
+}
+
+.header-action_dropdown.user .box-triangle {
+    right: .9rem;
 }
 
 /* 15 + 32 + 12+ 5*/
@@ -1282,11 +1292,11 @@ svg:not(:root) {
     }
 
     .header-action_dropdown .box-triangle {
-        right: 20px;
+        right: 4.5rem;
     }
 
     .header-action_account .header-action_dropdown .box-triangle {
-        right: 64px;
+        right: 2.85rem;
     }
 
     .header-action_search .header-action_dropdown .box-triangle {
@@ -3519,9 +3529,6 @@ svg:not(:root) {
 
 
 
-
-
-
 /*移动端下拉列表*/
 .msub-list {
     display: none;
@@ -3683,15 +3690,19 @@ svg:not(:root) {
 }
 
 @media(max-width: 767px) {
+    .hide-cart {
+        top: 5px;
+    }
+
     .msub-list {
         height: 100vh;
         padding: 0.2rem 0;
     }
 
     .msub-list dt {
-        height: 1rem;
-        line-height: 1rem;
-        font-size: 0.3rem;
+        height: 3.5rem;
+        line-height: 3.5rem;
+        font-size: 1.1rem;
     }
 
     .msub-list dd {
@@ -6181,6 +6192,7 @@ svg:not(:root) {
 
 .prodetail_sub .w1400 {
     position: relative;
+    height: 100%;
 }
 
 .prodetail_sub .w1400:before {
@@ -6244,16 +6256,21 @@ svg:not(:root) {
 
 @media(max-width: 767px) {
     .prodetail_sub {
-        font-size: 0.28rem;
+        font-size: 0.98rem;
+        height: 3.5rem;
+    }
+
+    .prodetail_sub .w1400 {
+        padding-top: 1.1rem;
     }
 
     .prode-show .backlist {
         position: relative;
-        width: 2rem;
-        height: .7rem;
-        line-height: .7rem;
-        font-size: .3rem;
-        margin-bottom: 0.5rem;
+        width: 7rem;
+        height: 2.5rem;
+        line-height: 2.1rem;
+        font-size: 1.3rem;
+        margin-top: 1rem;
     }
 }
 
@@ -6466,7 +6483,7 @@ svg:not(:root) {
     background: url('../icons/m-sec-arrow.png')no-repeat center center;
     background-size: contain;
     right: 0;
-    top: 60%;
+    top: 51%;
     transform: translateY(-50%);
 }
 
@@ -6544,6 +6561,18 @@ svg:not(:root) {
 
 
 @media(max-width: 1024px) {
+    .header-action_dropdown .box-triangle {
+        top: -30px;
+    }
+
+    .header-action_dropdown.cart .box-triangle {
+        right: 4rem;
+    }
+
+    .header-action_dropdown.user .box-triangle {
+        right: 2.75rem;
+    }
+
     .pcpro_list .sec-nav {
         box-sizing: border-box;
         padding-left: 1rem;

@@ -19,7 +19,7 @@
         </div>
         <div class="prode-show por">
             <a href="https://vn.deliworld.com/product/lists.html " class="antart_bo backlist poa">Quay lại</a>
-            <div class="w1080 por">
+            <div class="w1080 por mt-2">
                 <div class="proshow_img wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
                     <div class="big_img" id="big_img">
                         <img alt="" src="">
@@ -40,14 +40,14 @@
                         </div>
                     </div>
                     <div class="proshow_box">
-                        <div class="con_item">
+                        <div class="con_item a">
                             <span>Màu sắc: </span>
                         </div>
                         <div class="con_item colors container">
                         </div>
                     </div>
                     <div class="proshow_box full">
-                        <div class="con_item">
+                        <div class="con_item a">
                             <span>Số lượng :</span>
                         </div>
                         <div class="con_item">
@@ -68,7 +68,7 @@
             </div>
         </div>
         <div class="container" id="descriptions">
-            
+
         </div>
     </div>
 @endsection
