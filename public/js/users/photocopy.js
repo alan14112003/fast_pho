@@ -1,4 +1,4 @@
-import { formatMoney, renderToast } from '../helper.js'
+import { formatMoney, renderBanks, renderToast } from '../helper.js'
 import { HN_TREE, PHOTOS_ORDER_CREATE } from '../url.js';
 
 const group = $('.group')
@@ -434,6 +434,8 @@ const createPhotoOrder = () => {
 const main = async () => {
     setOnClickShowPanel()
     createPhotoPanel()
+
+    renderBanks('.banks')
 
     addressTree = await getAddressTree();
     await renderAddressTree()

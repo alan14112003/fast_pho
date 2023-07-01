@@ -24,4 +24,9 @@ final class PhotoCoverEnum extends Enum
             'Bìa hồng' => self::PINK_COVER,
         ];
     }
+
+    public static function getNameByValue($value): bool|int|string
+    {
+        return array_search($value, self::arrayView(), true);
+    }
 }

@@ -182,12 +182,9 @@
                                     <div class="blank-slate">
                                         *Lưu ý: Nhân viên sẽ gọi xác nhận và thông báo số tiền cần chuyển khoản của
                                         quý khách, quý khách vui lòng không chuyển khoản trước.
-
-                                        • ACB CN Thống Nhất : 12466 - LƯƠNG NGỌC PHƯƠNG CHI
-
-                                        LƯU Ý
-                                        • Khi chuyển khoản quý khách ghi nội dung CK là: TÊN FB CÁ NHÂN + MÃ ĐƠN
-                                        HÀNG + SĐT
+                                        <div class="banks">
+                                            
+                                        </div>
                                     </div>
                                 </div>
                             </div>

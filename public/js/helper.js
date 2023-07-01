@@ -1,3 +1,5 @@
+import { BANKS, STORAGE } from "./url.js";
+
 export const renderAlert = (ele, { status = 'danger', title = '', text = '' }) => {
     $(ele).prepend(`
         <div class="alert alert-${status} alert-dismissible fade show" role="alert">
@@ -153,4 +155,37 @@ export const formatDateTime = (date) => {
     const formattedTime = ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2) + ':' + ('0' + seconds).slice(-2);
 
     return formattedDate + ' - ' + formattedTime;
+}
+
+export const renderBanks = async(ele) => {
+    $.ajax({
+        url: BANKS,
+        type: 'GET',
+        
+        success: function (response) {
+            if (response.status) {
+                const banks = response.body
+                $(ele).html('')
+
+                banks.forEach(bank => {
+                    const html = `
+                    <div class="bank_container .row">
+                        <div class="bank_box col-lg-3 col-6">
+                            <div class="bank_qr_code">
+                                <img src="${ STORAGE + bank.info_1}" alt="">
+                            </div>
+                            <div class="bank_info">
+                                ${bank.info_2}
+                            </div>
+                        </div>
+                    </div>
+                    `
+                    $(ele).append(html)
+                })
+            }
+        },
+        error: function (response) {
+            reject(response.responseJSON.message);
+        }
+    })
 }
