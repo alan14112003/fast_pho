@@ -53,9 +53,9 @@ Route::middleware(AdminMiddleware::class)
             ->name('config.')
             ->controller(ConfigController::class)
             ->group(function () {
-               Route::get('/', 'index')->name('index');
-               Route::get('create-bank', 'createBank')->name('create_bank');
-               Route::get('edit-bank/{id}', 'editBank')->name('edit_bank');
+                Route::get('/', 'index')->name('index');
+                Route::get('create-bank', 'createBank')->name('create_bank');
+                Route::get('edit-bank/{id}', 'editBank')->name('edit_bank');
             });
 
         Route::prefix('products/')
