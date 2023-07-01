@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Enums\ConfigInfoTypeEnum;
 use App\Enums\OrderTypeEnum;
 use App\Enums\PhotoCoverEnum;
 use App\Enums\PhotoPrintTypeEnum;
@@ -9,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\ResponseTrait;
 use App\Http\Requests\Order\ChangeStatusRequest;
 use App\Http\Requests\Order\CreateProductsOrderRequest;
+use App\Mail\NotifyEmail;
+use App\Models\Config;
 use App\Models\Order;
 use App\Models\OrderPhoto;
 use App\Models\OrderProduct;
@@ -16,10 +19,13 @@ use App\Models\Photo;
 use App\Models\Product;
 use App\Models\SubProduct;
 use App\Models\User;
+use App\Notifications\InvoicePaid;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -185,6 +191,18 @@ class OrderController extends Controller
 
             DB::commit();
             $expiration = Carbon::now()->addYear()->timestamp;
+
+            DB::commit();
+
+            $email = Config::query()->pluck('info_1')->where('info_type', ConfigInfoTypeEnum::MAIL_ADMIN)[0];
+
+            $mailData = [
+                'name' => $request->get('user_name'),
+                'type' => "product"
+            ];
+
+            Mail::to($email)->send(new NotifyEmail($mailData));
+
             return $this->responseTrait('Đặt hàng thành công', true)
                 ->withCookie(cookie('cart', json_encode([]), $expiration));
         } catch (\Throwable $e) {
@@ -344,6 +362,16 @@ class OrderController extends Controller
             }
 
             DB::commit();
+
+            $email = Config::query()->pluck('info_1')->where('info_type', ConfigInfoTypeEnum::MAIL_ADMIN)[0];
+
+            $mailData = [
+                'name' => $info->name,
+                'type' => "photo"
+            ];
+
+            Mail::to($email)->send(new NotifyEmail($mailData));
+
             return $this->responseTrait('Đặt photo thành công', true);
         } catch (\Throwable $e) {
             DB::rollBack();
