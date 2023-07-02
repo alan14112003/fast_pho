@@ -90,13 +90,10 @@ Route::middleware(AdminMiddleware::class)
 
 
 //User
-Route::get('/', [HomeController::class, 'index'])->name('index');
-Route::get('/photocopy', function () {
-    return view('clients.users.photocopy');
-})->name('photocopy');
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/about', 'about')->name('about');
+    Route::get('/photocopy', 'photocopy')->name('photocopy');
 });
 
 Route::prefix('/cart')

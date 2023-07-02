@@ -55,7 +55,7 @@
                 </table>
             </div>
         </section>
-        <section class="box">
+        <section class="box mt-3">
             <h2 class="title">Lịch sử mua hàng</h2>
             <div class="table-responsive">
                 <table class="table mb-0 table-striped table-hover">

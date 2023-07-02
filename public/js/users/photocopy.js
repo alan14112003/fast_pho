@@ -248,8 +248,21 @@ const calculateTotal = () => {
 
     panels.each((i, e) => {
         const cover = $(e).find('select[name="cover"]').val()
-        if (cover > 0) total += 1000;
+        let coverPrice = 1000
 
+        const paperTypeEle = $(e).find('input[name="paper_type"]:checked')
+        switch (paperTypeEle.val()) {
+            case 'A3':
+                coverPrice = 1500
+                break;
+            case 'A5':
+                coverPrice = 500
+                break;
+            default:
+                coverPrice = 1000
+                break;
+        }
+        if (cover > 0) total += coverPrice;
         const isPaper = $(e).find('input[name="is_paper"]:checked').val()
 
         if (!isPaper) return;
@@ -260,7 +273,6 @@ const calculateTotal = () => {
             return;
         }
 
-        const paperTypeEle = $(e).find('input[name="paper_type"]:checked')
         const rate = $(paperTypeEle).parent().find('input[name="photo_rate"]').val()
 
         total += calculateWithQuantity(quantity, rate);
@@ -358,6 +370,9 @@ const createPhotoOrder = () => {
     const phone = $('#phone').val()
     const timeReceive = $('#time_receive').val()
     const payment = $('input[name="payment"]:checked').val()
+    const wardAdd = $(`#customer_shipping_ward option[value="${ward}"]`).html()
+    const districtAdd = $(`#customer_shipping_district option[value="${district}"]`).html()
+    const provinceAdd = $(`#customer_shipping_province option[value="${province}"]`).html()
 
     if (name.trim() == "" || phone.trim() == "" || address.trim() == "" || ward.trim() == "" || province.trim() == "" || district.trim() == "") {
         renderToast({
@@ -376,13 +391,14 @@ const createPhotoOrder = () => {
         phone: phone,
         time_receive: timeReceive,
         payment,
-        full_address: `${address}, ${ward}, ${district}, ${province}`
+        full_address: `${address}, ${wardAdd}, ${districtAdd}, ${provinceAdd}`
     }
 
     formData.append('info', JSON.stringify(info))
 
     let data = [];
     const panels = group.find('.panel')
+    let checkSubmit = true
 
     panels.each((i, e) => {
         const paperType = $(e).find('input[name="paper_type"]:checked').val()
@@ -392,6 +408,16 @@ const createPhotoOrder = () => {
         const cover = $(e).find('select[name="cover"]').val()
         const photoFile = $(e).find('input[name="photo-file"]').prop('files')[0]
         const note = $(e).find('.note').html()
+
+        if (photoFile == undefined) {
+            renderToast({
+                status: 'danger',
+                title: 'Lỗi',
+                text: "Chưa chọn file."
+            })
+            checkSubmit = false
+            return
+        }
 
         const dataAdd = {
             face_number: faceNumber,
@@ -406,6 +432,10 @@ const createPhotoOrder = () => {
         formData.append('data[]', JSON.stringify(dataAdd))
         formData.append('files[]', photoFile)
     });
+
+    if (!checkSubmit) {
+        return
+    }
 
     $.ajax({
         url: PHOTOS_ORDER_CREATE,

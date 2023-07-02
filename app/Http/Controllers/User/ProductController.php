@@ -14,12 +14,15 @@ class ProductController extends Controller
         $arrFilter = ProductFilterEnum::ArrayView();
 
         return view('clients/users/products/index', [
-            'arrFilter' => $arrFilter
+            'arrFilter' => $arrFilter,
+            'cur_page' => 'products'
         ]);
     }
 
     public function show($slug)
     {
-        return view('clients/users/products/show');
+        return view('clients/users/products/show', [
+            'cur_page' => 'product'
+        ]);
     }
 }

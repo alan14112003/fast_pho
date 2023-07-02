@@ -63,6 +63,8 @@ export const CATEGORY_CREATE = DOMAIN + 'api/categories'
 export const CATEGORY_DELETE = DOMAIN + 'api/categories/:id'
 
 //Order
+export const PHOTOS_ORDERS_AUTH = DOMAIN + 'api/orders/photos-auth'
+export const PRODUCT_ORDERS_AUTH = DOMAIN + 'api/orders/products-auth'
 export const PRODUCT_ORDERS = DOMAIN + 'api/orders/products'
 export const PRODUCT_ORDER_CREATE = DOMAIN + 'api/orders/products'
 export const PHOTOS_ORDERS = DOMAIN + 'api/orders/photos'
