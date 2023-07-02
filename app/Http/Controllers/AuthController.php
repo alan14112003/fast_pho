@@ -55,6 +55,10 @@ class AuthController extends Controller
         $request->validated();
         $logining = $this->logining($request->get('email'), $request->get('password'));
 
+        if (!$logining['body']) {
+            return $this->responseTrait($logining['message']);
+        }
+
         if ($logining['body']->role !== UserRoleEnum::USER) {
             return $this->responseTrait('Tài khoản không tồn tại');
         }
@@ -71,6 +75,10 @@ class AuthController extends Controller
         $request->validated();
         $logining = $this->logining($request->get('email'), $request->get('password'));
 
+        if (!$logining['body']) {
+            return $this->responseTrait($logining['message']);
+        }
+        
         if ($logining['body']->role !== UserRoleEnum::ADMIN) {
             return $this->responseTrait('Không có quyền truy cập');
         }

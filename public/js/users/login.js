@@ -1,5 +1,5 @@
 import { LOGINING } from "../url.js";
-import { renderAlert } from '../helper.js'
+import { renderAlert, renderToast } from '../helper.js'
 
 $('#customer_login').on('submit', function (e) {
     e.preventDefault()
@@ -21,7 +21,13 @@ $('#customer_login').on('submit', function (e) {
                 setTimeout(() => {
                     location.replace(response.body)
                 }, 2000)
+                return
             }
+            renderToast({
+                status: 'danger',
+                title: 'Đăng nhập thất bại',
+                text: response.message
+            })
         },
         error: function (response) {
             renderAlert('.site_account_inner', {
