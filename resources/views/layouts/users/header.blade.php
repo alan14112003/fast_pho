@@ -73,6 +73,12 @@
                                     <p class="ttbold">Giỏ hàng</p>
                                 </div>
                                 <div class="cart-view clearfix">
+                                    <div class="cart-view-scroll">
+                                        <table id="cart-view">
+                                            <tbody id="cart-body">
+                                            </tbody>
+                                        </table>
+                                    </div>
                                     <div class="line"></div>
                                     <div class="cart-view-total">
                                         <table class="table-total">
