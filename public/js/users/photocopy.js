@@ -3,7 +3,7 @@ import { HN_TREE, PHOTOS_ORDER_CREATE } from '../url.js';
 
 const group = $('.group')
 const totalPrice = $('.total-price')
-let countPhotos = 0, total = 0, addressTree;
+let countPhotos = 0, sumQuantity = 0, total = 0, addressTree;
 let lines = $('.line_')
 const btnCreatePhoto = $('#btn-create-photo'), btnCalTotal = $('#btn-calculate-total')
 
@@ -243,9 +243,19 @@ const calculateWithQuantity = (quantity, rate) => {
 }
 
 const calculateTotal = () => {
-    total = 0;
     const panels = group.find('.panel')
 
+    sumQuantity = 0;
+    panels.each((i, e) => {
+        sumQuantity += Number($(e).find('input[name=quantity]').val());
+    })
+
+    if (sumQuantity <= object.photo_distance.d_1) {
+        totalPrice.html(formatMoney(10000) + '₫');
+        return;
+    }
+
+    total = 0;
     panels.each((i, e) => {
         const cover = $(e).find('select[name="cover"]').val()
         if (cover > 0) total += 1000;
@@ -255,10 +265,6 @@ const calculateTotal = () => {
         if (!isPaper) return;
 
         const quantity = $(e).find('input[name="quantity"]').val()
-        if (quantity <= object.photo_distance.d_1) {
-            total += 10000;
-            return;
-        }
 
         const paperTypeEle = $(e).find('input[name="paper_type"]:checked')
         const rate = $(paperTypeEle).parent().find('input[name="photo_rate"]').val()
@@ -267,6 +273,7 @@ const calculateTotal = () => {
     });
 
     totalPrice.html(formatMoney(Math.round(total)) + '₫');
+    return;
 }
 
 const setOnClickShowPanel = () => {
@@ -376,7 +383,8 @@ const createPhotoOrder = () => {
         phone: phone,
         time_receive: timeReceive,
         payment,
-        full_address: `${address}, ${ward}, ${district}, ${province}`
+        full_address: `${address}, ${ward}, ${district}, ${province}`,
+        sum_quantity: sumQuantity
     }
 
     formData.append('info', JSON.stringify(info))
