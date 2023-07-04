@@ -341,6 +341,8 @@ class OrderController extends Controller
     {
         DB::beginTransaction();
         try {
+            $flag = true;
+            $total = 0;
             $data = $request->get('data');
 
             $info = json_decode($request->get('info'));
@@ -361,13 +363,19 @@ class OrderController extends Controller
                 }
             }
 
+            if ($info->sum_quantity <= 10) {
+                $flag = false;
+                $total = 10000;
+            }
+
             $order = Order::query()->create([
                 'delivery_time' => $info->time_receive,
                 'user_id' => Auth::id(),
                 'user_name' => $info->name,
                 'user_phone' => $info->phone,
                 'user_address' => $info->full_address,
-                'type' => $info->payment
+                'type' => $info->payment,
+                'total' => $total
             ]);
 
             foreach ($data as $key => $value) {
@@ -378,9 +386,10 @@ class OrderController extends Controller
                 $quantity = $photoValue->quantity;
                 $cover = $photoValue->cover;
                 $isPaper = $photoValue->is_paper;
-
-                if ($isPaper == PhotoPrintTypeEnum::PAPER) {
+              
+                if ($flag && $isPaper === PhotoPrintTypeEnum::PAPER) {
                     $price = calculatePhotoOrderPrice($type, $cover, $quantity);
+                    $total += $price;
                 }
 
                 $photo = Photo::query()->create([
@@ -409,6 +418,10 @@ class OrderController extends Controller
                     'photo_price' => $photo->price,
                 ]);
             }
+
+            $order->update([
+                'total' => $total
+            ]);
 
             DB::commit();
 

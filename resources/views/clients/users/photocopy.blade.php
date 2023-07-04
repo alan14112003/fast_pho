@@ -9,7 +9,7 @@
     </style>
 @endpush
 @section('content')
-    <div class="container row col-xl-12">
+    <div class="container row col-xl-12 photo">
         <div class="col-xl-9">
             <div class="step mb-2">
                 <h2 class="section-title">Thông tin giao hàng</h2>
@@ -85,7 +85,8 @@
                                                             @auth value="{{ auth()->user()->address }}" @endauth required="">
                                                     </div>
                                                 </div>
-                                                <div class="row col-xl-12" style="padding: 0 25px;">
+                                                <div class="row col-xl-12" id="location"
+                                                    style="padding: 0 25px; width: 100%;">
                                                     <div
                                                         class="col-xl-4 field field-show-floating-label field-required field-third ">
                                                         <div class="field-input-wrapper field-input-wrapper-select">
@@ -148,9 +149,8 @@
                                 <div class="radio-wrapper content-box-row">
                                     <label class="two-page" for="payment_method_">
                                         <div class="radio-input payment-method-checkbox">
-                                            <input id="payment_method_" class="input-radio"
-                                                name="payment" type="radio" value="0"
-                                                checked="">
+                                            <input id="payment_method_" class="input-radio" name="payment"
+                                                type="radio" value="0" checked="">
                                         </div>
 
                                         <div class="radio-content-input">
@@ -167,8 +167,8 @@
                                 <div class="radio-wrapper content-box-row">
                                     <label class="two-page" for="payment_method__">
                                         <div class="radio-input payment-method-checkbox">
-                                            <input id="payment_method__" class="input-radio"
-                                                name="payment" type="radio" value="1">
+                                            <input id="payment_method__" class="input-radio" name="payment"
+                                                type="radio" value="1">
                                         </div>
 
                                         <div class="radio-content-input">
@@ -224,11 +224,11 @@
                 </div>
             </div>
             <div>
-                <a href="#" id="btn-create-photo" class="step-footer-continue-btn btn">
+                <a href="#" id="btn-create-photo" class="step-footer-continue-btn btn mb-2">
                     <span>Thêm bản ghi</span>
                     <i class="btn-spinner icon icon-button-spinner"></i>
                 </a>
-                <a href="#" id="btn-calculate-total" class="step-footer-continue-btn btn">
+                <a href="#" id="btn-calculate-total" class="step-footer-continue-btn btn mb-2">
                     <span>Tính tổng tiền</span>
                     <i class="btn-spinner icon icon-button-spinner"></i>
                 </a>
