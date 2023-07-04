@@ -6,8 +6,6 @@ use App\Enums\PhotoTypeEnum;
 if (!function_exists('calculatePhotoOrderPrice')) {
     function calculatePhotoOrderPrice($type, $cover, $quantity)
     {
-        if ($quantity <= 10) return 10000;
-
         $price = 0;
         $rate = PhotoTypeEnum::fromKey(strtoupper($type))->value;
 
