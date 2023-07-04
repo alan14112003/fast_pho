@@ -48,12 +48,12 @@ const renderOrder = () => {
               <td>${p.face_number}</td>
               <td class="col-2">${p.is_cover}</td>
               <td>${p.total}</td>
-              <td>${formatCurrency(p.price)}</td>
+              <td>${order.total ? '-' : formatCurrency(p.price)}</td>
             </tr>
           `
         }).join('')
 
-        $('.total').html(formatCurrency(total))
+        $('.total').html(order.total ? formatCurrency(order.total) : formatCurrency(total))
         bodyContent.html(html)
         resolve()
       },

@@ -16,7 +16,8 @@ class Order extends Model
         "user_phone",
         "user_address",
         "status",
-        'type'
+        'type',
+        'total'
     ];
 
     public function orderProducts(): \Illuminate\Database\Eloquent\Relations\HasMany
