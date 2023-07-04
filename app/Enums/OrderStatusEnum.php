@@ -20,4 +20,9 @@ final class OrderStatusEnum extends Enum
             'Đã hủy' => self::CANCEL,
         ];
     }
+
+    public static function getNameByValue($value): bool|int|string
+    {
+        return array_search($value, self::arrayView(), true);
+    }
 }

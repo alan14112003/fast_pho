@@ -30,6 +30,9 @@
                                         </div>
                                     </div>
                                     <p class="logged-in-customer-information-paragraph">
+                                        @auth
+                                            {{ auth()->user()->name }} ({{ auth()->user()->email }})
+                                        @endauth
                                     </p>
                                 </div>
                                 <div class="fieldset col-xl-12">
@@ -39,14 +42,16 @@
                                                 tên</label>
                                             <input placeholder="Họ và tên" autocapitalize="off" spellcheck="false"
                                                 class="field-input" size="30" type="text" id="full_name"
-                                                autocomplete="false" required="">
+                                                autocomplete="false"
+                                                @auth value="{{ auth()->user()->name }}" @endauth required="">
                                         </div>
                                         <div class="field-input-wrapper col-xl-6">
                                             <label class="field-label" for="phone">Số điện
                                                 thoại</label>
                                             <input autocomplete="false" placeholder="Số điện thoại" autocapitalize="off"
                                                 spellcheck="false" class="field-input" size="30" maxlength="15"
-                                                type="tel" id="phone" required="">
+                                                type="tel" id="phone"
+                                                @auth value="{{ auth()->user()->phone }}" @endauth required="">
                                         </div>
                                     </div>
                                 </div>
@@ -77,7 +82,7 @@
                                                             chỉ</label>
                                                         <input placeholder="Địa chỉ" autocapitalize="off" spellcheck="false"
                                                             class="field-input" size="30" type="text" id="address"
-                                                            required="">
+                                                            @auth value="{{ auth()->user()->address }}" @endauth required="">
                                                     </div>
                                                 </div>
                                                 <div class="row col-xl-12" id="location"
@@ -182,12 +187,9 @@
                                     <div class="blank-slate">
                                         *Lưu ý: Nhân viên sẽ gọi xác nhận và thông báo số tiền cần chuyển khoản của
                                         quý khách, quý khách vui lòng không chuyển khoản trước.
-
-                                        • ACB CN Thống Nhất : 12466 - LƯƠNG NGỌC PHƯƠNG CHI
-
-                                        LƯU Ý
-                                        • Khi chuyển khoản quý khách ghi nội dung CK là: TÊN FB CÁ NHÂN + MÃ ĐƠN
-                                        HÀNG + SĐT
+                                        <div class="banks">
+                                            
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Enums\ConfigInfoTypeEnum;
+use App\Enums\OrderStatusEnum;
 use App\Enums\OrderTypeEnum;
 use App\Enums\PhotoCoverEnum;
 use App\Enums\PhotoPrintTypeEnum;
@@ -62,6 +63,30 @@ class OrderController extends Controller
             ];
 
             return $this->responseTrait('Thành công', true, $data);
+        } catch (\Exception $e) {
+            return $this->responseTrait('có lỗi! ' . $e->getMessage());
+        }
+    }
+
+    public function productsByAuth(Request $request): \Illuminate\Http\JsonResponse
+    {
+        try {
+            //  Lấy ra tất cả các order product và phân trang
+            $orders = Order::query()
+                ->addSelect('orders.*')
+                ->selectRaw('count(order_product.id) as item_count')
+                ->join('order_product', 'orders.id', '=', 'order_product.order_id')
+                ->where('user_id', Auth::id())
+                ->groupBy('orders.id')
+                ->latest('created_at')
+                ->paginate();
+
+            foreach ($orders as $order) {
+                $order->type = OrderTypeEnum::getNameByValue($order->type);
+                $order->status = OrderStatusEnum::getNameByValue($order->status);
+            }
+
+            return $this->responseTrait('Thành công', true, $orders);
         } catch (\Exception $e) {
             return $this->responseTrait('có lỗi! ' . $e->getMessage());
         }
@@ -245,6 +270,30 @@ class OrderController extends Controller
         }
     }
 
+    public function photosByAuth(Request $request): \Illuminate\Http\JsonResponse
+    {
+        try {
+            //  Lấy ra tất cả các order photo và phân trang
+            $orders = Order::query()
+                ->addSelect('orders.*')
+                ->selectRaw('count(order_photo.id) as item_count')
+                ->join('order_photo', 'orders.id', '=', 'order_photo.order_id')
+                ->where('user_id', Auth::id())
+                ->groupBy('orders.id')
+                ->latest('created_at')
+                ->paginate();
+
+            foreach ($orders as $order) {
+                $order->type = OrderTypeEnum::getNameByValue($order->type);
+                $order->status = OrderStatusEnum::getNameByValue($order->status);
+            }
+
+            return $this->responseTrait('Thành công', true, $orders);
+        } catch (\Exception $e) {
+            return $this->responseTrait('có lỗi! ' . $e->getMessage());
+        }
+    }
+
     //  Xem hóa đơn của đơn hàng $id
     public function photo($id): \Illuminate\Http\JsonResponse
     {
@@ -337,7 +386,7 @@ class OrderController extends Controller
                 $quantity = $photoValue->quantity;
                 $cover = $photoValue->cover;
                 $isPaper = $photoValue->is_paper;
-
+              
                 if ($flag && $isPaper === PhotoPrintTypeEnum::PAPER) {
                     $price = calculatePhotoOrderPrice($type, $cover, $quantity);
                     $total += $price;

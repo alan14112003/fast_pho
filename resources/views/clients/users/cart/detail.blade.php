@@ -215,9 +215,9 @@
                                         <p class="logged-in-customer-information-paragraph">
                                             @auth
                                                 {{ auth()->user()->name }} ({{ auth()->user()->email }})
-                                                <a class="btn" id="update_address"
+                                                {{-- <a class="btn" id="update_address"
                                                     style="font-size: .45rem; padding: .3rem .4rem;">Lưu
-                                                    địa chỉ</a>
+                                                    địa chỉ</a> --}}
                                             @endauth
                                         </p>
                                     </div>

@@ -301,7 +301,8 @@
     margin: 0 0.75rem;
 }
 
-.header-wrap .pc_nav_box li:hover .a {
+.header-wrap .pc_nav_box li:hover .a,
+.header-wrap .pc_nav_box li.active .a {
     color: var(--main-color);
 }
 

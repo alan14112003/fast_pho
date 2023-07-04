@@ -8,22 +8,22 @@
             </div>
 
             <ul class="pc_nav_box poa antart_b" id="pc_nav_box">
-                <li>
+                <li class="@if(isset($cur_page))@if($cur_page == 'index')active @endif @endif">
                     <a href="/" class="a">
                         Trang chủ
                     </a>
-                <li>
+                </li>
+                <li class="@if(isset($cur_page))@if($cur_page == 'photocopy')active @endif @endif">
                     <a href="{{ route('photocopy') }}" class="a">Photocopy</a>
                 </li>
-                </li>
-                <li>
+                <li class="@if(isset($cur_page))@if($cur_page == 'products') active @endif @endif">
                     <a href="{{ route('products.index') }}" class="a">Sản phẩm </a>
                     <div class="prosub-box poa">
                         <div id="prosub-box">
                         </div>
                     </div>
                 </li>
-                <li>
+                <li class="@if(isset($cur_page))@if($cur_page == 'about')active @endif @endif">
                     <a href="{{ route('about') }}" class="a">Về chúng tôi</a>
                 </li>
             </ul>
@@ -71,26 +71,8 @@
                             <div class="site-cart">
                                 <div class="cart-ttbold">
                                     <p class="ttbold">Giỏ hàng</p>
-                                    <a class="hide-cart">
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                            viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000"
-                                            xml:space="preserve">
-                                            <g>
-                                                <path
-                                                    d="M500,442.7L79.3,22.6C63.4,6.7,37.7,6.7,21.9,22.5C6.1,38.3,6.1,64,22,79.9L442.6,500L22,920.1C6,936,6.1,961.6,21.9,977.5c15.8,15.8,41.6,15.8,57.4-0.1L500,557.3l420.7,420.1c16,15.9,41.6,15.9,57.4,0.1c15.8-15.8,15.8-41.5-0.1-57.4L557.4,500L978,79.9c16-15.9,15.9-41.5,0.1-57.4c-15.8-15.8-41.6-15.8-57.4,0.1L500,442.7L500,442.7z">
-                                                </path>
-                                            </g>
-                                        </svg>
-                                    </a>
                                 </div>
                                 <div class="cart-view clearfix">
-                                    <div class="cart-view-scroll">
-                                        <table id="cart-view">
-                                            <tbody id="cart-body">
-                                            </tbody>
-                                        </table>
-                                    </div>
                                     <div class="line"></div>
                                     <div class="cart-view-total">
                                         <table class="table-total">
@@ -102,7 +84,7 @@
                                                 <tr>
                                                     <td><a href="/cart" class="linktocart button dark">Xem giỏ
                                                             hàng</a></td>
-                                                    <td><a href="/checkout" class="linktocheckout button dark">Thanh
+                                                    <td><a href="{{ route('cart.details') }}" class="linktocheckout button dark">Thanh
                                                             toán</a></td>
                                                 </tr>
                                             </tbody>

@@ -17,11 +17,20 @@ class HomeController extends Controller
         ;
 
         return view('clients/users/index', [
-            'slides' => $slides
+            'slides' => $slides,
+            'cur_page' => 'index'
         ]);
     }
     
     public function about() {
-        return view('clients.users.about');
+        return view('clients.users.about', [
+            'cur_page' => 'about'
+        ]);
+    }
+
+    public function photocopy() {
+        return view('clients.users.photocopy', [
+            'cur_page' => 'photocopy'
+        ]);
     }
 }

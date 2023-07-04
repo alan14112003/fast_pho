@@ -122,6 +122,8 @@ Route::prefix('orders')
         });
         Route::get('/photos', 'photos')->name('photos');
         Route::post('/photos', 'photosCreate')->name('photos_create');
+        Route::get('products-auth', 'productsByAuth')->name('products_by_auth');
+        Route::get('photos-auth', 'photosByAuth')->name('photos_by_auth');
     });
 
 Route::prefix('cart')
