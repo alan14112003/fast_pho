@@ -1,5 +1,5 @@
-import { formatMoney, moneyToNumber } from "../helper.js";
-import { CART, CART_REMOVE, CART_UPDATE, CATEGORIES, DOMAIN, ICONS, IMAGES, PRODUCT_VIEW, STORAGE, _PRODUCTS } from "../url.js";
+import { formatMoney, moneyToNumber, renderToast } from "../helper.js";
+import { CART, CART_REMOVE, CART_UPDATE, CATEGORIES, FORGOT_PASSWORD, PRODUCT_VIEW, STORAGE, _PRODUCTS } from "../url.js";
 
 const proSubBox = $('#prosub-box'), mListPro = $('#mlist_pro');
 
@@ -239,6 +239,58 @@ const main = async () => {
     const result = await getCart()
 
     await renderCart(result)
+
+    $(".site_account .site_account_panel_list .site_account_inner form .form__input-wrapper .form__field").on('change', function() {
+        if($(this).val().trim() != '') {
+            console.log(123);
+            $(this).parent().find('.form__floating-label').css('transform', 'translateY(-6px) scale(0.8)')
+        } else $(this).parent().find('.form__floating-label').attr('style', '');
+    }), 
+
+    $('#btn-show-recover').on('click', function() {
+        $('#header-login-panel').removeClass('is-selected')
+        $('#header-recover-panel').addClass('is-selected')
+
+        $('#header-login-panel').css('height', '235px')
+    })
+
+    $('#btn-show-login').on('click', function() {
+        $('#header-login-panel').addClass('is-selected')
+        $('#header-recover-panel').removeClass('is-selected')
+
+        $('#header-login-panel').css('height', '100%')
+    })
+
+    $('#form-recover').on('submit', function(e) {
+        e.preventDefault()
+
+        const email = $(this).find('input[name=email]').val()
+        const data = {
+            email: email
+        }
+
+        $.ajax({
+            url: FORGOT_PASSWORD,
+            type: 'POST',
+            data: data,
+            dataType: 'json',
+            success: function (response) {
+                if (response.status) {
+                    renderToast({
+                        title: 'Thành công',
+                        text: response.message
+                    })
+                }
+            },
+            error: function (response) {
+                renderToast({
+                    status: 'danger',
+                    title: 'Lỗi',
+                    text: response.message
+                })
+            }
+        });
+    })
 }
 
 main()

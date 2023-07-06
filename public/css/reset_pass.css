@@ -1,0 +1,150 @@
+.main {
+    position: fixed;
+    width: 400px;
+    padding: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+/* Mini Box Account */
+
+/* - Mini box Account - */
+.header-dropdown_content .site_account {
+    text-align: center;
+}
+
+.site_account .site_account_panel_list .site_account_inner {
+    font-size: 12px;
+}
+
+.site_account .site_account_panel_list .site_account_header .site_account_title {
+    margin-bottom: 4px;
+    font-size: 17px;
+    font-weight: 500;
+    font-style: normal;
+    text-transform: uppercase;
+}
+
+form .form__input-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+form .form__input-wrapper .form__field {
+    display: block;
+    padding: 14px 10px 3px;
+    border-radius: 2px;
+    border: 1px solid #d4d6d8;
+    width: 100%;
+    line-height: normal;
+    height: 42px;
+    color: #1e2d7d;
+    -webkit-appearance: none;
+    resize: none;
+    font-size: 12px;
+    outline: none;
+    box-shadow: 0 1px rgba(212, 214, 216, 0.25) inset;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+form .form__input-wrapper .form__floating-label {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    line-height: 42px;
+    font-size: 12px;
+    margin-bottom: 0;
+    color: #677279;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+    transition: -webkit-transform 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
+    pointer-events: none;
+}
+
+form .form__input-wrapper .form__field:focus+.form__floating-label,
+form .form__input-wrapper .form__field.is-filled+.form__floating-label {
+    -webkit-transform: translateY(-6px) scale(0.8);
+    transform: translateY(-6px) scale(0.8);
+}
+
+form .form__submit {
+    width: 100%;
+    outline: none;
+    padding: 0px 28px;
+    height: 42px;
+    line-height: 42px;
+}
+
+.site_account_secondary-action {
+    font-size: 12px;
+}
+
+.site_account_secondary-action>p {
+    margin-bottom: 4px;
+    line-height: 0;
+}
+
+.site_account_secondary-action>p .link {
+    color: var(--main-color);
+    transition: color 0.2s ease-in-out;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    outline: none;
+}
+
+.site_account_info {
+    text-align: left;
+    font-size: 14px;
+}
+
+.site_account_info .site_account_header {
+    text-align: center;
+    border-bottom: 1px solid #ededed;
+    padding: 0 0 10px;
+    margin-bottom: 12px;
+}
+
+.site_account_info .site_account_header .site_account_title {
+    margin-bottom: 0
+}
+
+.site_account_info ul {
+    margin: 0;
+}
+
+.site_account_info li span {
+    font-size: 15px;
+    color: #282c2d;
+    font-weight: bold;
+}
+
+.site_account_info li {
+    padding: 0 4px;
+    margin-bottom: 10px;
+    line-height: 22px;
+    font-weight: 400;
+}
+
+.site_account_info li a:hover {
+    color: var(--main-color);
+}
+
+.site_account_header {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 767px) {
+    h2 {
+        font-size: 1.1rem !important;
+    }
+}

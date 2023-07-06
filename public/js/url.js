@@ -34,6 +34,8 @@ export const CHANGE_AVATAR = DOMAIN + 'api/users/change-avatar'
 
 //User
 export const ADDRESS_UPDATE = DOMAIN + 'api/update_address'
+export const FORGOT_PASSWORD = DOMAIN + 'api/forgot-password'
+export const RESET_PASSWORD = DOMAIN + 'api/reset-password/:token'
 
 
 //Slide

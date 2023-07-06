@@ -386,7 +386,7 @@ class OrderController extends Controller
                 $quantity = $photoValue->quantity;
                 $cover = $photoValue->cover;
                 $isPaper = $photoValue->is_paper;
-              
+
                 if ($flag && $isPaper === PhotoPrintTypeEnum::PAPER) {
                     $price = calculatePhotoOrderPrice($type, $cover, $quantity);
                     $total += $price;

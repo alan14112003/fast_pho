@@ -153,6 +153,15 @@ class AuthController extends Controller
         return view('clients.auth.change_avatar');
     }
 
+    public function forgotPassword()
+    {
+        return view('clients.auth.forgot_pass');
+    }
+
+    public function resetPassword()
+    {
+        return view('clients.auth.reset_pass');
+    }
 
     public function forgotPasswordHandle(Request $request)
     {

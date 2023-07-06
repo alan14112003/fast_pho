@@ -49,7 +49,8 @@
 
                         </div>
                         <div class="link">
-                            <a href="https://www.youtube.com/channel/UCZ4d845dzB4xtMGWfoXCbsA" target="_blank">Youtube&nbsp;</a>
+                            <a href="https://www.youtube.com/channel/UCZ4d845dzB4xtMGWfoXCbsA"
+                                target="_blank">Youtube&nbsp;</a>
                         </div>
                         <div class="link">
                             <a href="https://www.tiktok.com/@fastphovn" target="_blank">Tiktok</a>
@@ -189,8 +190,9 @@
                                                             khoản</a>
                                                     </p>
                                                     <p>Quên mật khẩu?
-                                                        <button aria-controls="header-recover-panel"
-                                                            class="js-link link">Khôi phục mật khẩu</button>
+                                                        <button aria-controls="header-recover-panel" class="js-link link"
+                                                            id="btn-show-recover">Khôi
+                                                            phục mật khẩu</button>
                                                     </p>
                                                 </div>
                                             </div>
@@ -201,33 +203,21 @@
                                                 <p class="site_account_legend">Nhập email của bạn:</p>
                                             </header>
                                             <div class="site_account_inner">
-                                                <form accept-charset="UTF-8" action="/account/recover" method="post">
-                                                    <input name="form_type" type="hidden"
-                                                        value="recover_customer_password">
-                                                    <input name="utf8" type="hidden" value="✓">
-
+                                                <form id="form-recover" accept-charset="UTF-8" method="post">
                                                     <div class="form__input-wrapper form__input-wrapper--labelled">
                                                         <input type="email" id="recover-recover_email"
                                                             class="form__field form__field--text" name="email"
                                                             required="required">
                                                         <label for="recover-recover_email"
                                                             class="form__floating-label">Email</label>
-                                                        <div class="sitebox-recaptcha">
-                                                            This site is protected by reCAPTCHA and the Google
-                                                            <a href="https://policies.google.com/privacy" target="_blank"
-                                                                rel="noreferrer">Privacy Policy</a>
-                                                            and <a href="https://policies.google.com/terms"
-                                                                target="_blank" rel="noreferrer">Terms of Service</a>
-                                                            apply.
-                                                        </div>
                                                     </div>
                                                     <button type="submit" class="form__submit button dark"
                                                         id="form_submit-recover">Khôi phục</button>
                                                 </form>
                                                 <div class="site_account_secondary-action">
                                                     <p>Bạn đã nhớ mật khẩu?
-                                                        <button aria-controls="header-login-panel"
-                                                            class="js-link link">Trở về đăng nhập</button>
+                                                        <button aria-controls="header-login-panel" class="js-link link"
+                                                            id="btn-show-login">Trở về đăng nhập</button>
                                                     </p>
                                                 </div>
                                             </div>
