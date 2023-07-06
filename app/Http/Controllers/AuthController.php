@@ -145,4 +145,8 @@ class AuthController extends Controller
             'userGenderEnums' => $userGenderEnums
         ]);
     }
+
+    public function changeAvatar() {
+        return view('clients.auth.change_avatar');
+    }
 }

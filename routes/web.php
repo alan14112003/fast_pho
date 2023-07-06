@@ -93,7 +93,9 @@ Route::middleware(AdminMiddleware::class)
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/about', 'about')->name('about');
-    Route::get('/photocopy', 'photocopy')->name('photocopy');
+    Route::get('/photocopy', 'photocopy')
+    ->middleware('user')
+    ->name('photocopy');
 });
 
 Route::prefix('/cart')
@@ -101,8 +103,10 @@ Route::prefix('/cart')
     ->controller(CartController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/details', 'details')->name('details');
-        Route::get('/history', 'history')->name('history');
+        Route::middleware('user')->group(function () {
+            Route::get('/details', 'details')->name('details');
+            Route::get('/history', 'history')->name('history');
+        });
     });
 
 Route::controller(AuthController::class)->group(function () {
@@ -111,6 +115,9 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/profile', 'profile')
         ->middleware('user')
         ->name('profile');
+    Route::get('change-avatar', 'changeAvatar')
+    ->middleware('user')
+    ->name('change_avatar');
 });
 
 Route::prefix('products/')
@@ -134,4 +141,8 @@ Route::get('/migrate', function () {
 
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
+});
+
+Route::get('/path', function () {
+    return __DIR__;
 });

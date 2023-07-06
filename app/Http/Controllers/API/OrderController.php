@@ -182,7 +182,7 @@ class OrderController extends Controller
             foreach ($products as $product) {
                 $productRequest = $productsRequest[array_search($product->sub_product_id, $productIds)];
                 if ($product->total - $productRequest->quantity < 0) {
-                    return $this->responseTrait("Sản phẩm {$products->name}({$products->type} không đủ");
+                    return $this->responseTrait("Sản phẩm {$product->name}({$product->type}) không đủ");
                 }
             }
 

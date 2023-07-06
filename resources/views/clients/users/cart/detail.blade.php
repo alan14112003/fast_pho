@@ -206,15 +206,15 @@
                                     </div>
                                     <div class="logged-in-customer-information">&nbsp;
                                         <div class="logged-in-customer-information-avatar-wrapper">
-                                            <div class="logged-in-customer-information-avatar gravatar"
-                                                style="background-image: url(//www.gravatar.com/avatar/f9c70ec134cefbbe4124e7178fb0e1b3.jpg?s=100&amp;d=blank);
-                                                filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='//www.gravatar.com/avatar/f9c70ec134cefbbe4124e7178fb0e1b3.jpg?s=100&amp;d=blank',
-                                                sizingMethod='scale')">
+                                            <div class="logged-in-customer-information-avatar gravatar">
+                                                <img class="rounded-circle"
+                                                    src="{{ asset('storage/' . auth()->user()->avatar) . '?' . now() }}"
+                                                    alt="">
                                             </div>
                                         </div>
                                         <p class="logged-in-customer-information-paragraph">
                                             @auth
-                                                {{ auth()->user()->name }} ({{ auth()->user()->email }})
+                                                {{ auth()->user()->name }}
                                                 {{-- <a class="btn" id="update_address"
                                                     style="font-size: .45rem; padding: .3rem .4rem;">Lưu
                                                     địa chỉ</a> --}}
@@ -459,7 +459,7 @@
                                                     <img class="main-img"
                                                         src="https://hstatic.net/0/0/global/design/seller/image/payment/cod.svg?v=4">
                                                     <div class="content-wrapper">
-                                                        <span class="radio-label-primary">Thanh toán khi giao hàng
+                                                        <span class="radio-label-primary">Thanh toán khi nhận hàng
                                                             (COD)</span>
                                                         <span class="quick-tagline hidden"></span>
                                                     </div>
@@ -489,12 +489,9 @@
                                             <div class="blank-slate">
                                                 *Lưu ý: Nhân viên sẽ gọi xác nhận và thông báo số tiền cần chuyển khoản của
                                                 quý khách, quý khách vui lòng không chuyển khoản trước.
+                                                <div class="banks">
 
-                                                • ACB CN Thống Nhất : 12466 - LƯƠNG NGỌC PHƯƠNG CHI
-
-                                                LƯU Ý
-                                                • Khi chuyển khoản quý khách ghi nội dung CK là: TÊN FB CÁ NHÂN + MÃ ĐƠN
-                                                HÀNG + SĐT
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

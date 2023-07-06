@@ -19,6 +19,19 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/mobile.css') }}">
     @stack('styles')
+    <style>
+        .toast {
+            font-size: 0.475rem;
+        }
+
+        .toast-header {
+            padding: .3rem .75rem;
+        }
+
+        .toast-body {
+            padding: .45rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -174,6 +187,20 @@
 <script type="module" src="{{ asset('js/users/header.js') }}"></script>
 <script type="module" src="{{ asset('js/users/login.js') }}"></script>
 <script type="module" src="{{ asset('js/users/logout.js') }}"></script>
+@if (session()->has('error'))
+    <script type="module">
+    import { renderToast } from "{{ asset('js/helper.js') }}"
+    renderToast({
+        text: '{{ session()->get("error") }}',
+        status: 'danger',
+        title: 'Thất bại'
+    })
+    $('.header-action_account').addClass('show-action')
+</script>
+    @php
+        session()->forget('error');
+    @endphp
+@endif
 @stack('scripts')
 
 </html>

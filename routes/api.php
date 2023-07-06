@@ -46,6 +46,7 @@ Route::prefix('users/')
         Route::get('/count', 'countUser')->name('count');
         Route::put('/profile', 'updateProfile')->name('update_profile');
         Route::put('/change-password', 'changePassword')->name('change_password');
+        Route::put('/change-avatar', 'changeAvatar')->name('change_avatar');
     });
 
 Route::prefix('categories')

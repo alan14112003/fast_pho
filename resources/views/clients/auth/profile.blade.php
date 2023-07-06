@@ -24,6 +24,15 @@
                 background: var(--main-color);
             }
 
+            .btn-change-avatar {
+                background: var(--main-color);
+                color: #fff
+            }
+
+            .btn-change-avatar:hover {
+                color: #fff
+            }
+
             .form-control {
                 font-size: inherit;
                 line-height: inherit;
@@ -56,11 +65,17 @@
     <div class="container rounded bg-white mt-5 mb-5">
         <div class="row">
             <div class="col-md-3 border-right">
-                <div class="d-flex flex-column align-items-center text-center p-3">
-                    <img class="rounded-circle mt-5" width="150px" src="{{ asset('storage/' . auth()->user()->avatar) }}"
+                <div class="d-flex flex-column align-items-center text-center p-3 image-box">
+                    <img class="rounded-circle mt-5" width="150px" src="{{ asset('storage/' . auth()->user()->avatar) . '?' . now() }}"
+                        data-default="{{ asset('storage/' . auth()->user()->avatar) . '?' . now() }}"
                         alt="hình ảnh {{ auth()->user()->name }}">
                     <span class="font-weight-bold">{{ auth()->user()->name }}</span>
                     <span class="text-black-50">{{ auth()->user()->email }}</span>
+
+                    <div class="mt-2">
+                        <label for="avatar_change" class="btn btn-sm btn-change-avatar">Đổi ảnh</label>
+                        <input type="file" style="display: none" id="avatar_change" accept="image/*">
+                    </div>
                 </div>
             </div>
             <div class="col-md-8 border-right">
@@ -186,5 +201,49 @@
     </div>
     @push('scripts')
         <script src="{{ asset('js/profile.js') }}" type="module"></script>
+        @push('scripts')
+            <script type="module">
+          import { renderToast } from "{{ asset('js/helper.js') }}"
+          import { CHANGE_AVATAR } from "{{ asset('js/url.js') }}"
+
+            $('#avatar_change').on('change', function() {
+                $('.image-box img').attr('src', $('.image-box img').data('default'))
+                const file = $(this)[0].files[0]
+                if (!file) {
+                    return
+                }
+                
+                const image = URL.createObjectURL(file)
+                $('.image-box img').attr('src', image)
+
+                const formData = new FormData()
+                formData.append('_method', 'PUT')
+                formData.append('avatar', $(this)[0].files[0])
+                
+                $.ajax({
+                    url: CHANGE_AVATAR,
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if (response.status) {
+                            renderToast({
+                                title: 'Thành công',
+                                text: response.message,
+                            })
+                        }
+                    },
+                    error: function(response) {
+                        renderToast({
+                            status: 'danger',
+                            title: 'Lỗi',
+                            text: response.responseJSON.message
+                        })
+                    }
+                })
+            })
+        </script>
+        @endpush
     @endpush
 @endsection
