@@ -118,6 +118,9 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('change-avatar', 'changeAvatar')
     ->middleware('user')
     ->name('change_avatar');
+
+    Route::get('forgot-password', 'forgotPassword')->name('forgot_password');
+    Route::get('reset-password/{token}', 'resetPassword')->name('reset_password');
 });
 
 Route::prefix('products/')

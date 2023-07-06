@@ -8,9 +8,11 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use App\Http\Controllers\ResponseTrait;
+use App\Mail\ResetPasswordEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -78,7 +80,7 @@ class AuthController extends Controller
         if (!$logining['body']) {
             return $this->responseTrait($logining['message']);
         }
-        
+
         if ($logining['body']->role !== UserRoleEnum::ADMIN) {
             return $this->responseTrait('Không có quyền truy cập');
         }
@@ -146,7 +148,50 @@ class AuthController extends Controller
         ]);
     }
 
-    public function changeAvatar() {
+    public function changeAvatar()
+    {
         return view('clients.auth.change_avatar');
+    }
+
+
+    public function forgotPasswordHandle(Request $request)
+    {
+        try {
+            $user = User::query()->where('email', $request->get('email'))
+                ->first();
+            if (is_null($user)) {
+                return $this->responseTrait('Không tồn tại người dùng');
+            }
+
+            $mailData = [
+                'token' => encrypt($user->id),
+            ];
+
+            Mail::to($user->email)->send(new ResetPasswordEmail($mailData));
+
+            return $this->responseTrait('Kiểm tra email để khôi phục mật khẩu', true);
+        } catch (\Throwable $e) {
+            return $this->responseTrait('có lỗi! ' . $e->getMessage());
+        }
+    }
+
+    public function resetPasswordHandle($token, Request $request)
+    {
+        try {
+            $id = decrypt($token);
+            $user = User::query()->find($id);
+
+            if (is_null($user)) {
+                return $this->responseTrait('Người dùng không tồn tại');
+            }
+
+            $user->update([
+                'password' => Hash::make($request->get('password'))
+            ]);
+
+            return $this->responseTrait('Khôi phục mật khẩu thành công', true);
+        } catch (\Throwable $e) {
+            return $this->responseTrait('có lỗi! ' . $e->getMessage());
+        }
     }
 }
