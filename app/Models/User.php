@@ -26,7 +26,8 @@ class User extends Authenticatable
         'gender',
         'province',
         'district',
-        'ward'
+        'ward',
+        'avatar'
     ];
 
     /**

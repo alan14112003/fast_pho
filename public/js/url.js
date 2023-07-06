@@ -18,6 +18,7 @@ export const PHOTO_ORDER_BILL = DOMAIN + 'admin/orders/photo/bill/:id'
 export const PRODUCT_VIEW = DOMAIN + 'products/:slug'
 
 export const CART_VIEW = DOMAIN + 'cart'
+export const CART_HISTORY = DOMAIN + 'cart/history'
 
 export const BANK_EDIT = DOMAIN + 'admin/config/edit-bank/:id'
 
@@ -29,6 +30,7 @@ export const LOGINING = DOMAIN + 'api/logining'
 export const LOGOUT = DOMAIN + 'api/logout'
 export const UPDATE_PROFILE = DOMAIN + 'api/users/profile'
 export const CHANGE_PASSWORD = DOMAIN + 'api/users/change-password'
+export const CHANGE_AVATAR = DOMAIN + 'api/users/change-avatar'
 
 //User
 export const ADDRESS_UPDATE = DOMAIN + 'api/update_address'

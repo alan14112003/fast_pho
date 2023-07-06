@@ -58,19 +58,19 @@
                                 <div class="card-footer">
                                     <div class="pagination p1">
                                         <ul>
-                                            <a href="#" id="first-paginate">
+                                            <a href="" id="first-paginate">
                                                 <li>&lt;&lt;</li>
                                             </a>
-                                            <a href="#" id="pre-paginate">
+                                            <a href="" id="pre-paginate">
                                                 <li></li>
                                             </a>
-                                            <a href="#" class="is-active" id="current-paginate">
+                                            <a href="" class="is-active" id="current-paginate">
                                                 <li></li>
                                             </a>
-                                            <a href="#" id="next-paginate">
+                                            <a href="" id="next-paginate">
                                                 <li></li>
                                             </a>
-                                            <a href="#" id="last-paginate">
+                                            <a href="" id="last-paginate">
                                                 <li>&gt;&gt;</li>
                                             </a>
                                         </ul>

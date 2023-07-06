@@ -23,15 +23,15 @@
                             <div class="section-content section-customer-information no-mb">
                                 <div class="logged-in-customer-information">&nbsp;
                                     <div class="logged-in-customer-information-avatar-wrapper">
-                                        <div class="logged-in-customer-information-avatar gravatar"
-                                            style="background-image: url(//www.gravatar.com/avatar/f9c70ec134cefbbe4124e7178fb0e1b3.jpg?s=100&amp;d=blank);
-                                            filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='//www.gravatar.com/avatar/f9c70ec134cefbbe4124e7178fb0e1b3.jpg?s=100&amp;d=blank',
-                                            sizingMethod='scale')">
+                                        <div class="logged-in-customer-information-avatar gravatar">
+                                            <img class="rounded-circle"
+                                                src="{{ asset('storage/' . auth()->user()->avatar) . '?' . now() }}"
+                                                alt="">
                                         </div>
                                     </div>
                                     <p class="logged-in-customer-information-paragraph">
                                         @auth
-                                            {{ auth()->user()->name }} ({{ auth()->user()->email }})
+                                            {{ auth()->user()->name }}
                                         @endauth
                                     </p>
                                 </div>
@@ -42,8 +42,8 @@
                                                 tên</label>
                                             <input placeholder="Họ và tên" autocapitalize="off" spellcheck="false"
                                                 class="field-input" size="30" type="text" id="full_name"
-                                                autocomplete="false"
-                                                @auth value="{{ auth()->user()->name }}" @endauth required="">
+                                                autocomplete="false" @auth value="{{ auth()->user()->name }}" @endauth
+                                                required="">
                                         </div>
                                         <div class="field-input-wrapper col-xl-6">
                                             <label class="field-label" for="phone">Số điện
@@ -82,7 +82,8 @@
                                                             chỉ</label>
                                                         <input placeholder="Địa chỉ" autocapitalize="off" spellcheck="false"
                                                             class="field-input" size="30" type="text" id="address"
-                                                            @auth value="{{ auth()->user()->address }}" @endauth required="">
+                                                            @auth value="{{ auth()->user()->address }}" @endauth
+                                                            required="">
                                                     </div>
                                                 </div>
                                                 <div class="row col-xl-12" id="location"
@@ -157,7 +158,7 @@
                                             <img class="main-img"
                                                 src="https://hstatic.net/0/0/global/design/seller/image/payment/cod.svg?v=4">
                                             <div class="content-wrapper">
-                                                <span class="radio-label-primary">Thanh toán khi giao hàng
+                                                <span class="radio-label-primary">Thanh toán khi nhận hàng
                                                     (COD)</span>
                                                 <span class="quick-tagline hidden"></span>
                                             </div>
@@ -188,7 +189,7 @@
                                         *Lưu ý: Nhân viên sẽ gọi xác nhận và thông báo số tiền cần chuyển khoản của
                                         quý khách, quý khách vui lòng không chuyển khoản trước.
                                         <div class="banks">
-                                            
+
                                         </div>
                                     </div>
                                 </div>

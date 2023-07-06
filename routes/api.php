@@ -30,6 +30,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('admin_logining', 'adminLogin')->name('admin_logining');
     Route::post('registering', 'registering')->name('registering');
     Route::post('logout', 'logout')->name('logout');
+    Route::post('forgot-password', 'forgotPasswordHandle')->name('forgot_password');
+    Route::post('reset-password/{token}', 'resetPasswordHandle')->name('reset_password');
 });
 
 
@@ -46,6 +48,7 @@ Route::prefix('users/')
         Route::get('/count', 'countUser')->name('count');
         Route::put('/profile', 'updateProfile')->name('update_profile');
         Route::put('/change-password', 'changePassword')->name('change_password');
+        Route::put('/change-avatar', 'changeAvatar')->name('change_avatar');
     });
 
 Route::prefix('categories')

@@ -1,11 +1,15 @@
-import { formatMoney, renderBanks, renderToast } from '../helper.js'
-import { HN_TREE, PHOTOS_ORDER_CREATE } from '../url.js';
+import { formatMoney, renderBanks, renderLoading, renderToast, validatePhoneNumber } from "../helper.js";
+import { CART_HISTORY, HN_TREE, PHOTOS_ORDER_CREATE } from "../url.js";
 
-const group = $('.group')
-const totalPrice = $('.total-price')
-let countPhotos = 0, sumQuantity = 0, total = 0, addressTree;
-let lines = $('.line_')
-const btnCreatePhoto = $('#btn-create-photo'), btnCalTotal = $('#btn-calculate-total')
+const group = $(".group");
+const totalPrice = $(".total-price");
+let countPhotos = 0,
+    sumQuantity = 0,
+    total = 0,
+    addressTree;
+let lines = $(".line_");
+const btnCreatePhoto = $("#btn-create-photo"),
+    btnCalTotal = $("#btn-calculate-total");
 
 const object = {
     photo_distance: {
@@ -17,63 +21,63 @@ const object = {
         price_1: 1000,
         price_2: 800,
         price_3: 700,
-        price_4: 500
+        price_4: 500,
     },
     photo_types: [
         {
-            key: 'A5',
-            text: 'A5',
-            rate: 46
+            key: "A5",
+            text: "A5",
+            rate: 46,
         },
         {
-            key: 'A4_70',
-            text: 'A4 70gsm',
-            rate: 100
+            key: "A4_70",
+            text: "A4 70gsm",
+            rate: 100,
         },
         {
-            key: 'A4_80',
-            text: 'A4 80gsm',
-            rate: 134
+            key: "A4_80",
+            text: "A4 80gsm",
+            rate: 134,
         },
         {
-            key: 'A3',
-            text: 'A3',
-            rate: 200
-        }
+            key: "A3",
+            text: "A3",
+            rate: 200,
+        },
     ],
     photo_covers: [
         {
             key: 1,
-            text: 'Bìa xanh dương',
+            text: "Bìa xanh dương",
         },
         {
             key: 2,
-            text: 'Bìa xanh lá',
+            text: "Bìa xanh lá",
         },
         {
             key: 3,
-            text: 'Bìa vàng',
+            text: "Bìa vàng",
         },
         {
             key: 4,
-            text: 'Bìa hồng',
-        }
-    ]
-}
+            text: "Bìa hồng",
+        },
+    ],
+};
 
-btnCreatePhoto.off('click').on('click', function () {
-    createPhotoPanel()
-})
+btnCreatePhoto.off("click").on("click", function () {
+    createPhotoPanel();
+});
 
-btnCalTotal.off('click').on('click', function () {
-    calculateTotal()
-})
+btnCalTotal.off("click").on("click", function () {
+    calculateTotal();
+});
 
 const createPhotoPanel = () => {
     ++countPhotos;
 
     let photoTypes = "";
-    object.photo_types.forEach(e => {
+    object.photo_types.forEach((e) => {
         photoTypes += `
         <li>
             <input type="radio" name="paper_type" id="paper_type_${e.key}_${countPhotos}" value="${e.key}" checked>
@@ -81,14 +85,14 @@ const createPhotoPanel = () => {
             <label for="paper_type_${e.key}_${countPhotos}">${e.text}</label>
         </li>
         `;
-    })
+    });
 
     let photoCovers = "";
-    object.photo_covers.forEach(e => {
+    object.photo_covers.forEach((e) => {
         photoCovers += `
         <option value="${e.key}">${e.text}</option>
         `;
-    })
+    });
 
     const panel = `
     <div class="mb-2">
@@ -203,27 +207,30 @@ const createPhotoPanel = () => {
                     </div>
                 </div>
             </div>
-            ${countPhotos > 1 ?
-            `<a class="btn-remove-panel">
+            ${
+                countPhotos > 1
+                    ? `<a class="btn-remove-panel">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
                     <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
                 </svg>
-            </a>` : ''}
+            </a>`
+                    : ""
+            }
             
         </form>
     </div>
-    `
+    `;
 
     if (countPhotos > 1) {
-        $('.line_.show').removeClass('show')
+        $(".line_.show").removeClass("show");
     }
     group.append(panel);
-    lines = $('.line_');
-    setOnClickShowPanel()
-    setOnClickRemovePanel()
-    setOnChangePaperRadio()
-}
+    lines = $(".line_");
+    setOnClickShowPanel();
+    setOnClickRemovePanel();
+    setOnChangePaperRadio();
+};
 
 const calculateWithQuantity = (quantity, rate) => {
     let price = 0;
@@ -235,158 +242,206 @@ const calculateWithQuantity = (quantity, rate) => {
     price = object.photo_price.price_2 * object.photo_distance.d_2;
 
     if (quantity <= object.photo_distance.d_3) {
-        return (price + object.photo_price.price_3 * (quantity - object.photo_distance.d_2)) * rate;
+        return (
+            (price +
+                object.photo_price.price_3 *
+                    (quantity - object.photo_distance.d_2)) *
+            rate
+        );
     }
-    price += object.photo_price.price_3 * (object.photo_distance.d_3 - object.photo_distance.d_2);
+    price +=
+        object.photo_price.price_3 *
+        (object.photo_distance.d_3 - object.photo_distance.d_2);
 
-    return (price + object.photo_price.price_4 * (quantity - object.photo_distance.d_3)) * rate;
-}
+    return (
+        (price +
+            object.photo_price.price_4 *
+                (quantity - object.photo_distance.d_3)) *
+        rate
+    );
+};
 
 const calculateTotal = () => {
-    const panels = group.find('.panel')
+    const panels = group.find(".panel");
 
     sumQuantity = 0;
     panels.each((i, e) => {
-        sumQuantity += Number($(e).find('input[name=quantity]').val());
-    })
+        sumQuantity += Number($(e).find("input[name=quantity]").val());
+    });
 
     if (sumQuantity <= object.photo_distance.d_1) {
-        totalPrice.html(formatMoney(10000) + '₫');
+        totalPrice.html(formatMoney(10000) + "₫");
         return;
     }
 
     total = 0;
     panels.each((i, e) => {
-        const cover = $(e).find('select[name="cover"]').val()
-        let coverPrice = 1000
+        const cover = $(e).find('select[name="cover"]').val();
+        let coverPrice = 1000;
 
-        const paperTypeEle = $(e).find('input[name="paper_type"]:checked')
+        const paperTypeEle = $(e).find('input[name="paper_type"]:checked');
         switch (paperTypeEle.val()) {
-            case 'A3':
-                coverPrice = 1500
+            case "A3":
+                coverPrice = 1500;
                 break;
-            case 'A5':
-                coverPrice = 500
+            case "A5":
+                coverPrice = 500;
                 break;
             default:
-                coverPrice = 1000
+                coverPrice = 1000;
                 break;
         }
         if (cover > 0) total += coverPrice;
-        const isPaper = $(e).find('input[name="is_paper"]:checked').val()
+        const isPaper = $(e).find('input[name="is_paper"]:checked').val();
 
         if (!isPaper) return;
 
-        const quantity = $(e).find('input[name="quantity"]').val()
+        const quantity = $(e).find('input[name="quantity"]').val();
 
-        const rate = $(paperTypeEle).parent().find('input[name="photo_rate"]').val()
+        const rate = $(paperTypeEle)
+            .parent()
+            .find('input[name="photo_rate"]')
+            .val();
 
         total += calculateWithQuantity(quantity, rate);
     });
 
-    totalPrice.html(formatMoney(Math.round(total)) + '₫');
+    totalPrice.html(formatMoney(Math.round(total)) + "₫");
     return;
-}
+};
 
 const setOnClickShowPanel = () => {
-    lines.off('click').on('click', function () {
-        $(this).toggleClass('show')
-    })
-}
+    lines.off("click").on("click", function () {
+        $(this).toggleClass("show");
+    });
+};
 
 const setOnClickRemovePanel = () => {
-    $('.btn-remove-panel').off('click').on('click', function () {
-        if (confirm('Bạn muốn xóa bản ghi photo này?')) {
-            $(this).parent().parent().remove()
-            lines = $('.line_');
-            lines.last().addClass('show')
-        }
-    })
-}
+    $(".btn-remove-panel")
+        .off("click")
+        .on("click", function () {
+            if (confirm("Bạn muốn xóa bản ghi photo này?")) {
+                $(this).parent().parent().remove();
+                lines = $(".line_");
+                lines.last().addClass("show");
+            }
+        });
+};
 
 const renderAddressTree = async (nodeCode, leafCode) => {
     //If result has many province -> use foreach
-    $('#customer_shipping_province').html(`<option value='${addressTree.code}' selected>${addressTree.name}</option>`)
+    $("#customer_shipping_province").html(
+        `<option value='${addressTree.code}' selected>${addressTree.name}</option>`
+    );
 
-    $('#customer_shipping_district').html(`<option value="null">Chọn quận / huyện
-            </option>`)
-    Object.values(addressTree.children).forEach(node => {
-        $('#customer_shipping_district').append(`
-            <option value='${node.code}' ${node.code === nodeCode ? 'selected' : ''}>${node.name_with_type}</option>
-        `)
-
+    $("#customer_shipping_district")
+        .html(`<option value="null">Chọn quận / huyện
+            </option>`);
+    Object.values(addressTree.children).forEach((node) => {
+        $("#customer_shipping_district").append(`
+            <option value='${node.code}' ${
+            node.code === nodeCode ? "selected" : ""
+        }>${node.name_with_type}</option>
+        `);
 
         if (node.code === nodeCode) {
             if (leafCode === undefined) {
-                leafCode = node.children[0]?.code
+                leafCode = node.children[0]?.code;
             }
 
-            $('#customer_shipping_ward').html(`<option value="null">Chọn phường / xã
-            </option>`)
-            Object.values(node.children).forEach(leaf => {
-                $('#customer_shipping_ward').append(`
-                    <option value='${leaf.code}' ${leaf.code === leafCode ? 'selected' : ''}>${leaf.name_with_type}</option>
-                `)
-            })
+            $("#customer_shipping_ward")
+                .html(`<option value="null">Chọn phường / xã
+            </option>`);
+            Object.values(node.children).forEach((leaf) => {
+                $("#customer_shipping_ward").append(`
+                    <option value='${leaf.code}' ${
+                    leaf.code === leafCode ? "selected" : ""
+                }>${leaf.name_with_type}</option>
+                `);
+            });
         }
-    })
-}
+    });
+};
 
 const getAddressTree = () => {
     return new Promise((resolve, reject) => {
         $.ajax({
             url: HN_TREE,
-            type: 'GET',
-            dataType: 'json',
+            type: "GET",
+            dataType: "json",
             success: function (response) {
-                return resolve(response)
+                return resolve(response);
             },
-            error: function (response) {
-            }
+            error: function (response) {},
         });
-    })
-}
+    });
+};
 
 const setOnChangeAddress = () => {
-    $('#customer_shipping_district').off('change').on('change', function (e) {
-        console.log(this.value);
-        renderAddressTree(this.value)
-    })
-}
+    $("#customer_shipping_district")
+        .off("change")
+        .on("change", function (e) {
+            console.log(this.value);
+            renderAddressTree(this.value);
+        });
+};
 
 const setOnChangePaperRadio = () => {
-    $('input[type=radio][name=is_paper]').change(function () {
-        const parent = $(this).parent().parent().parent().parent().parent()
+    $("input[type=radio][name=is_paper]").change(function () {
+        const parent = $(this).parent().parent().parent().parent().parent();
         if (this.value == 1) {
-            $(parent).find('select[name=cover]').val(0).attr('disabled', 'disabled')
-        }
-        else if (this.value == 0) {
-            $(parent).find('select[name=cover]').removeAttr('disabled')
+            $(parent)
+                .find("select[name=cover]")
+                .val(0)
+                .attr("disabled", "disabled");
+        } else if (this.value == 0) {
+            $(parent).find("select[name=cover]").removeAttr("disabled");
         }
     });
-}
+};
 
 const createPhotoOrder = () => {
-    const formData = new FormData()
+    const formData = new FormData();
 
-    const address = $('#address').val()
-    const ward = $('#customer_shipping_ward').val()
-    const district = $('#customer_shipping_district').val()
-    const province = $('#customer_shipping_province').val()
-    const name = $('#full_name').val()
-    const phone = $('#phone').val()
-    const timeReceive = $('#time_receive').val()
-    const payment = $('input[name="payment"]:checked').val()
-    const wardAdd = $(`#customer_shipping_ward option[value="${ward}"]`).html()
-    const districtAdd = $(`#customer_shipping_district option[value="${district}"]`).html()
-    const provinceAdd = $(`#customer_shipping_province option[value="${province}"]`).html()
+    const address = $("#address").val();
+    const ward = $("#customer_shipping_ward").val();
+    const district = $("#customer_shipping_district").val();
+    const province = $("#customer_shipping_province").val();
+    const name = $("#full_name").val();
+    const phone = $("#phone").val();
+    const timeReceive = $("#time_receive").val();
+    const payment = $('input[name="payment"]:checked').val();
+    const wardAdd = $(`#customer_shipping_ward option[value="${ward}"]`).html();
+    const districtAdd = $(
+        `#customer_shipping_district option[value="${district}"]`
+    ).html();
+    const provinceAdd = $(
+        `#customer_shipping_province option[value="${province}"]`
+    ).html();
 
-    if (name.trim() == "" || phone.trim() == "" || address.trim() == "" || ward.trim() == "" || province.trim() == "" || district.trim() == "") {
+    if (
+        name.trim() == "" ||
+        phone.trim() == "" ||
+        address.trim() == "" ||
+        ward.trim() == "" ||
+        province.trim() == "" ||
+        district.trim() == ""
+    ) {
         renderToast({
-            status: 'danger',
-            title: 'Lỗi',
-            text: "Điền thiếu thông tin!"
-        })
+            status: "danger",
+            title: "Lỗi",
+            text: "Điền thiếu thông tin!",
+        });
+        return
+    }
+
+    if (!validatePhoneNumber(phone.trim())) {
+        renderToast({
+            status: "danger",
+            title: "Lỗi",
+            text: "Số điện thoại không hợp lệ!",
+        });
+        return
     }
 
     const info = {
@@ -399,32 +454,34 @@ const createPhotoOrder = () => {
         time_receive: timeReceive,
         payment,
         full_address: `${address}, ${wardAdd}, ${districtAdd}, ${provinceAdd}`,
-        sum_quantity: sumQuantity
-    }
+        sum_quantity: sumQuantity,
+    };
 
-    formData.append('info', JSON.stringify(info))
+    formData.append("info", JSON.stringify(info));
 
     let data = [];
-    const panels = group.find('.panel')
-    let checkSubmit = true
+    const panels = group.find(".panel");
+    let checkSubmit = true;
 
     panels.each((i, e) => {
-        const paperType = $(e).find('input[name="paper_type"]:checked').val()
-        const isPaper = $(e).find('input[name="is_paper"]:checked').val()
-        const faceNumber = $(e).find('input[name="face_number"]:checked').val()
-        const quantity = $(e).find('input[name="quantity"]').val()
-        const cover = $(e).find('select[name="cover"]').val()
-        const photoFile = $(e).find('input[name="photo-file"]').prop('files')[0]
-        const note = $(e).find('.note').html()
+        const paperType = $(e).find('input[name="paper_type"]:checked').val();
+        const isPaper = $(e).find('input[name="is_paper"]:checked').val();
+        const faceNumber = $(e).find('input[name="face_number"]:checked').val();
+        const quantity = $(e).find('input[name="quantity"]').val();
+        const cover = $(e).find('select[name="cover"]').val();
+        const photoFile = $(e)
+            .find('input[name="photo-file"]')
+            .prop("files")[0];
+        const note = $(e).find(".note").html();
 
         if (photoFile == undefined) {
             renderToast({
-                status: 'danger',
-                title: 'Lỗi',
-                text: "Chưa chọn file."
-            })
-            checkSubmit = false
-            return
+                status: "danger",
+                title: "Lỗi",
+                text: "Chưa chọn file.",
+            });
+            checkSubmit = false;
+            return;
         }
 
         const dataAdd = {
@@ -434,54 +491,66 @@ const createPhotoOrder = () => {
             descriptions: note,
             type: paperType,
             quantity: quantity,
-        }
+        };
 
-        data.push(dataAdd)
-        formData.append('data[]', JSON.stringify(dataAdd))
-        formData.append('files[]', photoFile)
+        data.push(dataAdd);
+        formData.append("data[]", JSON.stringify(dataAdd));
+        formData.append("files[]", photoFile);
     });
 
     if (!checkSubmit) {
-        return
+        return;
     }
 
     $.ajax({
         url: PHOTOS_ORDER_CREATE,
-        type: 'POST',
+        type: "POST",
         data: formData,
         processData: false,
         contentType: false,
+        beforeSend: function () {
+          $('#btn-create-order').addClass('d-none')
+        },
         success: async function (response) {
             if (response.status) {
                 renderToast({
-                    title: 'Đơn hàng',
+                    title: "Đơn photo",
                     text: response.message,
-                })
+                });
+
+                setTimeout(() => {
+                    location.replace(CART_HISTORY);
+                }, 1000);
             }
+            
+            $('#btn-create-order').addClass('d-block')
         },
         error: function (response) {
             renderToast({
-                status: 'danger',
-                title: 'Lỗi',
-                text: response.responseJSON.message
-            })
-        }
-    })
-}
+                status: "danger",
+                title: "Lỗi",
+                text: response.responseJSON.message,
+            });
+        },
+    });
+};
 
 const main = async () => {
-    setOnClickShowPanel()
-    createPhotoPanel()
+    setOnClickShowPanel();
+    createPhotoPanel();
 
-    renderBanks('.banks')
+    renderBanks(".banks");
 
     addressTree = await getAddressTree();
-    await renderAddressTree()
-    setOnChangeAddress()
+    await renderAddressTree();
+    setOnChangeAddress();
 
-    $('#btn-create-order').off('click').on('click', function () {
-        createPhotoOrder()
-    })
-}
+    $("#btn-create-order")
+        .off("click")
+        .on("click", function (e) {
+            e.preventDefault()
+            createPhotoOrder();
+        });
+};
 
 main();

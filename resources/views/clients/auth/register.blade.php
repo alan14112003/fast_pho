@@ -47,17 +47,36 @@
                                     <input type="email" value="" placeholder="Email" name="email" id="email"
                                         class="text" size="30">
                                 </div>
-                                <div id="form-password" class="clearfix large_form large_form">
+                                <div id="form-password" class="clearfix large_form large_form" style="position: relative">
                                     <label for="password" class="label icon-field"><i
                                             class="icon-login icon-shield "></i></label>
                                     <input required type="password" value="" placeholder="Mật khẩu" name="password"
                                         id="password" class="password text" size="30">
+                                    <span class="eye-pass"
+                                        style="    position: absolute;
+                                                            right: 10px;
+                                                            top: 50%;
+                                                            transform: translateY(-50%);
+                                                            cursor: pointer;
+                                                            ">
+                                        <img src="{{ asset('icons/eye.svg') }}" alt="">
+                                    </span>
                                 </div>
-                                <div id="form-password" class="clearfix large_form large_form-mr10">
+                                <div id="form-password" class="clearfix large_form large_form-mr10"
+                                    style="position: relative">
                                     <label for="password" class="label icon-field"><i
                                             class="icon-login icon-shield "></i></label>
                                     <input required type="password" value="" placeholder="Nhập lại mật khẩu"
                                         id="re-password" class="re-password text" size="30">
+                                    <span class="eye-pass"
+                                        style="    position: absolute;
+                                                            right: 10px;
+                                                            top: 50%;
+                                                            transform: translateY(-50%);
+                                                            cursor: pointer;
+                                                            ">
+                                        <img src="{{ asset('icons/eye.svg') }}" alt="">
+                                    </span>
                                 </div>
                                 <div class="clearfix action_account_custommer">
                                     <div class="action_bottom button dark">

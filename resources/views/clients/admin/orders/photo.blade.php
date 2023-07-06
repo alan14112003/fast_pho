@@ -69,6 +69,9 @@
                                     </thead>
                                     <tbody id="body-content"></tbody>
                                 </table>
+                                <div >
+                                    Tổng cộng: <span class="total"></span>
+                                </div>
                             </div>
                         </div>
                     </div>

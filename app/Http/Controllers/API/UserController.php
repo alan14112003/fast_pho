@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Auth\UpdateProfileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -78,5 +79,21 @@ class UserController extends Controller
         } catch (\Throwable $e) {
             return $this->responseTrait("Có lỗi! {$e->getMessage()}");
         }
+    }
+
+    public function changeAvatar(Request $request)
+    {
+        if (!Auth::check()) return $this->responseTrait('Bạn chưa đăng nhập');
+
+        $imagePath = Storage::disk('public')->putFileAs(
+            "images/users/" . Auth::id(),
+            $request->file('avatar'),
+            "image.{$request->file('avatar')->extension()}"
+        );
+
+        User::query()->find(Auth::id())->update([
+            'avatar' => $imagePath
+        ]);
+        return $this->responseTrait('Đổi ảnh đại diện thành công', true);
     }
 }

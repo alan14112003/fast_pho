@@ -45,9 +45,19 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <div class="input-group input-group-merge">
+                                    <div class="input-group input-group-merge" style="position: relative;">
                                         <input type="password" id="password" class="form-control"
                                             placeholder="Enter your password" name="password">
+                                        <span class="eye-pass"
+                                            style="    position: absolute;
+                                                            right: 10px;
+                                                            top: 50%;
+                                                            transform: translateY(-50%);
+                                                            cursor: pointer;
+                                                            z-index: 5;
+                                                            ">
+                                            <img src="{{ asset('icons/eye.svg') }}" alt="">
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="form-group mb-0 text-center">
@@ -68,5 +78,16 @@
 </body>
 @include('libraries')
 <script src="{{ asset('js/admin/login.js') }}" type="module"></script>
+
+<script>
+    $('.eye-pass').off('click').on('click', function() {
+        $(this).toggleClass('active')
+        if ($(this).hasClass('active')) {
+            $(this).parent().find('input').attr('type', 'text')
+            return
+        }
+        $(this).parent().find('input').attr('type', 'password')
+    })
+</script>
 
 </html>

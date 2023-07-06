@@ -8,22 +8,22 @@
             </div>
 
             <ul class="pc_nav_box poa antart_b" id="pc_nav_box">
-                <li class="@if(isset($cur_page))@if($cur_page == 'index')active @endif @endif">
+                <li class="@if (isset($cur_page)) @if ($cur_page == 'index')active @endif @endif">
                     <a href="/" class="a">
                         Trang chủ
                     </a>
                 </li>
-                <li class="@if(isset($cur_page))@if($cur_page == 'photocopy')active @endif @endif">
+                <li class="@if (isset($cur_page)) @if ($cur_page == 'photocopy')active @endif @endif">
                     <a href="{{ route('photocopy') }}" class="a">Photocopy</a>
                 </li>
-                <li class="@if(isset($cur_page))@if($cur_page == 'products') active @endif @endif">
+                <li class="@if (isset($cur_page)) @if ($cur_page == 'products') active @endif @endif">
                     <a href="{{ route('products.index') }}" class="a">Sản phẩm </a>
                     <div class="prosub-box poa">
                         <div id="prosub-box">
                         </div>
                     </div>
                 </li>
-                <li class="@if(isset($cur_page))@if($cur_page == 'about')active @endif @endif">
+                <li class="@if (isset($cur_page)) @if ($cur_page == 'about')active @endif @endif">
                     <a href="{{ route('about') }}" class="a">Về chúng tôi</a>
                 </li>
             </ul>
@@ -41,17 +41,18 @@
                     </div>
                     <div class="item_option poa">
                         <div class="link">
-                            <a href="" target="_blank">Facebook</a>
+                            <a href="https://www.facebook.com/profile.php?id=100092715771742"
+                                target="_blank">Facebook</a>
                         </div>
                         <div class="link">
-                            <a href="" target="_blank">Instagram</a>
+                            <a href="https://www.instagram.com/fastphovn" target="_blank">Instagram</a>
 
                         </div>
                         <div class="link">
-                            <a href="" target="_blank">Youtube&nbsp;</a>
+                            <a href="https://www.youtube.com/channel/UCZ4d845dzB4xtMGWfoXCbsA" target="_blank">Youtube&nbsp;</a>
                         </div>
                         <div class="link">
-                            <a href="" target="_blank">Tiktok</a>
+                            <a href="https://www.tiktok.com/@fastphovn" target="_blank">Tiktok</a>
                         </div>
                     </div>
                 </div>
@@ -73,6 +74,12 @@
                                     <p class="ttbold">Giỏ hàng</p>
                                 </div>
                                 <div class="cart-view clearfix">
+                                    <div class="cart-view-scroll">
+                                        <table id="cart-view">
+                                            <tbody id="cart-body">
+                                            </tbody>
+                                        </table>
+                                    </div>
                                     <div class="line"></div>
                                     <div class="cart-view-total">
                                         <table class="table-total">
@@ -84,7 +91,8 @@
                                                 <tr>
                                                     <td><a href="/cart" class="linktocart button dark">Xem giỏ
                                                             hàng</a></td>
-                                                    <td><a href="{{ route('cart.details') }}" class="linktocheckout button dark">Thanh
+                                                    <td><a href="{{ route('cart.details') }}"
+                                                            class="linktocheckout button dark">Thanh
                                                             toán</a></td>
                                                 </tr>
                                             </tbody>
@@ -95,9 +103,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="item header-action header-action_account" id="pccart_btn">
-                    <div class="item_up">
-                        <img src="{{ asset('images/user.png') }}" alt="">
+                <div class="item header-action header-action_account" id="">
+                    <div class="item_up" style="position: relative; width: 30px">
+                        @auth
+                            <img src="{{ asset('storage/' . auth()->user()->avatar) . '?' . now() }}" class="rounded-circle"
+                                style="position: absolute; width: 30px; height: 30px; max-height: none;" alt="">
+                        @endauth
+                        @guest
+                            <img src="{{ asset('images/user.png') }}" alt="">
+                        @endguest
                     </div>
                     <div class="header-action_dropdown user">
                         <span class="box-triangle">
@@ -116,7 +130,12 @@
                                                 <h2 class="site_account_title heading">Thông tin tài khoản</h2>
                                             </header>
                                             <ul>
-                                                <li><span>{{ auth()->user()->name }}</span></li>
+                                                <li class="d-flex align-items-center">
+                                                    <img src="{{ asset('storage/' . auth()->user()->avatar) . '?' . now() }}"
+                                                        class="rounded-circle" alt=""
+                                                        style="width: 30px; height: 30px; max-height: none;">
+                                                    <span class="ms-1">{{ auth()->user()->name }}</span>
+                                                </li>
                                                 <li><a href="{{ route('profile') }}">Tài khoản của tôi</a></li>
                                                 <li><a href="{{ route('cart.history') }}">Lịch sử đơn hàng</a></li>
                                                 <li><a id="logout-btn">Đăng xuất</a></li>
@@ -153,6 +172,13 @@
                                                             required="required" autocomplete="current-password">
                                                         <label for="login-password" class="form__floating-label">Mật
                                                             khẩu</label>
+                                                        <span class="eye-pass"
+                                                            style="position: absolute;
+                                                            right: 10px;
+                                                            bottom: 50%;
+                                                            transform: translateY(50%);">
+                                                            <img src="{{ asset('icons/eye.svg') }}" alt="">
+                                                        </span>
                                                     </div>
                                                     <button type="submit" class="form__submit button dark"
                                                         id="form_submit-login">Đăng nhập</button>
@@ -255,3 +281,15 @@
         </div>
     </div>
 </header>
+@push('scripts')
+    <script>
+        $('.eye-pass').off('click').on('click', function() {
+            $(this).toggleClass('active')
+            if ($(this).hasClass('active')) {
+                $(this).parent().find('input').attr('type', 'text')
+                return
+            }
+            $(this).parent().find('input').attr('type', 'password')
+        })
+    </script>
+@endpush

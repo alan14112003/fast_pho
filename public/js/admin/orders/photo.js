@@ -29,13 +29,14 @@ const renderOrder = () => {
         $('.user_address').html(order.user_address)
         $('.type').html(order.type)
 
-
+        let total = 0
         const photos = order.order_photos
             
         const html = photos.map((p, index) => {
           
           const photoName = p.file ?? ''
           const download = `<img src="${ICONS}download.svg" width="20" />`
+          total += p.price
 
           return `
             <tr>
@@ -47,7 +48,7 @@ const renderOrder = () => {
               <td class="col-2">${p.is_cover}</td>
               <td>${p.total}</td>
               <td>${p.descriptions}</td>
-              <td>${formatCurrency(p.price)}</td>
+              <td>${order.total ? '-' : formatCurrency(p.price)}</td>
               <td>
                 ${
                   p.file ? 
@@ -62,6 +63,8 @@ const renderOrder = () => {
         }).join('')
 
         bodyContent.html(html)
+
+        $('.total').html(order.total ? formatCurrency(order.total) : formatCurrency(total))
         resolve()
       },
       error: function (response) {
