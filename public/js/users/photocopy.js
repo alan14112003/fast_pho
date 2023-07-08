@@ -69,9 +69,9 @@ btnCreatePhoto.off("click").on("click", function () {
     createPhotoPanel();
 });
 
-btnCalTotal.off("click").on("click", function () {
-    calculateTotal();
-});
+// btnCalTotal.off("click").on("click", function () {
+//     calculateTotal();
+// });
 
 const createPhotoPanel = () => {
     ++countPhotos;
@@ -102,7 +102,7 @@ const createPhotoPanel = () => {
             <div class="row col-xl-12">
                 <div class="left col-xl-4">
                     <div class="content">
-                        <div class="header">
+                        <label for="file-${countPhotos}" class="header">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -115,7 +115,7 @@ const createPhotoPanel = () => {
                                 </g>
                             </svg>
                             <p>Browse File to upload!</p>
-                        </div>
+                        </label>
                         <label for="file-${countPhotos}" class="footer">
                             <svg fill="#000000" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -232,83 +232,83 @@ const createPhotoPanel = () => {
     setOnChangePaperRadio();
 };
 
-const calculateWithQuantity = (quantity, rate) => {
-    let price = 0;
-    rate = rate / 100;
+// const calculateWithQuantity = (quantity, rate) => {
+//     let price = 0;
+//     rate = rate / 100;
 
-    if (quantity <= object.photo_distance.d_2) {
-        return object.photo_price.price_2 * quantity * rate;
-    }
-    price = object.photo_price.price_2 * object.photo_distance.d_2;
+//     if (quantity <= object.photo_distance.d_2) {
+//         return object.photo_price.price_2 * quantity * rate;
+//     }
+//     price = object.photo_price.price_2 * object.photo_distance.d_2;
 
-    if (quantity <= object.photo_distance.d_3) {
-        return (
-            (price +
-                object.photo_price.price_3 *
-                    (quantity - object.photo_distance.d_2)) *
-            rate
-        );
-    }
-    price +=
-        object.photo_price.price_3 *
-        (object.photo_distance.d_3 - object.photo_distance.d_2);
+//     if (quantity <= object.photo_distance.d_3) {
+//         return (
+//             (price +
+//                 object.photo_price.price_3 *
+//                     (quantity - object.photo_distance.d_2)) *
+//             rate
+//         );
+//     }
+//     price +=
+//         object.photo_price.price_3 *
+//         (object.photo_distance.d_3 - object.photo_distance.d_2);
 
-    return (
-        (price +
-            object.photo_price.price_4 *
-                (quantity - object.photo_distance.d_3)) *
-        rate
-    );
-};
+//     return (
+//         (price +
+//             object.photo_price.price_4 *
+//                 (quantity - object.photo_distance.d_3)) *
+//         rate
+//     );
+// };
 
-const calculateTotal = () => {
-    const panels = group.find(".panel");
+// const calculateTotal = () => {
+//     const panels = group.find(".panel");
 
-    sumQuantity = 0;
-    panels.each((i, e) => {
-        sumQuantity += Number($(e).find("input[name=quantity]").val());
-    });
+//     sumQuantity = 0;
+//     panels.each((i, e) => {
+//         sumQuantity += Number($(e).find("input[name=quantity]").val());
+//     });
 
-    if (sumQuantity <= object.photo_distance.d_1) {
-        totalPrice.html(formatMoney(10000) + "₫");
-        return;
-    }
+//     if (sumQuantity <= object.photo_distance.d_1) {
+//         totalPrice.html(formatMoney(10000) + "₫");
+//         return;
+//     }
 
-    total = 0;
-    panels.each((i, e) => {
-        const cover = $(e).find('select[name="cover"]').val();
-        let coverPrice = 1000;
+//     total = 0;
+//     panels.each((i, e) => {
+//         const cover = $(e).find('select[name="cover"]').val();
+//         let coverPrice = 1000;
 
-        const paperTypeEle = $(e).find('input[name="paper_type"]:checked');
-        switch (paperTypeEle.val()) {
-            case "A3":
-                coverPrice = 1500;
-                break;
-            case "A5":
-                coverPrice = 500;
-                break;
-            default:
-                coverPrice = 1000;
-                break;
-        }
-        if (cover > 0) total += coverPrice;
-        const isPaper = $(e).find('input[name="is_paper"]:checked').val();
+//         const paperTypeEle = $(e).find('input[name="paper_type"]:checked');
+//         switch (paperTypeEle.val()) {
+//             case "A3":
+//                 coverPrice = 1500;
+//                 break;
+//             case "A5":
+//                 coverPrice = 500;
+//                 break;
+//             default:
+//                 coverPrice = 1000;
+//                 break;
+//         }
+//         if (cover > 0) total += coverPrice;
+//         const isPaper = $(e).find('input[name="is_paper"]:checked').val();
 
-        if (!isPaper) return;
+//         if (!isPaper) return;
 
-        const quantity = $(e).find('input[name="quantity"]').val();
+//         const quantity = $(e).find('input[name="quantity"]').val();
 
-        const rate = $(paperTypeEle)
-            .parent()
-            .find('input[name="photo_rate"]')
-            .val();
+//         const rate = $(paperTypeEle)
+//             .parent()
+//             .find('input[name="photo_rate"]')
+//             .val();
 
-        total += calculateWithQuantity(quantity, rate);
-    });
+//         total += calculateWithQuantity(quantity, rate);
+//     });
 
-    totalPrice.html(formatMoney(Math.round(total)) + "₫");
-    return;
-};
+//     totalPrice.html(formatMoney(Math.round(total)) + "₫");
+//     return;
+// };
 
 const setOnClickShowPanel = () => {
     lines.off("click").on("click", function () {
@@ -521,9 +521,15 @@ const createPhotoOrder = () => {
                 setTimeout(() => {
                     location.replace(CART_HISTORY);
                 }, 1000);
+                return
             }
+            renderToast({
+                status: "danger",
+                title: "Lỗi",
+                text: response.message,
+            });
             
-            $('#btn-create-order').addClass('d-block')
+            $('#btn-create-order').removeClass('d-none')
         },
         error: function (response) {
             renderToast({
@@ -538,8 +544,6 @@ const createPhotoOrder = () => {
 const main = async () => {
     setOnClickShowPanel();
     createPhotoPanel();
-
-    renderBanks(".banks");
 
     addressTree = await getAddressTree();
     await renderAddressTree();

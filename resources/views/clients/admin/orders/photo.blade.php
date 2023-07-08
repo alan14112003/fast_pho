@@ -65,12 +65,16 @@
                                             <th class="col-4">Ghi chú</th>
                                             <th>Giá</th>
                                             <th></th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody id="body-content"></tbody>
                                 </table>
-                                <div >
-                                    Tổng cộng: <span class="total"></span>
+                                <div>
+                                    Tổng cộng: <span class="total total-view"></span> <span
+                                        class="total-handle d-none"><input type="text"> <button
+                                            class="btn btn-primary btn-sm">ok</button></span>
+                                    <button class="btn btn-primary ms-2 btn-add-total">nhập giá tổng</button>
                                 </div>
                             </div>
                         </div>
@@ -90,5 +94,5 @@
     </div>
 @endsection
 @push('scripts')
-   <script src="{{ asset('js/admin/orders/photo.js') }}" type="module"></script>
+    <script src="{{ asset('js/admin/orders/photo.js') }}" type="module"></script>
 @endpush

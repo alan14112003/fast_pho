@@ -19,6 +19,8 @@ export const PRODUCT_VIEW = DOMAIN + 'products/:slug'
 
 export const CART_VIEW = DOMAIN + 'cart'
 export const CART_HISTORY = DOMAIN + 'cart/history'
+export const CART_HISTORY_PRODUCT =  DOMAIN + 'cart/history/product/:id'
+export const CART_HISTORY_PHOTO =  DOMAIN + 'cart/history/photo/:id'
 
 export const BANK_EDIT = DOMAIN + 'admin/config/edit-bank/:id'
 
@@ -76,6 +78,8 @@ export const PHOTOS_ORDER_CREATE = DOMAIN + 'api/orders/photos'
 export const CHANGE_STATUS_ORDER = DOMAIN + 'api/orders/:id/change-status'
 export const PRODUCT_ORDER = DOMAIN + 'api/orders/:id/product'
 export const PHOTO_ORDER = DOMAIN + 'api/orders/:id/photo'
+export const PHOTO_ORDER_PRICE = DOMAIN + 'api/orders/:id/photo-price'
+export const ORDER_TOTAL = DOMAIN + 'api/orders/:id/total'
 
 //Cart
 export const CART = DOMAIN + 'api/cart'

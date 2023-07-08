@@ -106,6 +106,10 @@ Route::prefix('/cart')
         Route::middleware('user')->group(function () {
             Route::get('/details', 'details')->name('details');
             Route::get('/history', 'history')->name('history');
+            Route::prefix('/history')->group(function() {
+                Route::get('/product/{id}', 'historyProduct')->name('history_product');
+                Route::get('/photo/{id}', 'historyPhoto')->name('history_photo');
+            });
         });
     });
 
@@ -126,11 +130,6 @@ Route::controller(AuthController::class)->group(function () {
 Route::prefix('products/')
     ->name('products.')
     ->group(function () {
-        Route::controller(ProductController::class)
-            ->group(function () {
-                Route::get('', 'index')->name('index');
-                Route::get('{slug}', 'show')->name('show');
-            });
         Route::controller(ProductController::class)
             ->group(function () {
                 Route::get('', 'index')->name('index');

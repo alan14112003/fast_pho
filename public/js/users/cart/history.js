@@ -1,5 +1,5 @@
-import { PHOTOS_ORDERS, PHOTOS_ORDERS_AUTH, PRODUCT_ORDERS, PRODUCT_ORDERS_AUTH } from "../../url.js"
-import { formatDateTime, renderLoading, renderPagination, renderToast } from "../../helper.js"
+import { CART_HISTORY_PHOTO, CART_HISTORY_PRODUCT, ICONS, PHOTOS_ORDERS_AUTH, PRODUCT_ORDERS_AUTH } from "../../url.js"
+import { formatDateTime, renderBanks, renderLoading, renderPagination, renderToast } from "../../helper.js"
 
 
 const page = new URLSearchParams(window.location.search).get('page') ?? 1;
@@ -29,18 +29,25 @@ const renderOrders = (typePage) => {
         }
         const orders = response.body.data;
         bodyContent.html('');
+        const viewOrderUrl = (typePage === 'PRODUCT') ? CART_HISTORY_PRODUCT : CART_HISTORY_PHOTO
+
         orders.forEach(o => {
-            const id = `<th class="col-1" scope="row">${o.id}</th>`
+            const id = `<th scope="row">${o.id}</th>`
 
             const createdAt = formatDateTime(new Date(o.created_at))
 
             bodyContent.append(`
               <tr>
                   ${id}
-                  <td class="col-1">${o.item_count}</td>
-                  <td class="col-1">${o.type}</td>
-                  <td class="col-2">${createdAt}</td>
-                  <td class="col-2">${o.status}</td>
+                  <td>${o.item_count}</td>
+                  <td>${o.type}</td>
+                  <td>${createdAt}</td>
+                  <td>${o.status}</td>
+                  <td>
+                    <a href="${viewOrderUrl.replace(':id', o.id)}" data-bs-toggle="tooltip" title="Xem chi tiết">
+                      <img src="${ICONS}eye.svg" />
+                    </a>
+                  </td>
               </tr>
             `)
         })
@@ -61,6 +68,7 @@ const renderOrders = (typePage) => {
 }
 
 const main = async () => {
+  renderBanks('.banks')
   await renderOrders('PRODUCT')
   await renderOrders('PHOTOS')
 }

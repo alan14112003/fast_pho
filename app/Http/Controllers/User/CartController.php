@@ -26,4 +26,16 @@ class CartController extends Controller
     public function history() {
         return view('clients.users.cart.history');
     }
+
+    public function historyProduct($id) {
+        return view('clients.users.cart.history_product', [
+            'id' => $id
+        ]);
+    }
+
+    public function historyPhoto($id) {
+        return view('clients.users.cart.history_photo', [
+            'id' => $id
+        ]);
+    }
 }

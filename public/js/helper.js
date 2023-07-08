@@ -181,36 +181,40 @@ export const formatDateTime = (date) => {
 };
 
 export const renderBanks = async (ele) => {
-    $.ajax({
-        url: BANKS,
-        type: "GET",
-
-        success: function (response) {
-            if (response.status) {
-                const banks = response.body;
-                $(ele).html("");
-
-                banks.forEach((bank) => {
-                    const html = `
-                    <div class="bank_container .row">
-                        <div class="bank_box col-lg-3 col-6">
-                            <div class="bank_qr_code">
-                                <img src="${STORAGE + bank.info_1}" alt="">
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: BANKS,
+            type: "GET",
+    
+            success: function (response) {
+                if (response.status) {
+                    const banks = response.body;
+                    const bankBox = $(`<div>`, {
+                        class: "bank_container row"
+                    })
+                    $(ele).html(bankBox);
+    
+                    banks.forEach((bank) => {
+                        const html = `
+                            <div class="bank_box col-lg-3 col-6">
+                                <div class="bank_qr_code">
+                                    <img src="${STORAGE + bank.info_1}" alt="">
+                                </div>
+                                <div class="bank_info">
+                                    ${bank.info_2}
+                                </div>
                             </div>
-                            <div class="bank_info">
-                                ${bank.info_2}
-                            </div>
-                        </div>
-                    </div>
-                    `;
-                    $(ele).append(html);
-                });
-            }
-        },
-        error: function (response) {
-            reject(response.responseJSON.message);
-        },
-    });
+                        `;
+                        $(bankBox).append(html);
+                    });
+                    resolve()
+                }
+            },
+            error: function (response) {
+                reject(response.responseJSON.message);
+            },
+        });
+    })
 };
 
 export const validatePhoneNumber = (phoneNumber) => {

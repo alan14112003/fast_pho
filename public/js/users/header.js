@@ -280,7 +280,15 @@ const main = async () => {
                         title: 'Thành công',
                         text: response.message
                     })
+                
+                    return
                 }
+                
+                renderToast({
+                    status: 'danger',
+                    title: 'Lỗi',
+                    text: response.message
+                })
             },
             error: function (response) {
                 renderToast({
