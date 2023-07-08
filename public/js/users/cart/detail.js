@@ -188,6 +188,7 @@ $("#checkout_complete")
                     setTimeout(() => {
                         location.replace(CART_HISTORY);
                     }, 1000);
+                    return
                 }
                 renderToast({
                     status: "danger",

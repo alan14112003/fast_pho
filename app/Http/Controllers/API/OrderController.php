@@ -337,12 +337,50 @@ class OrderController extends Controller
         return $this->responseTrait('Thành công', true, $order);
     }
 
+    public function photoPrice($id, Request $request) {
+        try {
+            $price = $request->get('price');
+
+            $photoOrder = OrderPhoto::query()->find($id);
+            if (is_null($photoOrder)) {
+                return $this->responseTrait('không tồn tại đơn hàng photo này');
+            }
+            
+            $photoOrder->update([
+                'photo_price' => $price
+            ]);
+
+            return $this->responseTrait('Nhập giá thành công', true);
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return $this->responseTrait('có lỗi! ' . $e->getMessage());
+        }
+    }
+
+    public function updateTotal($id, Request $request) {
+        try {
+            $total = $request->get('total');
+
+            $order = Order::query()->find($id);
+            if (is_null($order)) {
+                return $this->responseTrait('không tồn tại đơn hàng này');
+            }
+            
+            $order->update([
+                'total' => $total
+            ]);
+
+            return $this->responseTrait('Nhập tổng tiền thành công', true);
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return $this->responseTrait('có lỗi! ' . $e->getMessage());
+        }
+    }
+
     public function photosCreate(Request $request): \Illuminate\Http\JsonResponse
     {
         DB::beginTransaction();
         try {
-            $flag = true;
-            $total = 0;
             $data = $request->get('data');
 
             $info = json_decode($request->get('info'));
@@ -363,11 +401,6 @@ class OrderController extends Controller
                 }
             }
 
-            if ($info->sum_quantity <= 10) {
-                $flag = false;
-                $total = 10000;
-            }
-
             $order = Order::query()->create([
                 'delivery_time' => $info->time_receive,
                 'user_id' => Auth::id(),
@@ -375,22 +408,15 @@ class OrderController extends Controller
                 'user_phone' => $info->phone,
                 'user_address' => $info->full_address,
                 'type' => $info->payment,
-                'total' => $total
             ]);
 
             foreach ($data as $key => $value) {
                 $photoValue = json_decode($value);
-                $price = 0;
 
                 $type = $photoValue->type;
                 $quantity = $photoValue->quantity;
                 $cover = $photoValue->cover;
                 $isPaper = $photoValue->is_paper;
-
-                if ($flag && $isPaper === PhotoPrintTypeEnum::PAPER) {
-                    $price = calculatePhotoOrderPrice($type, $cover, $quantity);
-                    $total += $price;
-                }
 
                 $photo = Photo::query()->create([
                     'total' => $quantity,
@@ -398,7 +424,7 @@ class OrderController extends Controller
                     'is_cover' => $cover,
                     'is_paper' => $isPaper,
                     'descriptions' => $photoValue->descriptions,
-                    'price' => $price,
+                    'price' => 0,
                     'type' => $type,
                 ]);
 
@@ -418,10 +444,6 @@ class OrderController extends Controller
                     'photo_price' => $photo->price,
                 ]);
             }
-
-            $order->update([
-                'total' => $total
-            ]);
 
             DB::commit();
 

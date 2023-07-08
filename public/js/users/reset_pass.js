@@ -35,7 +35,13 @@ $('#form-reset-pass').on('submit', function (e) {
                 setTimeout(() => {
                     window.location.replace(DOMAIN)
                 }, 2000)
+                return
             }
+            renderToast({
+                status: 'danger',
+                title: 'Lỗi',
+                text: response.message
+            })
         },
         error: function (response) {
             renderToast({

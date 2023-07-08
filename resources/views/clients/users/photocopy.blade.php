@@ -182,17 +182,6 @@
                                         </div>
                                     </label>
                                 </div>
-
-                                <div class="radio-wrapper content-box-row content-box-row-secondary"
-                                    for="payment_method_id_1003594838">
-                                    <div class="blank-slate">
-                                        *Lưu ý: Nhân viên sẽ gọi xác nhận và thông báo số tiền cần chuyển khoản của
-                                        quý khách, quý khách vui lòng không chuyển khoản trước.
-                                        <div class="banks">
-
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -207,32 +196,25 @@
                     </div>
                     <div class="sidebox-order_total">
                         <p>Tổng tiền:
-                            <span class="total-price">0₫</span>
+                            <span class="total-price">--</span>
                         </p>
                     </div>
                     <div class="sidebox-order_text">
-                        <p>*Tổng tiền chỉ mang tính tương đối.<br>
                     </div>
                     <div class="sidebox-order_action">
-                        <a href="#" id="btn-create-order" class="button dark btncart-checkout">THANH
-                            TOÁN</a>
-                        <p class="link-continue text-center">
-                            <a href="https://fast_pho.com/products">
-                                <i class="fa fa-reply"></i> Tiếp tục mua hàng
-                            </a>
-                        </p>
+                        <a href="#" id="btn-create-order" class="button dark btncart-checkout">ĐẶT ĐƠN</a>
                     </div>
                 </div>
             </div>
-            <div>
+            <div class="text-center">
                 <a href="#" id="btn-create-photo" class="step-footer-continue-btn btn mb-2">
                     <span>Thêm bản ghi</span>
                     <i class="btn-spinner icon icon-button-spinner"></i>
                 </a>
-                <a href="#" id="btn-calculate-total" class="step-footer-continue-btn btn mb-2">
+                {{-- <a href="#" id="btn-calculate-total" class="step-footer-continue-btn btn mb-2">
                     <span>Tính tổng tiền</span>
                     <i class="btn-spinner icon icon-button-spinner"></i>
-                </a>
+                </a> --}}
             </div>
             <ul class="mt-2 list-type">
                 <label for="">Các loại giấy:</label>

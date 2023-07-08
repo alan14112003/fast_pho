@@ -121,7 +121,9 @@ Route::prefix('orders')
         Route::prefix('/{id}')->group(function () {
             Route::get('/product', 'product')->name('product');
             Route::get('/photo', 'photo')->name('photo');
+            Route::put('/photo-price', 'photoPrice')->name('photo_price');
             Route::put('/change-status', 'changeStatus')->name('change_status');
+            Route::put('/total', 'updateTotal')->name('update_total');
         });
         Route::get('/photos', 'photos')->name('photos');
         Route::post('/photos', 'photosCreate')->name('photos_create');
