@@ -1,5 +1,5 @@
 
-export const DOMAIN = 'https://fast_pho.com/'
+export const DOMAIN = 'http://localhost/'
 export const IMAGES = DOMAIN + 'images/'
 export const ICONS = DOMAIN + 'icons/'
 export const STORAGE = DOMAIN + 'storage/'
