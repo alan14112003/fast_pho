@@ -32,6 +32,16 @@ services:
     volumes:
       - db-data:/var/lib/mysql
 
+  #public server with NGROK
+  ngrok:
+    image: shkoliar/ngrok:latest
+    depends_on:
+      - php 
+    ports:
+      - 4551:4551
+    environment:
+      - PARAMS=http -authtoken=${NGROK_AUTH_TOKEN} php:80
+
 volumes:
   db-data: ~
     

@@ -1,5 +1,5 @@
 
-export const DOMAIN = 'http://localhost/'
+export const DOMAIN = `${location.protocol}//${location.hostname}${(location.port ? `:${location.port}` : '')}/`
 export const IMAGES = DOMAIN + 'images/'
 export const ICONS = DOMAIN + 'icons/'
 export const STORAGE = DOMAIN + 'storage/'
